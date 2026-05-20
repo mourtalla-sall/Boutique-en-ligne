@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
 console.log("admin")
 
+const BASE_PATH = 'localhost/php/Boutique-en-ligne'
+
 function fetchcall() {
     const submitForm = document.getElementById("submit-form");
     if (submitForm) {
@@ -12,7 +14,7 @@ function fetchcall() {
                 const obj = Object.fromEntries(data);
 
                 try {
-                    const response = await fetch("Traitement.php", {
+                    const response = await fetch("/php/Boutique-en-ligne/src/PageAdmin/Traitement.php", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
