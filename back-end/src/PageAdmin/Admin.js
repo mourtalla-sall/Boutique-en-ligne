@@ -14,7 +14,7 @@ function fetchcall() {
                 const obj = Object.fromEntries(data);
 
                 try {
-                    const response = await fetch("/php/Boutique-en-ligne/src/PageAdmin/Traitement.php", {
+                    const response = await fetch("/php/Boutique-en-ligne/back-end/src/PageAdmin/Traitement.php", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
