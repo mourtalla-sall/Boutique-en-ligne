@@ -1,6 +1,10 @@
 <?php
 use Boutique\Controller\Controller;
 
+header('Content-Type: application/json'); 
+require_once __DIR__ . '/../../vendor/autoload.php';
+
+
 $newProduit = new Controller(); 
 
 $json = file_get_contents('php://input');
