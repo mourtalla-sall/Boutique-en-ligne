@@ -10,12 +10,12 @@ class Controller {
         $this->produitModel = new Produit();
     }
 
-    public function addProduit($nom, $description, $prix, $categorie) {
-            if (empty($nom) || empty($description) || empty($prix) || empty($categorie)) {
+    public function addProduit($nom, $description, $prix, $categorie,$image) {
+            if (empty($nom) || empty($description) || empty($prix) || empty($categorie) || empty($image)) {
                 return json_encode(['status' => 'error', 'message' => 'Tous les champs sont requis']);
             }
 
-            if ($this->produitModel->createproduit($nom, $description, $prix, $categorie)) {
+            if ($this->produitModel->createproduit($nom, $description, $prix, $categorie,$image)) {
                 return json_encode(['status' => 'success', 'message' => 'Produit ajouté avec succès']);
             }
 
@@ -24,6 +24,9 @@ class Controller {
 
     public function getProduits() {
      return json_encode($this->produitModel->getAll());
+    }
+    public function getCategories() {
+        return $this->produitModel->getCategorie();
     }
 
     public function updateProduits() {
@@ -37,12 +40,13 @@ class Controller {
             $description = trim($_POST['description']);
             $prix = trim($_POST['prix']);
             $categorie = trim($_POST['categorie']) ;
+            $image = trim($_POST['image']) ;
 
-            if (empty($nom) || empty($description) || empty($prix) || empty($categorie)) {
+            if (empty($nom) || empty($description) || empty($prix) || empty($categorie) || empty($image))   {
                 $error = "Tous les champs sont requis";
            
             } else {
-                if ($this->produitModel->update(((int)$_GET['id']), $nom, $description, $prix, $categorie)) {
+                if ($this->produitModel->update(((int)$_GET['id']), $nom, $description, $prix, $categorie, $image)) {
                     $success = "produit mis à jour avec succès";
              
                 } else {

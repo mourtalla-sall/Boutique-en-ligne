@@ -14,7 +14,7 @@ const routes = [
     { path : BASE_URL + "/femmes", file: "./Front-end/Pages/femmes.js"},
     { path : BASE_URL + "/Contact", file: "./Front-end/Pages/Contact.js"},
     { path : BASE_URL + "/Panier", file: "./Front-end/Pages/Panier.js"},
-    { path : BASE_URL + "/Inscription", file: "./Front-end/Pages/inscription.js"}
+    { path : BASE_URL + "/inscription", file: "./Front-end/Pages/inscription.js"}
     
 ]
 

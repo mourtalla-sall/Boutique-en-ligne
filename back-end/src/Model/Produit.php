@@ -19,12 +19,14 @@ class Produit {
         return trim(htmlspecialchars($input));
     }
 
-    public function createproduit($nom, $description, $prix, $categorie ) {
-        $data = $this->pdo->prepare('INSERT INTO Produits (nom, description, prix, categorie) VALUES (:nom, :description, :prix, :categorie)');
+    public function createproduit($nom, $description, $prix, $id_categorie, $image ) {
+        $data = $this->pdo->prepare('INSERT INTO Produits (nom, description, prix, id_categorie, image) VALUES (:nom, :description, :prix, :id_categorie, :image)');
         $data->bindValue(':nom', $this->securityInput($nom), PDO::PARAM_STR);
         $data->bindValue(':description', $this->securityInput($description), PDO::PARAM_STR);
-        $data->bindValue(':prix', $this->securityInput($prix), PDO::PARAM_STR);
-        $data->bindValue(':categorie', $this->securityInput($categorie), PDO::PARAM_STR);
+        $data->bindValue(':prix', $this->securityInput($prix), PDO::PARAM_INT);
+        $data->bindValue(':id_categorie', $this->securityInput($id_categorie), PDO::PARAM_STR);
+        $data->bindValue(':image', $this->securityInput($image), PDO::PARAM_STR);
+
    
         return $data->execute();
     }
@@ -47,12 +49,14 @@ class Produit {
         return $data->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, $nom, $description, $prix, $categorie ) {
-        $data = $this->pdo->prepare('UPDATE Produits SET nom=:nom, description=:description, prix=:prix, categorie=:categorie, WHERE id=:id');
+    public function update($id, $nom, $description, $prix, $id_categorie, $image ) {
+        $data = $this->pdo->prepare('UPDATE Produits SET nom=:nom, description=:description, prix=:prix, id_categorie=:id_categorie, image=:image ,  WHERE id=:id');
         $data->bindValue(':nom', $this->securityInput($nom), PDO::PARAM_STR);
         $data->bindValue(':description', $this->securityInput($description), PDO::PARAM_STR);
-        $data->bindValue(':prix', $this->securityInput($prix), PDO::PARAM_STR);
-        $data->bindValue(':categorie', $this->securityInput($categorie), PDO::PARAM_INT);
+        $data->bindValue(':prix', $this->securityInput($prix), PDO::PARAM_INT);
+        $data->bindValue(':id_categorie', $this->securityInput($id_categorie), PDO::PARAM_STR);
+        $data->bindValue(':id_categorie', $this->securityInput($id_categorie), PDO::PARAM_STR);
+        $data->bindValue(':image ', $this->securityInput($image), PDO::PARAM_STR);
         $data->bindValue(':id', $id,PDO::PARAM_INT);
         return $data->execute();
     }

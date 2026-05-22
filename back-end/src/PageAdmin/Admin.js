@@ -1,61 +1,55 @@
-document.addEventListener('DOMContentLoaded', function() {
+
 console.log('admin');
 
-    function fetchcall() {
-        const submitForm = document.getElementById("submit-form");
-        if (submitForm) {
-            submitForm.addEventListener('click', async (e) => {
-                e.preventDefault();
+  function fetchcall() {
 
-                async function envoyerDonnees() {
-                    const data = new FormData(document.getElementById("produitsForm"));
-                    const obj = Object.fromEntries(data);
-                    console.log('Données envoyées:', obj)
+    const submitForm = document.getElementById("submit-form");
+    const fileUpload = document.getElementById("add-product-file");
 
-                    try {
-                        const response = await fetch("/php/Boutique-en-ligne/back-end/src/PageAdmin/Traitement.php", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(obj)
-                        });
-                         const text = await response.text();
-                        console.log('Réponse brute PHP:', text);
-                        if (!response.ok) {
-                            throw new Error(`Erreur HTTP: ${response.status}`);
-                        }
+    if (submitForm) {
 
-                        const result = await response.json();
-                          
-                        const messageZone = document.getElementById('message-zone');
+        submitForm.addEventListener('click', async (e) => {
 
-                        if (result.status === "success") {
-                            messageZone.innerHTML = `<p class="success">${result.message}</p>`;
+            e.preventDefault();
 
-                            let container = document.getElementById('tableauxContact');
-                            let tr = document.createElement("tr");
-                            let td = document.createElement("td");
-                            td.innerHTML = "toto";
-                            tr.appendChild(td);
-                            container.appendChild(tr);
+            const form = document.getElementById("produitsForm");
 
-                        } else {
-                            messageZone.innerHTML = `<p class="error">${result.message}</p>`;
-                        }
+            const data = new FormData(form);
 
-                    } catch (error) {
-                        console.error("Erreur lors de l'envoi:", error.message);
+            // OR manually:
+            // data.append("image", fileUpload.files[0]);
+            console.log(fileUpload.files[0]);
+            
+            try {
+                console.log(data,'hello')
+
+                const response = await fetch("http://localhost/php/Boutique-en-ligne/back-end/src/PageAdmin/Traitement.php", {
+                    method: "POST",
+                    body: data
+                });
+
+                const result = await response.json();
+                const messageZone = document.getElementById('message-zone')
+                if (result.success === true) {  
+                    messageZone.innerHTML = `<p class="success">Produit ajouté avec succès !</p>`;
+                    document.getElementById("produitsForm").reset();
+                } else {
+                        messageZone.innerHTML = `<p class="error">${result.error}</p>`; 
                     }
-                }
+            } catch (error) {
 
-                envoyerDonnees();
-            });
-        }
+                console.error(error);
+
+            }
+
+        });
+
     }
 
+}
+
     fetchcall();
-});
+
 
 
 // async function getDataContact() {
