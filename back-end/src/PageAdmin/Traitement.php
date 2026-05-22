@@ -16,7 +16,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'getCategories') {
 
 // GET produits
 if (empty($_POST)) {
-    echo json_encode($newProduit->getProduits());
+    // var_dump($newProduit->getProduits());
+    echo ($newProduit->getProduits());
     exit;
 }
 
@@ -44,8 +45,12 @@ if (!move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
     exit;
 }
 
-// INSERT
-$result = $newProduit->addProduit(
+// ajouter un produits
+$AddProduct = $newProduit->addProduit(
+    $nom, $description, $prix, $categorie, $nomFichier
+);
+// Modifier un produits
+$UpdateProduct = $newProduit->updateProduits(
     $nom, $description, $prix, $categorie, $nomFichier
 );
 

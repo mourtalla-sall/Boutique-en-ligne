@@ -46,7 +46,7 @@ class Controller {
                 $error = "Tous les champs sont requis";
            
             } else {
-                if ($this->produitModel->update(((int)$_GET['id']), $nom, $description, $prix, $categorie, $image)) {
+                if ($this->produitModel->updateproduit(((int)$_GET['id']), $nom, $description, $prix, $categorie, $image)) {
                     $success = "produit mis à jour avec succès";
              
                 } else {
