@@ -7,7 +7,7 @@ export default function Produits () {
                     <th>nom</th>
                     <th>description</th>
                     <th>prix</th>
-                    <th>id_categorie</th>
+                    <th>Categorie</th>
                     <th>image</th>
                     <th>Actions</th>
                 </tr>

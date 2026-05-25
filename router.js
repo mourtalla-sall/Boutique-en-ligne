@@ -43,7 +43,7 @@ const router = async() =>{
             appContainer.innerHTML ="<h1>Erreur de chargement</h1>" 
         }
     } else {
-        appContainer.innerHTML = "<h1>404</h1>><p>Page introuvable</p>"
+        appContainer.innerHTML = "<h1>404</h1><p>Page introuvable</p>"
     }
 }
 window.addEventListener("popstate", router);

@@ -4,7 +4,7 @@ use Boutique\Controller\Controller;
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once(__DIR__ . '/../../back-end/vendor/autoload.php');
 
 $newProduit = new Controller();
 
@@ -20,7 +20,11 @@ if (empty($_POST)) {
     echo ($newProduit->getProduits());
     exit;
 }
-
+// GET un produit par id
+if (isset($_GET['id'])) {
+    echo ($newProduit->getById($_GET['id']));
+    exit;
+}
 // validation
 if (!isset($_POST['nom'], $_POST['description'], $_POST['prix'], $_POST['categorie'])) {
     echo json_encode(['error' => 'Tous les champs sont requis']);

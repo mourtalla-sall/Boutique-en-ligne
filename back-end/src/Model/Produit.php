@@ -31,8 +31,17 @@ class Produit {
         return $data->execute();
     }
 
-    public function getAll() {
-        $data = $this->pdo->prepare('SELECT * FROM  Produits ');
+    public function getAllProduits() {
+        $data = $this->pdo->prepare(
+            'SELECT Produits.id_produits, 
+                    Produits.nom AS nom, 
+                    Produits.description, 
+                    Produits.prix, 
+                    Produits.image,
+                    Categorie.nom AS nom_categorie 
+            FROM Produits 
+            JOIN Categorie ON Produits.id_categorie = Categorie.id_categorie'
+        );
         $data->execute();
         return $data->fetchAll(PDO::FETCH_ASSOC);
     }

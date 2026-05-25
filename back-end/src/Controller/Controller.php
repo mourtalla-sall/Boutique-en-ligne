@@ -23,10 +23,13 @@ class Controller {
         }
 
     public function getProduits() {
-     return json_encode($this->produitModel->getAll());
+     return json_encode($this->produitModel->getAllProduits());
     }
     public function getCategories() {
         return $this->produitModel->getCategorie();
+    }
+    public function getById($id) {
+    return json_encode($this->produitModel->getById($id));
     }
 
     public function updateProduits() {

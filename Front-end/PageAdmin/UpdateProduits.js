@@ -1,6 +1,6 @@
-export default function UpdateProduits () {
+ export default function UpdateProduits () {
     return `
-       
+       <script defer type="module" src="./Admin.js"></script>
         <div class="auth-page">
             <div class="auth-container">
                 <h1>Modifier un produits</h1>
@@ -17,9 +17,10 @@ export default function UpdateProduits () {
                     <button id="submitUpdate" type="button" class="btn">Validez</button>
                 </form>
             </div>
-        </div>
+                <button> <a href="./test.html">annulez</a></button>
+        <!-- </div>
     `;
-}
+} 
 export async function fetchCategories() {
     const response = await fetch('/php/Boutique-en-ligne/back-end/src/PageAdmin/Traitement.php?action=getCategories');
     const categories = await response.json();
@@ -28,4 +29,4 @@ export async function fetchCategories() {
     categories.forEach(cat => {
         select.innerHTML += `<option value="${cat.id_categorie}">${cat.nom}</option>`;
     });
-}
+} 
