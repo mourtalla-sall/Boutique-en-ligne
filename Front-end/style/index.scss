@@ -1,0 +1,28 @@
+@use 'variable';
+
+@use 'navbar';
+@use 'header';
+@use 'service';
+@use 'produit';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: v.$police-corps;
+  background-color: v.$couleur-fond;
+  color: v.$couleur-texte;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+.texte-or { color: v.$couleur-or; font-style: italic; }

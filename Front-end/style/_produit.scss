@@ -1,0 +1,264 @@
+@use 'variable' as v;
+
+// ══════════════════════════════
+// COLLECTIONS
+// ══════════════════════════════
+.section-collection {
+  padding: 70px 0 80px;
+  background-color: v.$couleur-fond;
+
+  .titre-section {
+    font-family: v.$police-titre;
+    font-size: 2.2rem;
+    text-align: center;
+    color: v.$couleur-texte;
+    margin-bottom: 6px;
+    &::after {
+      content: '';
+      display: block;
+      width: 48px; height: 2px;
+      background-color: v.$couleur-or;
+      margin: 10px auto 0;
+    }
+  }
+
+  .filtres-collection {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 28px 0 40px;
+
+    .bouton-filtre {
+      background-color: v.$couleur-blanc;
+      color: v.$couleur-gris;
+      border: 1px solid v.$couleur-bordure;
+      border-radius: 3px;
+      font-family: v.$police-corps;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 7px 20px;
+      cursor: pointer;
+      transition: v.$transition;
+
+      &:hover, &.actif {
+        background-color: v.$couleur-sombre;
+        border-color: v.$couleur-sombre;
+        color: v.$couleur-blanc;
+      }
+    }
+  }
+
+  .grille-produits {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    @media (max-width: 992px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 576px) { grid-template-columns: 1fr; }
+  }
+
+  .carte-produit {
+    background-color: v.$couleur-blanc;
+    border: 1px solid v.$couleur-bordure;
+    border-radius: v.$rayon;
+    overflow: hidden;
+    box-shadow: v.$ombre-carte;
+    display: flex;
+    flex-direction: column;
+    transition: v.$transition;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+      .produit-corps { background-color: #ddd4c4; }
+    }
+
+    .produit-corps {
+      background-color: #ede4d8;
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background-color 0.25s;
+      img { width: 100%; height: 100%; object-fit: cover; }
+    }
+
+    .produit-numero {
+      font-family: v.$police-titre;
+      font-size: 2.5rem;
+      color: rgba(v.$couleur-sombre, 0.18);
+      font-weight: 700;
+    }
+
+    .produit-entete {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px 0;
+
+      .produit-categorie {
+        font-size: 0.72rem; color: v.$couleur-gris;
+        text-transform: uppercase; letter-spacing: 0.05em;
+      }
+
+      .produit-etiquette {
+        background-color: v.$couleur-or;
+        color: v.$couleur-sombre;
+        font-size: 0.68rem; font-weight: 700;
+        letter-spacing: 0.06em; text-transform: uppercase;
+        padding: 3px 8px; border-radius: 2px;
+      }
+    }
+
+    .produit-pied {
+      padding: 12px 14px 16px;
+      flex: 1; display: flex; flex-direction: column; gap: 6px;
+
+      .produit-nom {
+        font-family: v.$police-titre;
+        font-size: 0.95rem; font-weight: 600;
+        color: v.$couleur-texte; line-height: 1.3;
+      }
+
+      .produit-prix {
+        display: flex; align-items: baseline; gap: 8px;
+        .prix-principal { font-size: 1rem; font-weight: 700; color: v.$couleur-sombre; }
+        .prix-barre { font-size: 0.8rem; color: v.$couleur-gris; text-decoration: line-through; }
+      }
+
+      .produit-entete {
+        padding: 6px 0 0;
+        margin-top: auto;
+        border-top: 1px solid v.$couleur-bordure;
+        .produit-categorie {
+          color: v.$couleur-or; font-weight: 700;
+          cursor: pointer; transition: color 0.2s;
+          &:hover { color: v.$couleur-sombre; }
+        }
+      }
+    }
+  }
+
+  .bouton-voir-plus {
+    display: block; margin: 40px auto 0;
+    padding: 13px 40px;
+    background-color: v.$couleur-sombre; color: v.$couleur-blanc;
+    border: none; border-radius: 3px;
+    font-family: v.$police-corps; font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; transition: v.$transition;
+    &:hover { background-color: #2a2a2a; }
+  }
+}
+
+// ══════════════════════════════
+// PROMO
+// ══════════════════════════════
+.section-promo {
+  background-color: v.$couleur-fond-alt;
+  background-image: repeating-linear-gradient(
+    90deg, transparent, transparent 18px,
+    rgba(v.$couleur-or, 0.06) 18px,
+    rgba(v.$couleur-or, 0.06) 19px
+  );
+  padding: 60px 0;
+
+  h2 { font-family: v.$police-titre; font-size: 1.4rem; color: v.$couleur-texte; margin-bottom: 4px; }
+  .chiffre-promo { font-family: v.$police-titre; font-size: 3.5rem; font-weight: 700; color: v.$couleur-sombre; line-height: 1; }
+  p { font-size: 0.88rem; color: v.$couleur-gris; margin-top: 6px; }
+
+  .bouton-promo {
+    display: block; margin-bottom: 10px; padding: 11px 30px;
+    background-color: v.$couleur-sombre; color: v.$couleur-blanc;
+    border: none; border-radius: 3px;
+    font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; text-align: center;
+    cursor: pointer; transition: v.$transition;
+    &:hover { background-color: #2a2a2a; color: v.$couleur-blanc; }
+  }
+
+  .bouton-promo-contour {
+    display: block; padding: 10px 30px;
+    background-color: transparent; color: v.$couleur-sombre;
+    border: 1px solid v.$couleur-sombre; border-radius: 3px;
+    font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; text-align: center;
+    cursor: pointer; transition: v.$transition;
+    &:hover { background-color: v.$couleur-sombre; color: v.$couleur-blanc; }
+  }
+}
+
+// ══════════════════════════════
+// LETTRE D'INFORMATION
+// ══════════════════════════════
+.section-lettre {
+  background-color: v.$couleur-sombre;
+  padding: 40px 0;
+
+  .etiquette-lettre {
+    font-size: 0.72rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: v.$couleur-or; margin-bottom: 6px;
+  }
+
+  h3 { font-family: v.$police-titre; font-size: 1.4rem; color: v.$couleur-blanc; }
+
+  .formulaire-lettre {
+    display: flex; max-width: 400px;
+
+    input[type="email"] {
+      flex: 1; padding: 10px 16px;
+      background-color: rgba(v.$couleur-blanc, 0.08);
+      color: v.$couleur-blanc;
+      border: 1px solid rgba(v.$couleur-blanc, 0.15);
+      border-right: none; border-radius: 3px 0 0 3px;
+      font-size: 0.85rem;
+      &::placeholder { color: rgba(v.$couleur-blanc, 0.35); }
+      &:focus { outline: none; border-color: v.$couleur-or; }
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: v.$couleur-or; color: v.$couleur-sombre;
+      border: none; border-radius: 0 3px 3px 0;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: pointer; transition: v.$transition;
+      &:hover { background-color: v.$couleur-or-clair; }
+    }
+  }
+}
+
+// ══════════════════════════════
+// PIED DE PAGE
+// ══════════════════════════════
+footer {
+  background-color: #0a0a0a;
+  padding: 50px 0 24px;
+  color: rgba(v.$couleur-blanc, 0.60);
+
+  .logo-pied {
+    font-family: v.$police-titre; font-size: 1.6rem;
+    color: v.$couleur-blanc; margin-bottom: 10px;
+    span { color: v.$couleur-or; font-style: italic; }
+  }
+
+  p { font-size: 0.8rem; line-height: 1.7; max-width: 240px; }
+
+  h6 {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: v.$couleur-blanc; margin-bottom: 16px;
+  }
+
+  ul {
+    list-style: none; padding: 0;
+    li { margin-bottom: 8px; }
+    a {
+      color: rgba(v.$couleur-blanc, 0.55);
+      text-decoration: none; font-size: 0.82rem; transition: color 0.2s;
+      &:hover { color: v.$couleur-or; }
+    }
+  }
+
+  .bordure-pied {
+    border-top: 1px solid rgba(v.$couleur-blanc, 0.10);
+    margin-top: 40px; padding-top: 20px;
+    font-size: 0.75rem; color: rgba(v.$couleur-blanc, 0.30);
+  }
+}
