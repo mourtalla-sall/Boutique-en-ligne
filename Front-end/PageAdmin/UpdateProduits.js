@@ -17,7 +17,9 @@
                     <button id="submitUpdate" type="button" class="btn">Validez</button>
                 </form>
             </div>
-                <button> <a href="./test.html">annulez</a></button>
+                <a href="/Boutique-en-ligne/Front-end/Produits">
+                     <button>Annuler</button>
+                </a>
         <!-- </div>
     `;
 } 

@@ -1,5 +1,8 @@
 export default function Produits () {
     return `
+        <a href="/Boutique-en-ligne/Front-end/AddProduits">
+            <button>Add Produits</button>
+         </a>
        <table>
             <thead>
                 <tr>
