@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+const detailProduit = () => {
+    return ` <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -173,3 +174,8 @@
     <script src="script.js"></script>
 </body>
 </html>
+        
+      `
+}
+
+export default detailProduit
