@@ -16,7 +16,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'getCategories') {
 
 // GET produits
 if (empty($_POST)) {
-    echo json_encode($newProduit->getProduits());
+    echo ($newProduit->getProduits());
     exit;
 }
 

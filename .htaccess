@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /Boutique-en-ligne/Front-end
+RewriteBase /boutique-en-ligne/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.html [L]

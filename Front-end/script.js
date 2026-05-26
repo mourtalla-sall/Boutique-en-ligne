@@ -1,8 +1,8 @@
 console.log('script.js');
 
 
-import AddProduits, { fetchCategories } from '../back-end/src/PageAdmin/AddProduits';
+import AddProduits, { fetchCategories } from './compents/AddProduits';
 
-document.getElementById('main-container').innerHTML = AddProduits();
+document.getElementById('root').innerHTML = AddProduits();
 
 fetchCategories();

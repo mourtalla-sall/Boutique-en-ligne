@@ -6,15 +6,15 @@ const Panier = document.getElementsByClassName("link-Panier")
 const femmes= document.getElementsByClassName("link-femmes")
 const inscription= document.getElementsByClassName("link-inscription")
 
-const BASE_URL = "/Boutique-en-ligne"
+const BASE_URL = "/boutique-en-ligne/Front-end"
 const routes = [
-    { path : BASE_URL + "/Home", file : "./Front-end/Pages/Home.js" },
-    { path : BASE_URL + "/homme", file: "./Front-end/Pages/homme.js"},
-    { path : BASE_URL + "/connexion", file: "./Front-end/Pages/connexion.js"},
-    { path : BASE_URL + "/femmes", file: "./Front-end/Pages/femmes.js"},
-    { path : BASE_URL + "/Contact", file: "./Front-end/Pages/Contact.js"},
-    { path : BASE_URL + "/Panier", file: "./Front-end/Pages/Panier.js"},
-    { path : BASE_URL + "/inscription", file: "./Front-end/Pages/inscription.js"}
+    { path : BASE_URL + "/Home", file : "/Pages/Home.js" },
+    { path : BASE_URL + "/homme", file: "/Pages/homme.js"},
+    { path : BASE_URL + "/connexion", file: "/Pages/connexion.js"},
+    { path : BASE_URL + "/femmes", file: "/Pages/femmes.js"},
+    { path : BASE_URL + "/Contact", file: "/Pages/Contact.js"},
+    { path : BASE_URL + "/Panier", file: "/Pages/Panier.js"},
+    { path : BASE_URL + "/inscription", file: "/Pages/inscription.js"}
     
 ]
 
@@ -23,7 +23,7 @@ const router = async() =>{
     let match = null;
     for (let i= 0; i < routes.length;i++){
         const route = routes[i];
-
+        console.log(currentPath, route)
         if (currentPath === route.path || currentPath === route.path + "/"){
             match =route;  
             break;
@@ -34,7 +34,7 @@ const router = async() =>{
     console.log(match, 'match')
     if ( match!== null){
         try {
-            const module = await import(match.file)
+            const module = await import(BASE_URL + match.file)
             console.log(module,'ici')
             const render = module.default
 
