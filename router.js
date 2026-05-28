@@ -1,3 +1,8 @@
+import { initAutocomplete } from "./autocompletion.js";
+
+// Au moment où ton routeur démarre ou initialise le site :
+initAutocomplete();
+
 const accueil = document.getElementsByClassName("link-home2")
 const homme= document.getElementsByClassName("link-homme")
 const connexion = document.getElementsByClassName("link-connexion")
