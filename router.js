@@ -35,7 +35,7 @@ const router = async() =>{
     let match = null;
     for (let i= 0; i < routes.length;i++){
         const route = routes[i];
-        console.log(currentPath, route.path, "currentPath + route.path")
+        // console.log(currentPath, route.path, "currentPath + route.path")
         if (currentPath === route.path || currentPath === route.path + "/"){
             match =route;  
             break;
@@ -47,7 +47,7 @@ const router = async() =>{
     if ( match!== null){
         try {
             const module = await import(match.file)
-            console.log(module,'ici')
+            // console.log(module,'ici')
             const render = module.default
 
             appContainer.innerHTML = render();
