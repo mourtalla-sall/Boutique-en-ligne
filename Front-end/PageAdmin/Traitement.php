@@ -4,7 +4,7 @@ use Boutique\Controller\Controller;
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once(__DIR__ . '/../../back-end/vendor/autoload.php');
 
 $newProduit = new Controller();
 
@@ -16,10 +16,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'getCategories') {
 
 // GET produits
 if (empty($_POST)) {
+    // var_dump($newProduit->getProduits());
     echo ($newProduit->getProduits());
     exit;
 }
-
+// GET un produit par id
+if (isset($_GET['id'])) {
+    echo ($newProduit->getById($_GET['id']));
+    exit;
+}
 // validation
 if (!isset($_POST['nom'], $_POST['description'], $_POST['prix'], $_POST['categorie'])) {
     echo json_encode(['error' => 'Tous les champs sont requis']);
@@ -44,8 +49,12 @@ if (!move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
     exit;
 }
 
-// INSERT
-$result = $newProduit->addProduit(
+// ajouter un produits
+$AddProduct = $newProduit->addProduit(
+    $nom, $description, $prix, $categorie, $nomFichier
+);
+// Modifier un produits
+$UpdateProduct = $newProduit->updateProduits(
     $nom, $description, $prix, $categorie, $nomFichier
 );
 

@@ -31,8 +31,17 @@ class Produit {
         return $data->execute();
     }
 
-    public function getAll() {
-        $data = $this->pdo->prepare('SELECT * FROM  Produits ');
+    public function getAllProduits() {
+        $data = $this->pdo->prepare(
+            'SELECT Produits.id_produits, 
+                    Produits.nom AS nom, 
+                    Produits.description, 
+                    Produits.prix, 
+                    Produits.image,
+                    Categorie.nom AS nom_categorie 
+            FROM Produits 
+            JOIN Categorie ON Produits.id_categorie = Categorie.id_categorie'
+        );
         $data->execute();
         return $data->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -49,12 +58,11 @@ class Produit {
         return $data->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, $nom, $description, $prix, $id_categorie, $image ) {
+    public function updateproduit($id, $nom, $description, $prix, $id_categorie, $image) {
         $data = $this->pdo->prepare('UPDATE Produits SET nom=:nom, description=:description, prix=:prix, id_categorie=:id_categorie, image=:image ,  WHERE id=:id');
         $data->bindValue(':nom', $this->securityInput($nom), PDO::PARAM_STR);
         $data->bindValue(':description', $this->securityInput($description), PDO::PARAM_STR);
         $data->bindValue(':prix', $this->securityInput($prix), PDO::PARAM_INT);
-        $data->bindValue(':id_categorie', $this->securityInput($id_categorie), PDO::PARAM_STR);
         $data->bindValue(':id_categorie', $this->securityInput($id_categorie), PDO::PARAM_STR);
         $data->bindValue(':image ', $this->securityInput($image), PDO::PARAM_STR);
         $data->bindValue(':id', $id,PDO::PARAM_INT);

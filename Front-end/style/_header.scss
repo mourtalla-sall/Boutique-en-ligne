@@ -1,0 +1,62 @@
+@use 'variable' as v;
+
+.entete-principal {
+  background-color: v.$couleur-sombre;
+  overflow: hidden;
+
+  .carousel {
+    min-height: 480px;
+    .carousel-item {
+      min-height: 480px;
+      .container { padding: 60px 15px; }
+      .row       { min-height: 360px; }
+    }
+  }
+
+  .titre-entete {
+    font-family: v.$police-titre;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: v.$couleur-blanc;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .paragraphe-entete {
+    color: rgba(v.$couleur-blanc, 0.70);
+    font-size: 0.95rem;
+    max-width: 380px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .bouton-entete {
+    display: inline-block;
+    background-color: v.$couleur-or;
+    color: v.$couleur-sombre;
+    border: none;
+    border-radius: 3px;
+    font-family: v.$police-corps;
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding: 10px 28px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: v.$transition;
+    &:hover { background-color: v.$couleur-or-clair; color: v.$couleur-sombre; }
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 44px; height: 44px;
+    background-color: rgba(v.$couleur-or, 0.25);
+    border-radius: 50%;
+    top: 50%; transform: translateY(-50%);
+    opacity: 0.8;
+    transition: v.$transition;
+    &:hover { background-color: v.$couleur-or; opacity: 1; }
+  }
+  .carousel-control-prev { left: 16px; }
+  .carousel-control-next { right: 16px; }
+}

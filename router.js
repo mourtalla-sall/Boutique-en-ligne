@@ -10,6 +10,11 @@ const Contact = document.getElementsByClassName("link-Contact")
 const Panier = document.getElementsByClassName("link-Panier")
 const femmes= document.getElementsByClassName("link-femmes")
 const inscription= document.getElementsByClassName("link-inscription")
+const Produits= document.getElementsByClassName("link-Produits")
+const AddProduits= document.getElementsByClassName("link-AddProduits")
+const DeleteProduits= document.getElementsByClassName("link-DeleteProduits")
+const UpdateProduits= document.getElementsByClassName("link-UpdateProduits")
+const Dashboard= document.getElementsByClassName("link-Dashboard")
 
 const BASE_URL = "/boutique-en-ligne/Front-end"
 const routes = [
@@ -33,10 +38,10 @@ const router = async() =>{
             match =route;  
             break;
         }
-        console.log(currentPath, route.path,'yoyoyo')
+        // console.log(currentPath, route.path,'yoyoyo')
     } 
     const appContainer = document.getElementById("root")
-    console.log(match, 'match')
+    // console.log(match, 'match')
     if ( match!== null){
         try {
             const module = await import(BASE_URL + match.file)

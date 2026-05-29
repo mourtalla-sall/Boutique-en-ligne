@@ -1,0 +1,66 @@
+.image-produit {
+    background: #e0e0e0;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 5rem;
+    color: $gris;
+}
+
+.infos-produit {
+
+    h1 { font-size: 2rem; }
+
+    .categorie { color: $gris; }
+
+    .bloc-prix {
+        margin: 16px 0;
+
+        .prix-actuel {
+            font-size: 2rem;
+            font-weight: bold;
+            color: $or;
+        }
+
+        .prix-ancien {
+            font-size: 1.1rem;
+            color: $gris;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+    }
+
+    .btn-panier {
+        background: $or;
+        color: #000;
+        font-weight: bold;
+        border: none;
+        padding: 14px;
+        font-size: 1rem;
+        border-radius: 5px;
+        width: 100%;
+        cursor: pointer;
+        transition: background 0.3s;
+
+        &:hover {
+            background: $or-hover;
+            color: #fff;
+        }
+    }
+
+    .message-ok {
+        background: $vert;
+        color: $vert-texte;
+        border: 1px solid $vert-bordure;
+        padding: 12px;
+        border-radius: 5px;
+        margin-top: 14px;
+        display: none;
+
+        &.visible {
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,110 @@
+@use 'variable' as v;
+
+.barre-navigation {
+  background-color: v.$couleur-sombre;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+
+  .logo {
+    font-family: v.$police-titre;
+    font-size: 1.5rem;
+    color: v.$couleur-blanc ;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    span { color: v.$couleur-or; font-style: italic; }
+  }
+
+  .lien-navigation {
+    color: rgba(v.$couleur-blanc, 0.82) ;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.75rem ;
+    transition: color 0.2s;
+    &:hover { color: v.$couleur-or ; }
+  }
+
+  .dropdown-menu-dark {
+    background-color: #0a0a0a;
+    border: 1px solid rgba(v.$couleur-or, 0.25);
+    border-radius: v.$rayon;
+    .dropdown-item {
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(v.$couleur-blanc, 0.75);
+      padding: 0.5rem 1.2rem;
+      &:hover {
+        background-color: rgba(v.$couleur-or, 0.15);
+        color: v.$couleur-or;
+      }
+    }
+  }
+
+  .form-control {
+    background-color: rgba(v.$couleur-blanc, 0.07);
+    border: 1px solid rgba(v.$couleur-blanc, 0.18);
+    color: v.$couleur-blanc;
+    font-size: 0.8rem;
+    border-radius: 3px;
+    &::placeholder { color: rgba(v.$couleur-blanc, 0.4); }
+    &:focus {
+      background-color: rgba(v.$couleur-blanc, 0.12);
+      border-color: v.$couleur-or;
+      box-shadow: none;
+      color: v.$couleur-blanc;
+    }
+  }
+
+  .btn-outline-success {
+    border-color: v.$couleur-or;
+    color: v.$couleur-or;
+    font-size: 0.78rem;
+    border-radius: 3px;
+    &:hover { background-color: v.$couleur-or; color: v.$couleur-sombre; }
+  }
+
+  .icone-panier {
+    position: relative;
+    color: rgba(v.$couleur-blanc, 0.82);
+    font-size: 1.35rem;
+    text-decoration: none;
+    transition: color 0.2s;
+    &:hover { color: v.$couleur-or; }
+
+    .pastille-panier {
+      position: absolute;
+      top: -4px; right: -6px;
+      width: 9px; height: 9px;
+      background-color: v.$couleur-or;
+      border-radius: 50%;
+      display: block;
+    }
+  }
+
+  .bouton-dore {
+    display: inline-block;
+    background-color: v.$couleur-or;
+    color: v.$couleur-sombre;
+    border: none;
+    border-radius: 3px;
+    font-family: v.$police-corps;
+    font-weight: 600;
+    font-size: 0.78rem;
+    padding: 6px 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: v.$transition;
+
+    .lien-navigation {
+      color: v.$couleur-sombre ;
+      font-weight: 700;
+      padding: 0 ;
+    }
+    &:hover { background-color: v.$couleur-or-clair; }
+  }
+}
