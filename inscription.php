@@ -1,10 +1,42 @@
- const inscription = () => {
-    return `
+<?php
+session_start();
+require_once '../../vendor/autoload.php';
+
+use Cinetech\Database\Database;
+use Cinetech\Controller\UserController;
+
+$registerController = new UserController();
+$message = $registerController->register();
+
+$success = '';
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    $success = "Inscription réussie ! Vous pouvez vous connecter.";
+}
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription </title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+
+
+<main>
     <div class="connexion-wrapper">
         <div class="connexion-box">
             <h1>Inscription</h1>
 
-        
+            <?php if (!empty($success)): ?>
+                <p style="color: green;"><?= htmlspecialchars($success) ?></p>
+            <?php endif; ?>
+
+            <?php if (!empty($message)): ?>
+                <p style="color: red;"><?= htmlspecialchars($message) ?></p>
+            <?php endif; ?>
+
             <form method="post">
                 <label>Nom</label>
                 <input type="text" name="lastName" placeholder="Votre nom" required>
@@ -28,5 +60,4 @@
                 </p>
             </form>
         </div>
-    </div>` }
-     export default inscription
+    </div>
