@@ -1,4 +1,6 @@
 @use 'variable' as v;
+@use 'variable';
+@use 'detailproduit';
 @use 'navbar';
 @use 'header';
 @use 'service';

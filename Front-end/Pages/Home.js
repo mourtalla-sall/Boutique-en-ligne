@@ -1,9 +1,14 @@
 const Home = () => {
+<<<<<<< HEAD
     return `
 
 
 <!-- SERVICES -->
 <div class="entete-principal">
+=======
+    return `<header class="entete-principal">
+    
+>>>>>>> 1f1cb22f3f1709c5bf19e39d66d0b4cb33959b69
     <div id="carrousel" class="carousel slide w-100">
         <div class="carousel-inner">
 
@@ -170,8 +175,15 @@ const Home = () => {
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </section>      
 `
 }
 
 export default Home ;
+=======
+</section>
+  `
+}
+export default Home
+>>>>>>> 1f1cb22f3f1709c5bf19e39d66d0b4cb33959b69

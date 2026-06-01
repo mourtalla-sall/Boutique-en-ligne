@@ -3,6 +3,13 @@
     import UpdateProduits from './PageAdmin/UpdateProduits';
     import Produits from './PageAdmin/Produits';
 
+<<<<<<< HEAD
+import AddProduits, { fetchCategories } from './compents/AddProduits';
+
+document.getElementById('root').innerHTML = AddProduits();
+
+fetchCategories();
+=======
 document.addEventListener('DOMContentLoaded', () => {
   
     console.log('script.js');
@@ -16,3 +23,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // fetchCategories();
 });
+>>>>>>> origin/lamali

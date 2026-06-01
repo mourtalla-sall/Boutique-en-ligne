@@ -5,6 +5,7 @@ RewriteBase /Boutique-en-ligne/Front-end/
 RewriteRule ^admin\.html$ - [L]
 
 # Ne pas toucher les fichiers et dossiers réels
+RewriteBase /boutique-en-ligne/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 

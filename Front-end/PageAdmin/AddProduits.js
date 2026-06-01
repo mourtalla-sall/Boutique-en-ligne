@@ -1,3 +1,4 @@
+
 console.log("addproduits");
 
 export default function AddProduits(){
@@ -89,5 +90,4 @@ function listenForm(){
     }); 
 
     } 
-
-}
+    } 
