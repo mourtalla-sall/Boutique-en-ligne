@@ -52,7 +52,7 @@ const detailProduit = () => {
 // Appelée depuis le router après injection du HTML
 export async function chargerDetailProduit() {
     const params = new URLSearchParams(window.location.search);
-    const id     = params.get('id');
+    const id  = params.get('id');
 
     if (!id) return;
 

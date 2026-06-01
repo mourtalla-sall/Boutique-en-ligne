@@ -1,29 +1,8 @@
-<<<<<<< HEAD
-import { AfficheProduit, fetchcall } from "./Front-end/PageAdmin/Admin.js";
+import { AfficheProduit } from "./Front-end/PageAdmin/Admin.js";
 import { chargerDetailProduit } from "./Front-end/Pages/detailProduit.js";
 
-
-=======
-import { AfficheProduit, fetchcall } from "./Front-end/PageAdmin/admin.js";
-import { chargerDetailProduit } from "./Front-end/Pages/detailProduit.js";
-
-const accueil        = document.getElementsByClassName("link-home2")
-const homme          = document.getElementsByClassName("link-homme")
-const connexion      = document.getElementsByClassName("link-connexion")
-const Contact        = document.getElementsByClassName("link-Contact")
-const Panier         = document.getElementsByClassName("link-Panier")
-const femmes         = document.getElementsByClassName("link-femmes")
-const inscription    = document.getElementsByClassName("link-inscription")
-const Produits       = document.getElementsByClassName("link-Produits")
-const AddProduits    = document.getElementsByClassName("link-AddProduits")
-const DeleteProduits = document.getElementsByClassName("link-DeleteProduits")
-const UpdateProduits = document.getElementsByClassName("link-UpdateProduits")
-const Dashboard      = document.getElementsByClassName("link-Dashboard")
-const detailProduit  = document.getElementsByClassName("link-detailProduit")
->>>>>>> df02526871e320a19f0bce7ebee3a98775081458
-
-const BASE_URL = "/Boutique-en-ligne"
-// const BASE_URL = "/php/Boutique-en-ligne" // Mourtalla
+const BASE_URL = "/Boutique-en-ligne";
+// const BASE_URL = "/php/Boutique-en-ligne"; // Mourtalla
 
 const routes = [
     { path: BASE_URL + "/Front-end/Home",          file: "./Front-end/Pages/Home.js" },
@@ -34,59 +13,29 @@ const routes = [
     { path: BASE_URL + "/Front-end/Panier",        file: "./Front-end/Pages/Panier.js" },
     { path: BASE_URL + "/Front-end/Inscription",   file: "./Front-end/Pages/inscription.js" },
     { path: BASE_URL + "/Front-end/detailProduit", file: "./Front-end/Pages/detailProduit.js" },
-    // Pages Admin
-    { path: BASE_URL + "/Front-end/Dashboard",      file: "./Front-end/PageAdmin/Dashboard.js" },
-    { path: BASE_URL + "/Front-end/Produits",       file: "./Front-end/PageAdmin/Produits.js" },
-    { path: BASE_URL + "/Front-end/AddProduits",    file: "./Front-end/PageAdmin/AddProduits.js" },
-    { path: BASE_URL + "/Front-end/UpdateProduits", file: "./Front-end/PageAdmin/UpdateProduits.js" },
-    { path: BASE_URL + "/Front-end/DeleteProduits", file: "./Front-end/PageAdmin/DeleteProduits.js" },
 ];
 
-const adminRoutes = [
-    BASE_URL + "/Front-end/Dashboard",
-    BASE_URL + "/Front-end/Produits",
-    BASE_URL + "/Front-end/AddProduits",
-    BASE_URL + "/Front-end/UpdateProduits",
-    BASE_URL + "/Front-end/DeleteProduits",
-];
+const matchRoute = (currentPath) =>
+    routes.find(r =>
+        currentPath.toLowerCase() === r.path.toLowerCase() ||
+        currentPath.toLowerCase() === r.path.toLowerCase() + "/"
+    );
 
-// Charge une page admin dans #main-content (navigation sidebar)
-const loadAdminContent = async (path) => {
-    const mainContent = document.getElementById("main-content");
-    if (!mainContent) return;
-
-    const match = routes.find(r => r.path === path);
-    if (!match) return;
-
-    try {
-        const module = await import(match.file);
-        mainContent.innerHTML = module.default();
-        await new Promise(resolve => setTimeout(resolve, 0));
-        if (module.initAfterRender) module.initAfterRender();
-    } catch (error) {
-        mainContent.innerHTML = "<h2>Erreur de chargement</h2>";
-    }
+const navigate = async (path) => {
+    window.history.pushState({}, "", path);
+    await router();
 };
 
-// Écoute les clics sur les liens de la sidebar
-const listenSidebar = () => {
-    document.querySelectorAll(".sidebar a").forEach(link => {
+const listenLinks = () => {
+    document.querySelectorAll(`a[href^="${BASE_URL}"]`).forEach(link => {
+        const href = link.getAttribute("href");
+
+        // Laisser admin.html se charger normalement par le navigateur
+        if (href.includes("admin.html")) return;
+
         link.addEventListener("click", async (e) => {
             e.preventDefault();
-
-            const path = link.getAttribute("href");
-            if (!path || path === "#") return;
-
-            window.history.pushState({}, "", path);
-
-            if (adminRoutes.includes(path)) {
-                await loadAdminContent(path);
-            } else {
-                await router();
-            }
-
-            document.querySelectorAll(".sidebar a").forEach(l => l.classList.remove("active"));
-            link.classList.add("active");
+            await navigate(href);
         });
     });
 };
@@ -100,20 +49,32 @@ const router = async () => {
         return;
     }
 
-    const match = routes.find(r =>
-        currentPath === r.path || currentPath === r.path + "/"
-    );
+    // Redirection racine → Home
+    const isRoot = ["/", BASE_URL, BASE_URL + "/", BASE_URL + "/Front-end/", BASE_URL + "/Front-end/index.html"]
+        .some(p => currentPath.toLowerCase() === p.toLowerCase());
+
+    if (isRoot) {
+        window.history.replaceState({}, "", BASE_URL + "/Front-end/Home");
+        return router();
+    }
+
+    const match = matchRoute(currentPath);
 
     if (!match) {
-        appContainer.innerHTML = "<h1>404</h1><p>Page introuvable</p>";
+        appContainer.innerHTML = `<h1>404</h1><p>Page introuvable — chemin : ${currentPath}</p>`;
         return;
+    }
+
+    if (location.pathname !== match.path) {
+        window.history.replaceState({}, "", match.path);
     }
 
     try {
         const module = await import(match.file);
         appContainer.innerHTML = module.default();
 
-        // Fonctions post-rendu selon la route
+        listenLinks();
+
         if (match.path === BASE_URL + "/Front-end/Home") {
             AfficheProduit();
         }
@@ -122,16 +83,14 @@ const router = async () => {
             chargerDetailProduit();
         }
 
-        if (adminRoutes.includes(match.path)) {
-            fetchcall();
-            listenSidebar();
-        }
-
     } catch (error) {
         console.error(error);
-        appContainer.innerHTML = "<h1>Erreur de chargement</h1>";
+        appContainer.innerHTML = `<h1>Erreur de chargement</h1><p>${error.message}</p>`;
     }
 };
 
 window.addEventListener("popstate", router);
-document.addEventListener("DOMContentLoaded", router);
+document.addEventListener("DOMContentLoaded", () => {
+    listenLinks();
+    router();
+});

@@ -1,5 +1,12 @@
 RewriteEngine On
 RewriteBase /Boutique-en-ligne/Front-end/
+
+# Laisser passer admin.html directement
+RewriteRule ^admin\.html$ - [L]
+
+# Ne pas toucher les fichiers et dossiers réels
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+
+# Tout le reste → index.html
 RewriteRule ^ index.html [L]
