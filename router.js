@@ -1,5 +1,5 @@
 import { AfficheProduit, fetchcall } from "./Front-end/PageAdmin/admin.js";
-import detailProduit from "./Front-end/Pages/detailProduit.js";
+import { chargerDetailProduit } from "./Front-end/Pages/detailProduit.js";
 
 const accueil        = document.getElementsByClassName("link-home2")
 const homme          = document.getElementsByClassName("link-homme")
@@ -13,7 +13,7 @@ const AddProduits    = document.getElementsByClassName("link-AddProduits")
 const DeleteProduits = document.getElementsByClassName("link-DeleteProduits")
 const UpdateProduits = document.getElementsByClassName("link-UpdateProduits")
 const Dashboard      = document.getElementsByClassName("link-Dashboard")
-// const detailProduit  = document.getElementsByClassName("link-detailProduit")
+const detailProduit  = document.getElementsByClassName("link-detailProduit")
 
 const BASE_URL = "/Boutique-en-ligne"
 // const BASE_URL = "/php/Boutique-en-ligne" // Mourtalla
