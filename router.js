@@ -1,8 +1,10 @@
 import { AfficheProduit, fetchcall } from "./Front-end/PageAdmin/Admin.js";
 import { chargerDetailProduit } from "./Front-end/Pages/detailProduit.js";
 
-const BASE_URL = "/Boutique-en-ligne";
-// const BASE_URL = "/php/Boutique-en-ligne"; // Mourtalla
+
+
+const BASE_URL = "/Boutique-en-ligne"
+// const BASE_URL = "/php/Boutique-en-ligne" // Mourtalla
 
 const routes = [
     { path: BASE_URL + "/Front-end/Home",          file: "./Front-end/Pages/Home.js" },
