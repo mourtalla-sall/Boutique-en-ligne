@@ -27,9 +27,7 @@ export function initAdd () {
                    
                     <button id="submit-form" type="button" class="btn">Validez</button>
                 </form>
-                <a href="/Boutique-en-ligne/Front-end/Produits">
-                     <button>Annuler</button>
-                </a>
+              
             </div>
         </div>
     `;
