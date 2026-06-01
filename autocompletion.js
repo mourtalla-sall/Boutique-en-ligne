@@ -66,7 +66,7 @@ const monFormulaire = document.querySelector('form');
 
 if (monFormulaire) {
     monFormulaire.addEventListener('submit', function(event) {
-        // Cette ligne magique annule le rechargement de la page
+       
         event.preventDefault(); 
     });
 }

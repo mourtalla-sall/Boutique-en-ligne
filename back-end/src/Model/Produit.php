@@ -51,32 +51,32 @@ class Produit {
         return $data->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function updateproduit($id, $nom, $description, $prix, $id_categorie, $image) {
+    $data = $this->pdo->prepare('UPDATE Produits SET nom=:nom, description=:description, prix=:prix, id_categorie=:id_categorie, image=:image WHERE id_produits=:id');
+    $data->bindValue(':nom', $this->securityInput($nom), PDO::PARAM_STR);
+    $data->bindValue(':description', $this->securityInput($description), PDO::PARAM_STR);
+    $data->bindValue(':prix', $this->securityInput($prix), PDO::PARAM_INT);
+    $data->bindValue(':id_categorie', $this->securityInput($id_categorie), PDO::PARAM_STR);
+    $data->bindValue(':image', $this->securityInput($image), PDO::PARAM_STR);
+    $data->bindValue(':id', $id, PDO::PARAM_INT);
+    return $data->execute();
+    }
+
     public function getById($id) {
-        $data = $this->pdo->prepare('SELECT * FROM Produits WHERE id = :id');
+        $data = $this->pdo->prepare('SELECT * FROM Produits WHERE id_produits = :id');
         $data->bindValue(':id', $id, PDO::PARAM_INT);
         $data->execute();
         return $data->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateproduit($id, $nom, $description, $prix, $id_categorie, $image) {
-        $data = $this->pdo->prepare('UPDATE Produits SET nom=:nom, description=:description, prix=:prix, id_categorie=:id_categorie, image=:image ,  WHERE id=:id');
-        $data->bindValue(':nom', $this->securityInput($nom), PDO::PARAM_STR);
-        $data->bindValue(':description', $this->securityInput($description), PDO::PARAM_STR);
-        $data->bindValue(':prix', $this->securityInput($prix), PDO::PARAM_INT);
-        $data->bindValue(':id_categorie', $this->securityInput($id_categorie), PDO::PARAM_STR);
-        $data->bindValue(':image ', $this->securityInput($image), PDO::PARAM_STR);
-        $data->bindValue(':id', $id,PDO::PARAM_INT);
-        return $data->execute();
-    }
-
     public function delete($id) {
-        $data = $this->pdo->prepare('DELETE FROM Produits WHERE id = :id');
+        $data = $this->pdo->prepare('DELETE FROM Produits WHERE id_produits = :id');
         $data->bindValue(':id', $id, PDO::PARAM_INT);
         return $data->execute();
     }
 
-    public function count() {
-        return $this->pdo->query('SELECT COUNT(*) FROM Produits')->fetchColumn();
+        public function count() {
+            return $this->pdo->query('SELECT COUNT(*) FROM Produits')->fetchColumn();
+        }
     }
-}
 ?>

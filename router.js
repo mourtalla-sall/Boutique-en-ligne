@@ -1,15 +1,15 @@
 import { initAutocomplete } from "./autocompletion.js";
-
-
+import inscription, { initInscriptionForm } from '/boutique-en-ligne/Front-end/Pages/inscription.js'
+import connexion, { initConnexionForm } from '/boutique-en-ligne/Front-end/Pages/connexion.js'
 initAutocomplete();
 
 const accueil = document.getElementsByClassName("link-home2")
 const homme= document.getElementsByClassName("link-homme")
-const connexion = document.getElementsByClassName("link-connexion")
+
 const Contact = document.getElementsByClassName("link-Contact")
 const Panier = document.getElementsByClassName("link-Panier")
 const femmes= document.getElementsByClassName("link-femmes")
-const inscription= document.getElementsByClassName("link-inscription")
+
 const Produits= document.getElementsByClassName("link-Produits")
 const AddProduits= document.getElementsByClassName("link-AddProduits")
 const DeleteProduits= document.getElementsByClassName("link-DeleteProduits")
@@ -48,7 +48,13 @@ const router = async() =>{
             console.log(module,'ici')
             const render = module.default
 
-            appContainer.innerHTML = render();
+            appContainer.innerHTML = render()
+         if (match.path === BASE_URL + "/inscription") {
+                initInscriptionForm()
+            }
+         if (match.path === BASE_URL + "/connexion") {
+                initConnexionForm()
+            }
         } catch (error){
             appContainer.innerHTML ="<h1>Erreur de chargement</h1>" 
         }

@@ -2,66 +2,54 @@
 
 
 
-require_once("./src/Database/Database.php");
+require_once("back-end/vendor/autoload.php");
+use Boutique\Controller\UserController;
 use Boutique\Database\Database;
 
 if (!isset($_SESSION)) {
     session_start();
 }
 
-$pdo= Database::getInstance();
-$pdo = Database::getInstance()->getConnexion();
 
-$message = "";
+header('Content-Type: application/json');
 
-if (isset($_POST['submit'])) {
+
+$response = [
+    'success' => false,
+    'message' => ''
+];
+
+if (isset($_POST['email'])) {
+
+    $pdo = Database::getInstance()->getConnexion();
+
     $email    = htmlspecialchars($_POST['email']);
     $password = $_POST['password'];
 
     if (!empty($email) && !empty($password)) {
-        $stmt = $pdo->prepare("SELECT * FROM user WHERE email = ?");
+        
+        $stmt = $pdo->prepare("SELECT * FROM User WHERE mail = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['mot_de_passe'])) {
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['nom']   = $user['nom'];
-            $_SESSION['prenom']= $user['prenom'];
-            $message = "<span style='color:green'>Connexion réussie !</span>";
+            // On remplit la session
+            $_SESSION['email']  = $user['email'];
+            $_SESSION['nom']    = $user['nom'];
+            $_SESSION['prenom'] = $user['prenom'];
+            
+            
+            $response['success'] = true;
+            $response['message'] = "Connexion réussie !";
         } else {
-            $message = "<span style='color:red'>Email ou mot de passe incorrect.</span>";
+            $response['message'] = "Email ou mot de passe incorrect.";
         }
     } else {
-        $message = "<span style='color:red'>Veuillez remplir tous les champs.</span>";
+        $response['message'] = "Veuillez remplir tous les champs.";
     }
+} else {
+    $response['message'] = "Aucune donnée reçue par le serveur.";
 }
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Connexion</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Connexion</h1>
-    <main>
-        <?php if (!empty($message)) echo "<p>$message</p>"; ?>
-
-        <form method="post">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" required>
-
-            <input type="submit" name="submit" value="Se connecter">
-
-            <p class="account">
-                Pas de compte ? <a href="inscription.php">S'inscrire</a>
-            </p>
-        </form>
-    </main>
-</body>
-</html>
+echo json_encode($response);
+exit;

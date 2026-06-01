@@ -11,7 +11,7 @@ export default function Produits () {
                     <th>description</th>
                     <th>prix</th>
                     <th>Categorie</th>
-                    <th>image</th>
+                    <th>image</th>  
                     <th>Actions</th>
                 </tr>
             </thead>
