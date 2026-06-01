@@ -1,0 +1,33 @@
+@use 'variable' as v;
+
+.section-services {
+  background-color: v.$couleur-blanc;
+  padding: 28px 0;
+  border-bottom: 1px solid v.$couleur-bordure;
+
+  .carte-service {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    border-right: 1px solid v.$couleur-bordure;
+    &:last-child { border-right: none; }
+
+    .icone-service { font-size: 1.8rem; color: v.$couleur-or; flex-shrink: 0; }
+
+    h4 {
+      font-size: 0.88rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: v.$couleur-texte; margin-bottom: 2px;
+    }
+    p { font-size: 0.78rem; color: v.$couleur-gris; margin: 0; }
+  }
+
+  @media (max-width: 768px) {
+    .carte-service {
+      border-right: none;
+      border-bottom: 1px solid v.$couleur-bordure;
+      &:last-child { border-bottom: none; }
+    }
+  }
+}

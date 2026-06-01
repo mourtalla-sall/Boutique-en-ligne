@@ -1,267 +1,116 @@
-// const accueil = document.getElementsByClassName("link-home2")
-// const homme= document.getElementsByClassName("link-homme")
-// const connexion = document.getElementsByClassName("link-connexion")
-// const Contact = document.getElementsByClassName("link-Contact")
-// const Panier = document.getElementsByClassName("link-Panier")
-// const femmes= document.getElementsByClassName("link-femmes")
-// const inscription= document.getElementsByClassName("link-inscription")
-// const Produits= document.getElementsByClassName("link-Produits")
-// const AddProduits= document.getElementsByClassName("link-AddProduits")
-// const DeleteProduits= document.getElementsByClassName("link-DeleteProduits")
-// const UpdateProduits= document.getElementsByClassName("link-UpdateProduits")
-// const Dashboard= document.getElementsByClassName("link-Dashboard")
+import { AfficheProduit, fetchcall } from "./Front-end/PageAdmin/Admin.js";
+import { chargerDetailProduit } from "./Front-end/Pages/detailProduit.js";
 
-// const BASE_URL = "/Boutique-en-ligne"
-// // const BASE_URL = "/php/Boutique-en-ligne" // Mourtalla
-// const routes = [
-//     { path : BASE_URL + "/Front-end/Home", file : "./Front-end/Pages/Home.js" },
-//     { path : BASE_URL + "/Front-end/homme", file: "./Front-end/Pages/homme.js"},
-//     { path : BASE_URL + "/Front-end/connexion", file: "./Front-end/Pages/connexion.js"},
-//     { path : BASE_URL + "/Front-end/femmes", file: "./Front-end/Pages/femmes.js"},
-//     { path : BASE_URL + "/Front-end/Contact", file: "./Front-end/Pages/Contact.js"},
-//     { path : BASE_URL + "/Front-end/Panier", file: "./Front-end/Pages/Panier.js"},
-//     { path : BASE_URL + "/Front-end/Inscription", file: "./Front-end/Pages/inscription.js"},
-//     //les page Admin
-//     { path : BASE_URL + "/Front-end/Produits", file: "./Front-end/PageAdmin/Produits.js"},
-//     { path : BASE_URL + "/Front-end/AddProduits", file: "./Front-end/PageAdmin/AddProduits.js"},
-//     { path : BASE_URL + "/Front-end/UpdateProduits", file: "./Front-end/PageAdmin/UpdateProduits.js"},
-//     { path : BASE_URL + "/Front-end/DeleteProduits", file: "./Front-end/PageAdmin/DeleteProduits.js"},
-//     { path : BASE_URL + "/Front-end/Dashboard", file: "./Front-end/PageAdmin/Dashboard.js"},
-    
-// ]
-
-// const router = async() =>{
-//     const currentPath = location.pathname
-//     let match = null;
-//     for (let i= 0; i < routes.length;i++){
-//         const route = routes[i];
-//         // console.log(currentPath, route.path, "currentPath + route.path")
-//         if (currentPath === route.path || currentPath === route.path + "/"){
-//             match =route;  
-//             break;
-//         }
-//         // console.log(currentPath, route.path,'yoyoyo')
-//     } 
-//     const appContainer = document.getElementById("root")
-//     // console.log(match, 'match')
-//     if ( match!== null){
-//         try {
-//             const module = await import(match.file)
-//             // console.log(module,'ici')
-//             const render = module.default
-
-//             appContainer.innerHTML = render();
-//         } catch (error){
-//             appContainer.innerHTML ="<h1>Erreur de chargement</h1>" 
-//         }
-//     } else {
-//         appContainer.innerHTML = "<h1>404</h1>><p>Page introuvable</p>"
-//     }
-// }
-
-
-// //  Pages admin — liste simple
-// const adminRoutes = [
-//     BASE_URL + "/Front-end/Dashboard",
-//     BASE_URL + "/Front-end/Produits",
-//     BASE_URL + "/Front-end/AddProduits",
-//     BASE_URL + "/Front-end/UpdateProduits",
-//     BASE_URL + "/Front-end/DeleteProduits",
-// ]
-
-// // Fonction sidebar  ne touche pas au routeur
-// const loadAdminContent = async (path) => {
-//     const mainContent = document.getElementById("main-content")
-//     if (!mainContent) return // pas dans le dashboard, on sort
-
-//     const match = routes.find(r => r.path === path)
-//     if (!match) return
-
-//     try {
-//         const module = await import(match.file)
-//         mainContent.innerHTML = module.default()
-//     } catch (error) {
-//         mainContent.innerHTML = "<h2>Erreur de chargement</h2>"
-//     }
-// }
-
-
-
-//     const appContainer = document.getElementById("root")
-
-//     if (match !== null) {
-//         try {
-//             const module = await import(match.file)
-//             const render = module.default
-//             appContainer.innerHTML = render()
-
-//             // Après injection, écouter la sidebar si page admin
-//             if (adminRoutes.includes(currentPath)) {
-//                 listenSidebar() // seule ligne ajoutée
-//             }
-
-//         } catch (error) {
-//             appContainer.innerHTML = "<h1>Erreur de chargement</h1>"
-//         }
-//     } else {
-//         appContainer.innerHTML = "<h1>404</h1><p>Page introuvable</p>"
-//     }
-// }
-
-// //  Fonction qui écoute les clics de la sidebar
-// const listenSidebar = () => {
-//     document.querySelectorAll(".sidebar a").forEach(link => {
-//         link.addEventListener("click", async (e) => {
-//             e.preventDefault()
-
-//             const path = link.getAttribute("href")
-//             if (!path || path === "#") return
-
-//             // Change l'URL sans recharger
-//             window.history.pushState({}, "", path)
-
-//             // Si c'est une page admin → injecter dans #main-content
-//             if (adminRoutes.includes(path)) {
-//                 await loadAdminContent(path)
-//             } else {
-//                 await router() // page normale
-//             }
-
-//             // Mettre à jour le lien actif
-//             document.querySelectorAll(".sidebar a").forEach(l => l.classList.remove("active"))
-//             link.classList.add("active")
-//         })
-//     })
-// }
-
-
-// window.addEventListener("popstate", router);
-// // Exécution au chargement initial
-// document.addEventListener("DOMContentLoaded", router);
-const accueil = document.getElementsByClassName("link-home2")
-const homme = document.getElementsByClassName("link-homme")
-const connexion = document.getElementsByClassName("link-connexion")
-const Contact = document.getElementsByClassName("link-Contact")
-const Panier = document.getElementsByClassName("link-Panier")
-const femmes = document.getElementsByClassName("link-femmes")
-const inscription = document.getElementsByClassName("link-inscription")
-const Produits = document.getElementsByClassName("link-Produits")
-const AddProduits = document.getElementsByClassName("link-AddProduits")
-const DeleteProduits = document.getElementsByClassName("link-DeleteProduits")
-const UpdateProduits = document.getElementsByClassName("link-UpdateProduits")
-const Dashboard = document.getElementsByClassName("link-Dashboard")
-
-const BASE_URL = "/Boutique-en-ligne"
+const BASE_URL = "/Boutique-en-ligne";
+// const BASE_URL = "/php/Boutique-en-ligne"; // Mourtalla
 
 const routes = [
-    { path: BASE_URL + "/Front-end/Home", file: "./Front-end/Pages/Home.js" },
-    { path: BASE_URL + "/Front-end/homme", file: "./Front-end/Pages/homme.js" },
-    { path: BASE_URL + "/Front-end/connexion", file: "./Front-end/Pages/connexion.js" },
-    { path: BASE_URL + "/Front-end/femmes", file: "./Front-end/Pages/femmes.js" },
-    { path: BASE_URL + "/Front-end/Contact", file: "./Front-end/Pages/Contact.js" },
-    { path: BASE_URL + "/Front-end/Panier",file: "./Front-end/Pages/Panier.js" },
-    { path: BASE_URL + "/Front-end/Inscription",file: "./Front-end/Pages/inscription.js" },
+    { path: BASE_URL + "/Front-end/Home",          file: "./Front-end/Pages/Home.js" },
+    { path: BASE_URL + "/Front-end/homme",         file: "./Front-end/Pages/homme.js" },
+    { path: BASE_URL + "/Front-end/connexion",     file: "./Front-end/Pages/connexion.js" },
+    { path: BASE_URL + "/Front-end/femmes",        file: "./Front-end/Pages/femmes.js" },
+    { path: BASE_URL + "/Front-end/Contact",       file: "./Front-end/Pages/Contact.js" },
+    { path: BASE_URL + "/Front-end/Panier",        file: "./Front-end/Pages/Panier.js" },
+    { path: BASE_URL + "/Front-end/Inscription",   file: "./Front-end/Pages/inscription.js" },
+    { path: BASE_URL + "/Front-end/detailProduit", file: "./Front-end/Pages/detailProduit.js" },
     // Pages Admin
-    { path: BASE_URL + "/Front-end/Produits", file: "./Front-end/PageAdmin/Produits.js" },
-    { path: BASE_URL + "/Front-end/AddProduits",file: "./Front-end/PageAdmin/AddProduits.js" },
-    { path: BASE_URL + "/Front-end/UpdateProduits",file: "./Front-end/PageAdmin/UpdateProduits.js" },
-    { path: BASE_URL + "/Front-end/DeleteProduits",file: "./Front-end/PageAdmin/DeleteProduits.js" },
-    { path: BASE_URL + "/Front-end/Dashboard", file: "./Front-end/PageAdmin/Dashboard.js" },
-]
+    { path: BASE_URL + "/Front-end/Dashboard",      file: "./Front-end/PageAdmin/Dashboard.js" },
+    { path: BASE_URL + "/Front-end/Produits",       file: "./Front-end/PageAdmin/Produits.js" },
+    { path: BASE_URL + "/Front-end/AddProduits",    file: "./Front-end/PageAdmin/AddProduits.js" },
+    { path: BASE_URL + "/Front-end/UpdateProduits", file: "./Front-end/PageAdmin/UpdateProduits.js" },
+    { path: BASE_URL + "/Front-end/DeleteProduits", file: "./Front-end/PageAdmin/DeleteProduits.js" },
+];
 
-// Pages admin
 const adminRoutes = [
     BASE_URL + "/Front-end/Dashboard",
     BASE_URL + "/Front-end/Produits",
     BASE_URL + "/Front-end/AddProduits",
     BASE_URL + "/Front-end/UpdateProduits",
     BASE_URL + "/Front-end/DeleteProduits",
-]
+];
 
-// Charge le contenu dans #main-content (sidebar)
+// Charge une page admin dans #main-content (navigation sidebar)
 const loadAdminContent = async (path) => {
-    const mainContent = document.getElementById("main-content")
-    if (!mainContent) return
+    const mainContent = document.getElementById("main-content");
+    if (!mainContent) return;
 
-    const match = routes.find(r => r.path === path)
-    if (!match) return
+    const match = routes.find(r => r.path === path);
+    if (!match) return;
 
     try {
-        const module = await import(match.file)
-        
-        // 1. Injecter le HTML
-        mainContent.innerHTML = module.default()
-        
-        // 2.  Attendre que le DOM soit prêt puis appeler init
-        await new Promise(resolve => setTimeout(resolve, 0))
-        
-        // 3.  Appeler la fonction d'init si elle existe
-        if (module.initAfterRender) {
-            module.initAfterRender()
-        }
-
+        const module = await import(match.file);
+        mainContent.innerHTML = module.default();
+        await new Promise(resolve => setTimeout(resolve, 0));
+        if (module.initAfterRender) module.initAfterRender();
     } catch (error) {
-        mainContent.innerHTML = "<h2>Erreur de chargement</h2>"
+        mainContent.innerHTML = "<h2>Erreur de chargement</h2>";
     }
-}
+};
 
 // Écoute les clics sur les liens de la sidebar
 const listenSidebar = () => {
     document.querySelectorAll(".sidebar a").forEach(link => {
         link.addEventListener("click", async (e) => {
-            e.preventDefault()
+            e.preventDefault();
 
-            const path = link.getAttribute("href")
-            if (!path || path === "#") return
+            const path = link.getAttribute("href");
+            if (!path || path === "#") return;
 
-            window.history.pushState({}, "", path)
+            window.history.pushState({}, "", path);
 
             if (adminRoutes.includes(path)) {
-                await loadAdminContent(path)  // injecte dans #main-content
+                await loadAdminContent(path);
             } else {
-                await router()  //  page normale
+                await router();
             }
 
-            // Mettre à jour le lien actif
-            document.querySelectorAll(".sidebar a").forEach(l => l.classList.remove("active"))
-            link.classList.add("active")
-        })
-    })
-}
+            document.querySelectorAll(".sidebar a").forEach(l => l.classList.remove("active"));
+            link.classList.add("active");
+        });
+    });
+};
 
-// Une seule fonction router
 const router = async () => {
-    const currentPath = location.pathname
-    let match = null;
+    const currentPath = location.pathname;
+    const appContainer = document.getElementById("root");
 
-    for (let i = 0; i < routes.length; i++) {
-        const route = routes[i];
-        if (currentPath === route.path || currentPath === route.path + "/") {
-            match = route;
-            break;
-        }
+    if (!appContainer) {
+        console.error("Élément #root introuvable");
+        return;
     }
 
-    const appContainer = document.getElementById("root")
+    const match = routes.find(r =>
+        currentPath === r.path || currentPath === r.path + "/"
+    );
 
-    if (match !== null) {
-        try {
-            const module = await import(match.file)
-            const render = module.default
-            appContainer.innerHTML = render()
-
-            // Si page admin activer la sidebar
-            if (adminRoutes.includes(currentPath)) {
-                listenSidebar()
-            }
-
-        } catch (error) {
-            appContainer.innerHTML = "<h1>Erreur de chargement</h1>"
-        }
-    } else {
-        appContainer.innerHTML = "<h1>404</h1><p>Page introuvable</p>"
+    if (!match) {
+        appContainer.innerHTML = "<h1>404</h1><p>Page introuvable</p>";
+        return;
     }
-}
 
-window.addEventListener("popstate", router)
-document.addEventListener("DOMContentLoaded", router)
+    try {
+        const module = await import(match.file);
+        appContainer.innerHTML = module.default();
+
+        // Fonctions post-rendu selon la route
+        if (match.path === BASE_URL + "/Front-end/Home") {
+            AfficheProduit();
+        }
+
+        if (match.path === BASE_URL + "/Front-end/detailProduit") {
+            chargerDetailProduit();
+        }
+
+        if (adminRoutes.includes(match.path)) {
+            fetchcall();
+            listenSidebar();
+        }
+
+    } catch (error) {
+        console.error(error);
+        appContainer.innerHTML = "<h1>Erreur de chargement</h1>";
+    }
+};
+
+window.addEventListener("popstate", router);
+document.addEventListener("DOMContentLoaded", router);

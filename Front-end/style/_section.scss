@@ -1,0 +1,278 @@
+@use 'variable' as v;
+
+/*SECTION COLLECTION*/
+    .section-collection {
+    padding: 60px 0;
+    background-color: #faf8f4;
+
+    .titre-section {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
+        font-weight: 700;
+        color: #1c1208;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .filtres-collection {
+        display: flex;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .bouton-filtre {
+        background: transparent;
+        border: 1px solid #d4af37;
+        color: #1c1208;
+        padding: 6px 20px;
+        border-radius: 20px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover,
+        &.actif {
+        background-color: #d4af37;
+        color: #111;
+        }
+    }
+
+    .bouton-voir-plus {
+        display: block;
+        margin: 2.5rem auto 0;
+        background: transparent;
+        border: 2px solid #d4af37;
+        color: #1c1208;
+        padding: 10px 32px;
+        border-radius: 3px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s ease;
+
+        &:hover {
+        background-color: #d4af37;
+        color: #111;
+        }
+    }
+    }
+
+    // ─────────────────────────────────────────────
+    // SECTION PROMO
+    // ─────────────────────────────────────────────
+
+    .section-promo {
+    background-color: #111;
+    padding: 60px 0;
+    color: #fff;
+
+    h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: 0.25rem;
+    }
+
+    .chiffre-promo {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(3rem, 8vw, 5.5rem);
+        font-weight: 700;
+        color: #d4af37;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.95rem;
+    }
+
+    .bouton-promo {
+        display: inline-block;
+        background-color: #d4af37;
+        color: #111;
+        padding: 11px 30px;
+        border-radius: 3px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: background 0.25s ease;
+
+        &:hover {
+        background-color: #e2c97a;
+        }
+    }
+
+    .bouton-promo-contour {
+        display: inline-block;
+        border: 1px solid rgba(212, 175, 55, 0.5);
+        color: rgba(255, 255, 255, 0.7);
+        padding: 10px 30px;
+        border-radius: 3px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.25s ease;
+
+        &:hover {
+        border-color: #d4af37;
+        color: #d4af37;
+        }
+    }
+    }
+
+    // ─────────────────────────────────────────────
+    // SECTION NEWSLETTER
+    // ─────────────────────────────────────────────
+
+    .section-lettre {
+    background-color: #1c1208;
+    padding: 50px 0;
+
+    h3 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.6rem;
+        color: #fff;
+        margin-bottom: 0.5rem;
+
+        span {
+        color: #d4af37;
+        font-style: italic;
+        }
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.88rem;
+    }
+
+    .formulaire-lettre {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+
+        input {
+        flex: 1;
+        min-width: 200px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 3px;
+        font-size: 0.85rem;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        &:focus {
+            outline: none;
+            border-color: #d4af37;
+            background: rgba(255, 255, 255, 0.12);
+        }
+        }
+
+        button {
+        background-color: #d4af37;
+        color: #111;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 3px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.2s ease;
+
+        &:hover {
+            background-color: #e2c97a;
+        }
+        }
+    }
+    }
+
+    // ─────────────────────────────────────────────
+    // FOOTER
+    // ─────────────────────────────────────────────
+
+    footer {
+    background-color: #0a0a0a;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 50px 0 0;
+    font-size: 0.85rem;
+
+    .logo-pied {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.4rem;
+        color: #fff;
+        margin-bottom: 0.75rem;
+        letter-spacing: 0.04em;
+
+        span {
+        color: #d4af37;
+        font-style: italic;
+        }
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.82rem;
+        line-height: 1.7;
+    }
+
+    h6 {
+        color: #fff;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+        margin-bottom: 0.5rem;
+        }
+
+        a {
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        font-size: 0.82rem;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: #d4af37;
+        }
+
+        i {
+            color: #d4af37;
+        }
+        }
+    }
+
+    .bordure-pied {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        margin-top: 40px;
+        padding: 20px 0;
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 0.04em;
+    }
+    }
