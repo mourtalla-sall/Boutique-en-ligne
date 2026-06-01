@@ -1,9 +1,9 @@
-@use 'variable';
-
+@use 'variable' as v;
 @use 'navbar';
 @use 'header';
 @use 'service';
 @use 'produit';
+@use 'section';
 
 *,
 *::before,
