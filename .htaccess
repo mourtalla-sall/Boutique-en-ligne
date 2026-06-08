@@ -1,13 +1,13 @@
 RewriteEngine On
-RewriteBase /Boutique-en-ligne/Front-end/
+RewriteBase /Boutique-en-ligne/
 
-# Laisser passer admin.html directement
-RewriteRule ^admin\.html$ - [L]
+# Fichiers physiques → servis directement
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
 
-# Ne pas toucher les fichiers et dossiers réels
-RewriteBase /boutique-en-ligne/
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+# Routes Admin → admin.html
+RewriteRule ^admin(/.*)?$ admin.html [L]
 
-# Tout le reste → index.html
-RewriteRule ^ index.html [L]
+# Routes boutique → index.html
+RewriteRule ^Front-end/(.*)$ index.html [L]

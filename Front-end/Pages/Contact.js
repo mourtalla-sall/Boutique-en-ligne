@@ -1,10 +1,8 @@
-<<<<<<< HEAD
-const Home = () => {
-    return `
-        <div class="lamal">Lamali la boss</div>
-    `
+const Contact = () => {
+    return ` <h1> Contact Nous</h1>
 
+        
+      `
 }
-=======
-console.log('coucou')
->>>>>>> 1f1cb22f3f1709c5bf19e39d66d0b4cb33959b69
+
+export default Contact

@@ -117,9 +117,9 @@ function fetchcall() {
     if (submitForm) {
         submitForm.addEventListener('click', async (e) => {
             e.preventDefault();
-            const form       = document.getElementById("produitsForm");
+            const form   = document.getElementById("produitsForm");
             const fileUpload = document.getElementById("fileUpload");
-            const data       = new FormData(form);
+            const data  = new FormData(form);
             console.log(fileUpload?.files[0]);
 
             try {
@@ -127,7 +127,7 @@ function fetchcall() {
                     "http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php",
                     { method: "POST", body: data }
                 );
-                const result      = await response.json();
+                const result = await response.json();
                 const messageZone = document.getElementById('message-zone');
 
                 if (result.success === true) {
@@ -144,7 +144,7 @@ function fetchcall() {
 
     /* ---- Lecture de l'id en query string ---- */
     const params = new URLSearchParams(window.location.search);
-    const id     = params.get('id');
+    const id = params.get('id');
 
     /* ---- Récupère un produit par id ---- */
     async function getProduit() {
@@ -153,10 +153,10 @@ function fetchcall() {
                 `http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?id=${id}`
             );
             const produit = await response.json();
-            document.querySelector('[name="nom"]').value         = produit.nom;
-            document.querySelector('[name="prix"]').value        = produit.prix;
+            document.querySelector('[name="nom"]').value = produit.nom;
+            document.querySelector('[name="prix"]').value = produit.prix;
             document.querySelector('[name="description"]').value = produit.description;
-            document.querySelector('[name="categorie"]').value   = produit.id_categorie;
+            document.querySelector('[name="categorie"]').value  = produit.id_categorie;
         } catch (error) {
             console.error(error);
         }

@@ -7,9 +7,7 @@ require_once(__DIR__ . '/../../back-end/vendor/autoload.php');
 
 $newProduit = new Controller();
 
-/* -------------------------
-   GET CATEGORIES
---------------------------*/
+
 if (isset($_GET['action']) && $_GET['action'] === 'getCategories') {
     echo json_encode($newProduit->getCategories());
     exit;
@@ -33,9 +31,7 @@ if (empty($_POST)) {
     exit;
 }
 // validation
-/* -------------------------
-   GET PRODUITS
---------------------------*/
+
 if (isset($_GET['id'])) {
     echo $newProduit->getById($_GET['id']);
     exit;
@@ -46,9 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     exit;
 }
 
-/* -------------------------
-   VALIDATION POST
---------------------------*/
+
 if (!isset($_POST['nom'], $_POST['description'], $_POST['prix'], $_POST['categorie'])) {
     echo json_encode(['status' => 'error', 'message' => 'Champs manquants']);
     exit;
@@ -59,9 +53,6 @@ $categorie = htmlspecialchars(trim($_POST['categorie']));
 $prix = htmlspecialchars(trim($_POST['prix']));
 $description = htmlspecialchars(trim($_POST['description']));
 
-/* -------------------------
-   IMAGE
---------------------------*/
 if (!isset($_FILES['image'])) {
     echo json_encode(['status' => 'error', 'message' => 'Image manquante']);
     exit;
@@ -99,9 +90,7 @@ echo json_encode([
     'message' => 'Produit ajouté avec succès !',
     'image'   => $nomFichier
 ]);
-/* -------------------------
-   AJOUT PRODUIT
---------------------------*/
+
 $newProduit->addProduit(
     $nom,
     $description,
@@ -110,13 +99,6 @@ $newProduit->addProduit(
     $nomFichier
 );
 
-/* -------------------------
-   RESPONSE UNIQUE
---------------------------*/
-echo json_encode([
-    'status' => 'success',
-    'message' => 'Produit ajouté avec succès',
-    'image' => $nomFichier
-]);
+
 var_dump($newProduit->getProduits());
 exit;

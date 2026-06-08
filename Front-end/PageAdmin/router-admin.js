@@ -1,80 +1,60 @@
-import { fetchcall } from "./Front-end/PageAdmin/Admin.js";
+import { fetchcall } from "/Boutique-en-ligne/Front-end/PageAdmin/Admin.js";
 
-const BASE_URL = "/Boutique-en-ligne";
+const BASE_URL = "/Boutique-en-ligne/admin";
 
 const adminRoutes = [
-    { path: BASE_URL + "/Front-end/Dashboard",      file: "./Front-end/PageAdmin/Dashboard.js" },
-    { path: BASE_URL + "/Front-end/Produits",       file: "./Front-end/PageAdmin/Produits.js" },
-    { path: BASE_URL + "/Front-end/AddProduits",    file: "./Front-end/PageAdmin/AddProduits.js" },
-    { path: BASE_URL + "/Front-end/UpdateProduits", file: "./Front-end/PageAdmin/UpdateProduits.js" },
-    { path: BASE_URL + "/Front-end/DeleteProduits", file: "./Front-end/PageAdmin/DeleteProduits.js" },
+    { path: BASE_URL + "/dashboard",      file: "/Boutique-en-ligne/Front-end/PageAdmin/Dashboard.js" },
+    { path: BASE_URL + "/produits",       file: "/Boutique-en-ligne/Front-end/PageAdmin/Produits.js" },
+    { path: BASE_URL + "/add-produit",    file: "/Boutique-en-ligne/Front-end/PageAdmin/AddProduits.js" },
+    { path: BASE_URL + "/update-produit", file: "/Boutique-en-ligne/Front-end/PageAdmin/UpdateProduits.js" },
+    { path: BASE_URL + "/delete-produit", file: "/Boutique-en-ligne/Front-end/PageAdmin/DeleteProduits.js" },
+    { path: BASE_URL + "/stock",       file: "/Boutique-en-ligne/Front-end/PageAdmin/Stock.js" },
+    { path: BASE_URL + "/profil",      file: "/Boutique-en-ligne/Front-end/PageAdmin/Profil.js" },
 ];
 
-const matchRoute = (path) =>
-    adminRoutes.find(r =>
-        path.toLowerCase() === r.path.toLowerCase() ||
-        path.toLowerCase() === r.path.toLowerCase() + "/"
+// const isAdmin = () => {
+//     const user = JSON.parse(localStorage.getItem("user") || "{}");
+//     return user?.role === "admin";
+// };
+
+const adminRouter = async () => {
+    const currentPath = location.pathname;
+    const appContainer = document.getElementById("main-content");
+
+    if (!appContainer) return;
+
+    // if (!isAdmin()) {
+    //     window.location.href = "/Boutique-en-ligne/Front-end/connexion";
+    //     return;
+    // }
+
+    const match = adminRoutes.find(
+        r => currentPath === r.path || currentPath === r.path + "/"
     );
 
-const loadPage = async (path) => {
-    const mainContent = document.getElementById("main-content");
-    if (!mainContent) return;
-
-    const match = matchRoute(path);
-
-    // Pas de route connue → Dashboard par défaut
-    if (!match) {
-        window.history.replaceState({}, "", BASE_URL + "/Front-end/Dashboard");
-        return loadPage(BASE_URL + "/Front-end/Dashboard");
-    }
-
-    // Normalise la casse dans l'URL
-    if (location.pathname !== match.path) {
-        window.history.replaceState({}, "", match.path);
-    }
+    const fileToLoad = match 
+        ? match.file 
+        : "/Boutique-en-ligne/Front-end/PageAdmin/Dashboard.js";
 
     try {
-        const module = await import(match.file);
-        mainContent.innerHTML = module.default();
-        await new Promise(resolve => setTimeout(resolve, 0));
-        if (module.initAfterRender) {
-            module.initAfterRender();
-        } else {
-            fetchcall();
-        }
+        const module = await import(fileToLoad);
+        appContainer.innerHTML = module.default();
+        fetchcall();
     } catch (error) {
-        console.error(error);
-        mainContent.innerHTML = `<h2>Erreur de chargement</h2><p>${error.message}</p>`;
+        console.error("Erreur:", error);
+        appContainer.innerHTML = "<h1>Erreur de chargement</h1>";
     }
-
-    updateActiveLink();
 };
-
-const updateActiveLink = () => {
-    document.querySelectorAll(".sidebar-link").forEach(link => {
-        const href = link.getAttribute("href");
-        link.classList.toggle("active", location.pathname.toLowerCase() === href.toLowerCase());
-    });
-};
-
-const listenSidebar = () => {
-    document.querySelectorAll(".sidebar-link").forEach(link => {
-        const href = link.getAttribute("href");
-
-        // Lien "Retour au site" → navigation normale
-        if (!adminRoutes.some(r => r.path.toLowerCase() === href.toLowerCase())) return;
-
-        link.addEventListener("click", async (e) => {
-            e.preventDefault();
-            window.history.pushState({}, "", href);
-            await loadPage(href);
-        });
-    });
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-    listenSidebar();
-    loadPage(location.pathname);
+document.addEventListener("click", (e) => {
+    console.log("clic détecté", e.target);
+    const link = e.target.closest("[data-link]");
+    console.log("link trouvé:", link);
+    if (!link) return;
+    const href = link.getAttribute("href");
+    if (!href || href === "#") return;
+    e.preventDefault();
+    history.pushState(null, "", href);
+    adminRouter();
 });
-
-window.addEventListener("popstate", () => loadPage(location.pathname));
+document.addEventListener("DOMContentLoaded", adminRouter);
+window.addEventListener("popstate", adminRouter);

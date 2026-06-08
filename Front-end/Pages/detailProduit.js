@@ -62,10 +62,10 @@ export async function chargerDetailProduit() {
         );
         const produit = await response.json();
 
-        document.getElementById('detail-nom').textContent         = produit.nom;
-        document.getElementById('detail-prix').textContent        = parseFloat(produit.prix).toFixed(2) + ' €';
+        document.getElementById('detail-nom').textContent = produit.nom;
+        document.getElementById('detail-prix').textContent = parseFloat(produit.prix).toFixed(2) + ' €';
         document.getElementById('detail-description').textContent = produit.description;
-        document.getElementById('detail-categorie').textContent   = produit.nom_categorie || '';
+        document.getElementById('detail-categorie').textContent = produit.nom_categorie || '';
         
         const img = document.getElementById('detail-image');
         img.src = `/Boutique-en-ligne/Front-end/public/images/${produit.image}`;
