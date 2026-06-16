@@ -58,8 +58,8 @@ function initHome() {
         <section class="section-promo">
             <div class="container">
                 <div class="row align-items-center">
+                
                     <div class="col-md-6">
-                        <h3>OFFRE LIMITÉE</h3>
                         <h2>Jusqu'à</h2>
                         <div class="chiffre-promo">−30%</div>
                         <p>sur toute la collection</p>
@@ -90,3 +90,43 @@ function initHome() {
     `;
 }
 
+    async function AfficheProduit() {
+        try {
+            const response = await fetch("http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php");
+            const produits = await response.json();
+
+            const container = document.getElementById("grille-produits");
+            if (!container) return;
+            container.innerHTML = "";
+
+            produits.forEach((produit) => {
+                container.innerHTML += `
+                    <div class="carte-produit">
+                        <div class="produit-corps">
+                            <img src="/Boutique-en-ligne/Front-end/public/images/${produit.image}" alt="${produit.nom}">
+                        </div>
+                        <div class="produit-pied">
+                            <div class="produit-nom">${produit.nom}</div>
+                            <div class="produit-prix">
+                                <span class="prix-principal">€ ${produit.prix}</span>
+                            </div>
+                            <div class="produit-entete">
+                                <a href="#" 
+                                class="produit-categorie"
+                                onclick="naviguer('/Boutique-en-ligne/Front-end/detailProduit?id=${produit.id_produits}'); return false;">
+                                    Voir le produit
+                                </a>
+                                <a href="#" class="icone-panier" onclick="ajouterAuPanier(${produit.id_produits}); return false;">
+                                    <i class="bi bi-cart3"></i>
+                                    <span class="pastille-panier"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
