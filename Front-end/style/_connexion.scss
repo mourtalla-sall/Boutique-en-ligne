@@ -44,18 +44,30 @@
 
 .connexion-box input[type="email"],
 .connexion-box input[type="password"],
-.connexion-box input[type="text"] {
+.connexion-box input[type="text"],
+.connexion-box textarea {
     width: 100%;
     padding: 0.7rem 1rem;
     border: 1px solid v.$couleur-bordure;
     border-radius: v.$rayon;
     background: v.$couleur-fond;
     transition: v.$transition;
+    font-family: inherit;
+}
+
+.connexion-box textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.connexion-box textarea::placeholder {
+    color: #999;
 }
 
 .connexion-box input[type="email"]:focus,
 .connexion-box input[type="password"]:focus,
-.connexion-box input[type="text"]:focus {
+.connexion-box input[type="text"]:focus,
+.connexion-box textarea:focus {
     outline: none;
     border-color: v.$couleur-or;
     background: v.$couleur-blanc;
