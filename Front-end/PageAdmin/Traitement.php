@@ -61,8 +61,7 @@ if (!isset($_FILES['image'])) {
 $nomFichier = basename($_FILES['image']['name']);
 $destination = __DIR__ . '/../public/images/' . $nomFichier;
 
-$destination = __DIR__ . '/../../../Front-end/public/images/' . $nomFichier;
-
+$destination = __DIR__ . '/../public/images/' . $nomFichier;
 if (!move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
     echo json_encode(['status' => 'error', 'message' => 'Upload échoué']);
     exit;
