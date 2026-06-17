@@ -1,19 +1,21 @@
+@use 'variable' as v;
+
 .image-produit {
-    background: #e0e0e0;
+    background: v.$couleur-fond-alt;
     height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: v.$rayon;
     font-size: 5rem;
-    color: $gris;
+    color: v.$couleur-gris;
 }
 
 .infos-produit {
 
     h1 { font-size: 2rem; }
 
-    .categorie { color: $gris; }
+    .categorie { color: v.$couleur-gris; }
 
     .bloc-prix {
         margin: 16px 0;
@@ -21,41 +23,41 @@
         .prix-actuel {
             font-size: 2rem;
             font-weight: bold;
-            color: $or;
+            color: v.$couleur-or;
         }
 
         .prix-ancien {
             font-size: 1.1rem;
-            color: $gris;
+            color: v.$couleur-gris;
             text-decoration: line-through;
             margin-left: 10px;
         }
     }
 
     .btn-panier {
-        background: $or;
-        color: #000;
+        background: v.$couleur-or;
+        color: v.$couleur-sombre;
         font-weight: bold;
         border: none;
         padding: 14px;
         font-size: 1rem;
-        border-radius: 5px;
+        border-radius: v.$rayon;
         width: 100%;
         cursor: pointer;
-        transition: background 0.3s;
+        transition: v.$transition;
 
         &:hover {
-            background: $or-hover;
-            color: #fff;
+            background: v.$couleur-or-clair;
+            color: v.$couleur-blanc;
         }
     }
 
     .message-ok {
-        background: $vert;
-        color: $vert-texte;
-        border: 1px solid $vert-bordure;
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
         padding: 12px;
-        border-radius: 5px;
+        border-radius: v.$rayon;
         margin-top: 14px;
         display: none;
 

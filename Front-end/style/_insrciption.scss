@@ -1,0 +1,151 @@
+@use 'variable' as v;
+
+// ===========================
+// CONNEXION & INSCRIPTION
+// ===========================
+.connexion-wrapper {
+    min-height:      calc(100vh - 80px);
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    background:      v.$couleur-fond;
+    padding:         2rem 1rem;
+}
+
+.connexion-box {
+    background:    v.$couleur-blanc;
+    border-radius: 10px;
+    padding:       2.5rem 2rem;
+    width:         100%;
+    max-width:     480px;
+    box-shadow:    v.$ombre;
+    border-top:    4px solid v.$couleur-or;
+
+    h1 {
+        font-family:   v.$police-titre;
+        font-size:     1.8rem;
+        color:         v.$couleur-texte;
+        margin-bottom: 1.5rem;
+        text-align:    center;
+        font-style:    italic;
+
+        span { color: v.$couleur-or; }
+    }
+
+    // ===========================
+    // FORMULAIRE
+    // ===========================
+    form {
+        display:        flex;
+        flex-direction: column;
+        gap:            0.8rem;
+    }
+
+    label {
+        font-size:   0.82rem;
+        font-weight: 600;
+        color:       v.$couleur-texte;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: -0.4rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width:         100%;
+        padding:       0.7rem 1rem;
+        border:        1px solid v.$couleur-bordure;
+        border-radius: v.$rayon;
+        font-size:     0.9rem;
+        font-family:   v.$police-corps;
+        color:         v.$couleur-texte;
+        background:    v.$couleur-fond;
+        transition:    v.$transition;
+
+        &:focus {
+            outline:      none;
+            border-color: v.$couleur-or;
+            background:   v.$couleur-blanc;
+            box-shadow:   0 0 0 3px rgba(v.$couleur-or, 0.15);
+        }
+
+        &::placeholder { color: v.$couleur-gris; }
+    }
+
+    input[type="submit"] {
+        margin-top:       0.5rem;
+        padding:          0.85rem;
+        background:       v.$couleur-or;
+        color:            v.$couleur-sombre;
+        border:           none;
+        border-radius:    v.$rayon;
+        font-size:        0.9rem;
+        font-weight:      700;
+        font-family:      v.$police-corps;
+        letter-spacing:   0.06em;
+        text-transform:   uppercase;
+        cursor:           pointer;
+        transition:       v.$transition;
+        width:            100%;
+
+        &:hover {
+            background: v.$couleur-or-clair;
+            transform:  translateY(-1px);
+            box-shadow: 0 4px 12px rgba(v.$couleur-or, 0.35);
+        }
+
+        &:active { transform: translateY(0); }
+    }
+
+    // ===========================
+    // LIEN compte
+    // ===========================
+    .account {
+        text-align: center;
+        font-size:  0.85rem;
+        color:      v.$couleur-gris;
+        margin-top: 0.5rem;
+
+        a {
+            color:           v.$couleur-or;
+            font-weight:     600;
+            text-decoration: none;
+            transition:      v.$transition;
+
+            &:hover { color: v.$couleur-or-clair; }
+        }
+    }
+
+    // ===========================
+    // MESSAGES
+    // ===========================
+    #msg-erreur {
+        background:    rgba(#e74c3c, 0.1);
+        border:        1px solid #e74c3c;
+        border-radius: v.$rayon;
+        padding:       0.6rem 1rem;
+        font-size:     0.85rem;
+        color:         #c0392b !important;
+        text-align:    center;
+    }
+
+    #msg-succes {
+        background:    rgba(#2ecc71, 0.1);
+        border:        1px solid #2ecc71;
+        border-radius: v.$rayon;
+        padding:       0.6rem 1rem;
+        font-size:     0.85rem;
+        color:         #27ae60 !important;
+        text-align:    center;
+    }
+
+    // ===========================
+    // RESPONSIVE
+    // ===========================
+    @media (max-width: 480px) {
+        padding: 2rem 1.2rem;
+
+        h1 { font-size: 1.4rem; }
+    }
+}

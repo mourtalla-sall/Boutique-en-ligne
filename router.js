@@ -4,6 +4,7 @@ import { initInscriptionForm } from "./Front-end/Pages/inscription.js";
 import { initConnexionForm } from "./Front-end/Pages/connexion.js";
 import { AfficheProduit } from "./Front-end/PageAdmin/Admin.js";
 
+
 initAutocomplete();
 
 const BASE_URL = "/Boutique-en-ligne";
@@ -34,7 +35,6 @@ const router = async () => {
             const module = await import(match.file);
             appContainer.innerHTML = module.default();
 
-            // ✅ Appels post-rendu
             if (match.path.includes("Home"))         AfficheProduit();
             if (match.path.includes("inscription"))  initInscriptionForm();
             if (match.path.includes("connexion"))    initConnexionForm();

@@ -6,6 +6,10 @@
 @use 'service';
 @use 'produit';
 @use 'section';
+@use 'connexion'; 
+@use 'inscription'; 
+
+
 
 *,
 *::before,

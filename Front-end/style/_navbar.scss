@@ -1,92 +1,126 @@
 @use 'variable' as v;
-/*navbar*/
 
+// ===========================
+// NAVBAR
+// ===========================
 .barre-navigation {
-  background-color: v.$couleur-sombre;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+    background-color: v.$couleur-sombre;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
 
-  .logo {
+.logo {
     font-family: v.$police-titre;
     font-size: 1.5rem;
-    color: v.$couleur-blanc ;
+    color: v.$couleur-blanc;
     letter-spacing: 0.04em;
     text-decoration: none;
-    span { color: v.$couleur-or; font-style: italic; }
-  }
 
-  .lien-navigation {
-    color: rgba(v.$couleur-blanc, 0.82) ;
+    span { color: v.$couleur-or; font-style: italic; }
+}
+
+.lien-navigation {
+    color: rgba(v.$couleur-blanc, 0.82);
     font-size: 0.82rem;
     font-weight: 500;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 0.5rem 0.75rem ;
+    padding: 0.5rem 0.75rem;
     transition: color 0.2s;
-    &:hover { color: v.$couleur-or ; }
-  }
 
-  .dropdown-menu-dark {
-    background-color: #0a0a0a;
+    &:hover { color: v.$couleur-or; }
+}
+
+// ===========================
+// DROPDOWN
+// ===========================
+.dropdown-menu-dark {
+    background-color: #0e0e0e;
     border: 1px solid rgba(v.$couleur-or, 0.25);
     border-radius: v.$rayon;
-    .dropdown-item {
-      font-size: 0.82rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: rgba(v.$couleur-blanc, 0.75);
-      padding: 0.5rem 1.2rem;
-      &:hover {
-        background-color: rgba(v.$couleur-or, 0.15);
-        color: v.$couleur-or;
-      }
-    }
-  }
 
-  .form-control {
+    .dropdown-item {
+        font-size: 0.82rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: rgba(v.$couleur-blanc, 0.75);
+        padding: 0.5rem 1.2rem;
+
+        &:hover {
+            background-color: rgba(v.$couleur-or, 0.15);
+            color: v.$couleur-or;
+        }
+    }
+}
+
+// ===========================
+// BARRE DE RECHERCHE
+// ===========================
+.form-control {
     background-color: rgba(v.$couleur-blanc, 0.07);
     border: 1px solid rgba(v.$couleur-blanc, 0.18);
     color: v.$couleur-blanc;
     font-size: 0.8rem;
     border-radius: 3px;
-    &::placeholder { color: rgba(v.$couleur-blanc, 0.4); }
-    &:focus {
-      background-color: rgba(v.$couleur-blanc, 0.12);
-      border-color: v.$couleur-or;
-      box-shadow: none;
-      color: v.$couleur-blanc;
-    }
-  }
 
-  .btn-outline-success {
+    &::placeholder { color: rgba(v.$couleur-blanc, 0.4); }
+
+    &:focus {
+        background-color: rgba(v.$couleur-blanc, 0.12);
+        border-color: v.$couleur-or;
+        box-shadow: none;
+        color: v.$couleur-blanc;
+    }
+}
+
+.btn-outline-success {
     border-color: v.$couleur-or;
     color: v.$couleur-or;
     font-size: 0.78rem;
     border-radius: 3px;
-    &:hover { background-color: v.$couleur-or; color: v.$couleur-sombre; }
-  }
 
-  .icone-panier {
+    &:hover { background-color: v.$couleur-or; color: v.$couleur-sombre; }
+}
+
+// ===========================
+// ICÔNE PANIER + PASTILLE
+// ===========================
+.icone-panier {
     position: relative;
     color: rgba(v.$couleur-blanc, 0.82);
     font-size: 1.35rem;
     text-decoration: none;
     transition: color 0.2s;
+
     &:hover { color: v.$couleur-or; }
+}
 
-    .pastille-panier {
-      position: absolute;
-      top: -4px; right: -6px;
-      width: 9px; height: 9px;
-      background-color: v.$couleur-or;
-      border-radius: 50%;
-      display: block;
-    }
-  }
+.pastille-panier {
+    position: absolute;
+    top:   -8px;
+    right: -8px;
+    background:      v.$couleur-or;
+    color:           v.$couleur-sombre;
+    font-size:       0.65rem;
+    font-weight:     900;
+    font-family:     v.$police-corps;
+    min-width:       18px;
+    height:          18px;
+    padding:         0 3px;
+    border-radius:   50px;
+    display:         none;
+    align-items:     center;
+    justify-content: center;
+    line-height:     1;
+    z-index:         10;
+}
 
-  .bouton-dore {
+// ===========================
+// BOUTON DORÉ (Se connecter)
+// ===========================
+.bouton-dore {
     display: inline-block;
     background-color: v.$couleur-or;
     color: v.$couleur-sombre;
@@ -94,18 +128,59 @@
     border-radius: 3px;
     font-family: v.$police-corps;
     font-weight: 600;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     padding: 6px 14px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     cursor: pointer;
     transition: v.$transition;
 
     .lien-navigation {
-      color: v.$couleur-sombre ;
-      font-weight: 700;
-      padding: 0 ;
+        color: v.$couleur-sombre;
+        font-weight: 700;
+        padding: 0;
     }
+
     &:hover { background-color: v.$couleur-or-clair; }
-  }
+}
+
+// ===========================
+// RESPONSIVE MOBILE
+// ===========================
+@media (max-width: 991px) {
+
+    // Menu burger fond sombre
+    .navbar-collapse {
+        background-color: v.$couleur-sombre;
+        padding: 1rem;
+        border-top: 1px solid rgba(v.$couleur-or, 0.2);
+    }
+
+    // Liens centrés en colonne
+    .navbar-nav {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.2rem !important;
+        width: 100%;
+    }
+
+    // Barre de recherche pleine largeur
+    .d-flex.role-search,
+    form.d-flex {
+        width: 100%;
+        margin-top: 0.5rem;
+
+        input { flex: 1; }
+    }
+
+    // Panier et boutons en ligne
+    .nav-item.d-flex {
+        margin-top: 0.5rem;
+    }
+
+    .bouton-dore {
+        width: 100%;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
 }

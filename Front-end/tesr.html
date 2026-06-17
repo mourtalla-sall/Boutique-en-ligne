@@ -1,3 +1,66 @@
+import { initAutocomplete } from "./autocompletion.js";
+import { chargerDetailProduit } from "./Front-end/Pages/detailProduit.js";
+import { initInscriptionForm } from "./Front-end/Pages/inscription.js";
+import { initConnexionForm } from "./Front-end/Pages/connexion.js";
+import { AfficheProduit } from "./Front-end/PageAdmin/Admin.js";
+
+initAutocomplete();
+
+const BASE_URL = "/Boutique-en-ligne";
+
+const routes = [
+    { path: BASE_URL + "/Front-end/Home",    file: "./Front-end/Pages/Home.js" },
+    { path: BASE_URL + "/Front-end/homme",  file: "./Front-end/Pages/homme.js" },
+    { path: BASE_URL + "/Front-end/connexion", file: "./Front-end/Pages/connexion.js" },
+    { path: BASE_URL + "/Front-end/femmes",  file: "./Front-end/Pages/femmes.js" },
+    { path: BASE_URL + "/Front-end/Contact", file: "./Front-end/Pages/Contact.js" },
+    { path: BASE_URL + "/Front-end/Panier", file: "./Front-end/Pages/Panier.js" },
+    { path: BASE_URL + "/Front-end/Inscription", file: "./Front-end/Pages/inscription.js" },
+    { path: BASE_URL + "/Front-end/detailProduit", file: "./Front-end/Pages/detailProduit.js" },
+];
+
+const router = async () => {
+    const currentPath = location.pathname;
+    const appContainer = document.getElementById("root");
+
+    if (!appContainer) return;
+
+    if (currentPath.startsWith(BASE_URL + "/admin")) return;
+
+    const match = routes.find(r => currentPath === r.path || currentPath === r.path + "/");
+
+    if (match) {
+        try {
+            const module = await import(match.file);
+            appContainer.innerHTML = module.default();
+
+            if (match.path.includes("Home"))         AfficheProduit();
+            if (match.path.includes("inscription"))  initInscriptionForm();
+            if (match.path.includes("connexion"))    initConnexionForm();
+            if (match.path.includes("detailProduit")) chargerDetailProduit();
+
+        } catch (error) {
+            console.error(error);
+            appContainer.innerHTML = "<h1>Erreur de chargement</h1>";
+        }
+    } else {
+        appContainer.innerHTML = "<h1>404</h1><p>Page introuvable</p>";
+    }
+};
+
+window.addEventListener("popstate", router);
+document.addEventListener("DOMContentLoaded", router);
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,6 +77,7 @@
 <body>
 
     <header>
+        
         <nav class="navbar navbar-expand-lg barre-navigation">
             <div class="container">
                 <a class="navbar-brand logo" href="/Boutique-en-ligne/Front-end/Home">Chez <span>Lamal</span></a>
@@ -23,13 +87,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="menuNavigation">
                     <ul class="navbar-nav mx-auto align-items-center gap-1">
-
                         <li class="nav-item">
                             <a class="nav-link lien-navigation" href="/Boutique-en-ligne/Front-end/Home">Accueil</a>
                         </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link lien-navigation dropdown-toggle"
+                    <li class="nav-item dropdown">
+                            <a class="nav-link lien-navigation dropdown-toggle" 
                             href="#"
                             data-bs-toggle="dropdown">Boutique</a>
                             <ul class="dropdown-menu dropdown-menu-dark">
@@ -37,42 +99,35 @@
                                 <li><a class="dropdown-item" href="/Boutique-en-ligne/Front-end/femmes" data-link>Femme</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link lien-navigation" href="/Boutique-en-ligne/Front-end/Contact">Contact</a>
                         </li>
-
                         <li class="nav-item">
                             <form class="d-flex" role="search">
                                 <input class="form-control me-2" type="search" placeholder="Rechercher">
                                 <button class="btn btn-outline-success" type="submit">Rechercher</button>
                             </form>
                         </li>
-
                         <li class="nav-item d-flex align-items-center">
                             <a href="/Boutique-en-ligne/Front-end/Panier" class="icone-panier">
                                 <i class="bi bi-cart3"></i>
                                 <span class="pastille-panier"></span>
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link lien-navigation" href="/Boutique-en-ligne/Front-end/Inscription">Inscription</a>
                         </li>
-
                         <li class="nav-item bouton-dore ms-2">
                             <a class="nav-link lien-navigation" href="/Boutique-en-ligne/Front-end/connexion">Se connecter</a>
                         </li>
-
                     </ul>
                 </div>
             </div>
         </nav>
-        
     </header>
 
     <main id="root">
-        
+        <!-- Contenu injecté par le routeur -->
     </main>
 
     <footer>
@@ -116,26 +171,40 @@
         </div>
     </footer>
 
-    <!-- ===== OVERLAY ===== -->
-    <div id="overlay-panier"></div>
-
-    <!-- ===== SIDEBAR PANIER ===== -->
-    <div id="sidebar-panier">
-        <div class="sidebar-panier__entete">
-            <h2>Mon Panier</h2>
-            <button id="fermer-sidebar">
-                <i class="bi bi-x-lg"></i>
-            </button>
-        </div>
-        <div id="panier-contenu"></div>
-        <div class="sidebar-panier__pied">
-            <div class="panier-total-ligne">
-                <span>Total</span>
-                <span id="panier-total">0.00 €</span>
-            </div>
-            <button class="bouton-commander">Commander</button>
-        </div>
-    </div>
-
 </body>
 </html>
+
+
+
+
+
+@use 'variable' as v;
+@use 'variable';
+@use 'detailproduit';
+@use 'navbar';
+@use 'header';
+@use 'service';
+@use 'produit';
+@use 'section';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: v.$police-corps;
+  background-color: v.$couleur-fond;
+  color: v.$couleur-texte;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+.texte-or { color: v.$couleur-or; font-style: italic; }
