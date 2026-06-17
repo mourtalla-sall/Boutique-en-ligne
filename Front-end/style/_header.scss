@@ -1,62 +1,166 @@
 @use 'variable' as v;
-/*header*/
+
+// ===========================
+// CAROUSEL HERO
+// ===========================
 .entete-principal {
-  background-color: v.$couleur-sombre;
-  overflow: hidden;
+    background-color: v.$couleur-sombre;
+    overflow: hidden;
 
-  .carousel {
-    min-height: 480px;
-    .carousel-item {
-      min-height: 480px;
-      .container { padding: 60px 15px; }
-      .row       { min-height: 360px; }
+    .carousel {
+        min-height: 480px;
+
+        .carousel-item {
+            min-height: 480px;
+
+            .container { padding: 60px 15px; }
+            .row       { min-height: 360px;  }
+        }
     }
-  }
 
-  .titre-entete {
-    font-family: v.$police-titre;
-    font-size: clamp(2rem, 4vw, 3.2rem);
+  
+.col-image img {
+    width:           100%;
+    max-height:      300px;  // ← réduit la hauteur
+    object-fit:      contain;
+    object-position: center;
+}
+
+    // Titre
+    .titre-entete {
+        font-family:   v.$police-titre;
+        font-size:     clamp(2rem, 4vw, 3.2rem);
+        font-weight:   700;
+        color:         v.$couleur-blanc;
+        line-height:   1.2;
+        margin-bottom: 1.2rem;
+    }
+
+    // Paragraphe
+    .paragraphe-entete {
+        color:         rgba(v.$couleur-blanc, 0.70);
+        font-size:     0.95rem;
+        max-width:     380px;
+        margin-bottom: 2rem;
+        line-height:   1.7;
+    }
+
+    // Bouton Découvrir
+    .bouton-entete {
+        display:          inline-block;
+        background-color: v.$couleur-or;
+        color:            v.$couleur-sombre;
+        border:           none;
+        border-radius:    3px;
+        font-family:      v.$police-corps;
+        font-weight:      600;
+        font-size:        0.82rem;
+        padding:          10px 28px;
+        letter-spacing:   0.08em;
+        text-transform:   uppercase;
+        cursor:           pointer;
+        transition:       v.$transition;
+
+        &:hover {
+            background-color: v.$couleur-or-clair;
+            color:            v.$couleur-sombre;
+        }
+    }
+
+    // ===========================
+    // FLÈCHES DORÉES
+    // ===========================
+    .carousel-control-prev,
+    .carousel-control-next {
+        width:            44px;
+        height:           44px;
+        background-color: v.$couleur-or;
+        border-radius:    50%;
+        top:              50%;
+        transform:        translateY(-50%);
+        opacity:          0.9;
+        transition:       v.$transition;
+
+        &:hover {
+            background-color: v.$couleur-or-clair;
+            opacity:          1;
+            transform:        translateY(-50%) scale(1.1);
+        }
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        filter: brightness(0) invert(0);
+    }
+    .icone-carousel {
+    color:     v.$couleur-or;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: v.$couleur-blanc;
-    line-height: 1.2;
-    margin-bottom: 1.2rem;
-  }
+}
 
-  .paragraphe-entete {
-    color: rgba(v.$couleur-blanc, 0.70);
-    font-size: 0.95rem;
-    max-width: 380px;
-    margin-bottom: 2rem;
-    line-height: 1.7;
-  }
+    .carousel-control-prev { left:  16px; }
+    .carousel-control-next { right: 16px; }
 
-  .bouton-entete {
-    display: inline-block;
-    background-color: v.$couleur-or;
-    color: v.$couleur-sombre;
-    border: none;
-    border-radius: 3px;
-    font-family: v.$police-corps;
-    font-weight: 600;
-    font-size: 0.82rem;
-    padding: 10px 28px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: v.$transition;
-    &:hover { background-color: v.$couleur-or-clair; color: v.$couleur-sombre; }
-  }
+    // ===========================
+    // RESPONSIVE
+    // ===========================
+    @media (max-width: 991px) {
+        .carousel      { min-height: 350px; }
+        .carousel-item { min-height: 350px; }
+        .row           { min-height: auto;  }
 
-  .carousel-control-prev,
-  .carousel-control-next {
-    width: 44px; height: 44px;
-    background-color: rgba(v.$couleur-or, 0.25);
-    border-radius: 50%;
-    top: 50%; transform: translateY(-50%);
-    opacity: 0.8;
-    transition: v.$transition;
-    &:hover { background-color: v.$couleur-or; opacity: 1; }
-  }
-  .carousel-control-prev { left: 16px; }
-  .carousel-control-next { right: 16px; }
+        .container { padding: 40px 15px; }
+
+        .col-image {
+            display: block;
+
+            img {
+                max-height: 200px;
+                width:      100%;
+                object-fit: contain;
+            }
+        }
+
+        .row {
+            flex-direction: row !important;
+            align-items:    center;
+        }
+
+        .col-lg-6 {
+            width: 50% !important;
+            flex:  0 0 50% !important;
+        }
+
+        .titre-entete      { font-size: 1.4rem;  }
+        .paragraphe-entete { font-size: 0.82rem; max-width: 100%; }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width:  38px;
+            height: 38px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .carousel      { min-height: 240px; }
+        .carousel-item { min-height: 240px; }
+
+        .container { padding: 20px 15px; }
+
+        .col-image img { max-height: 140px; }
+
+        .titre-entete      { font-size: 1.1rem; }
+        .paragraphe-entete { display: none;     }
+
+        .bouton-entete {
+            font-size: 0.7rem;
+            padding:   7px 14px;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width:  30px;
+            height: 30px;
+        }
+    }
 }

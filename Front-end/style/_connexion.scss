@@ -1,0 +1,129 @@
+@use 'variable' as v;
+
+.connexion-wrapper {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: v.$couleur-fond;
+    padding: 2rem 1rem;
+}
+
+.connexion-box {
+    background: v.$couleur-blanc;
+    border-radius: 10px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: v.$ombre;
+    border-top: 4px solid v.$couleur-or;
+}
+
+.connexion-box h1 {
+    font-family: v.$police-titre;
+    font-size: 1.8rem;
+    color: v.$couleur-texte;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-style: italic;
+}
+
+.connexion-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.connexion-box label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: v.$couleur-texte;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.connexion-box input[type="email"],
+.connexion-box input[type="password"],
+.connexion-box input[type="text"],
+.connexion-box textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1px solid v.$couleur-bordure;
+    border-radius: v.$rayon;
+    background: v.$couleur-fond;
+    transition: v.$transition;
+    font-family: inherit;
+}
+
+.connexion-box textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.connexion-box textarea::placeholder {
+    color: #999;
+}
+
+.connexion-box input[type="email"]:focus,
+.connexion-box input[type="password"]:focus,
+.connexion-box input[type="text"]:focus,
+.connexion-box textarea:focus {
+    outline: none;
+    border-color: v.$couleur-or;
+    background: v.$couleur-blanc;
+    box-shadow: 0 0 0 3px rgba(v.$couleur-or, 0.15);
+}
+
+.connexion-box input[type="submit"] {
+    margin-top: 0.5rem;
+    padding: 0.85rem;
+    background: v.$couleur-or;
+    color: v.$couleur-sombre;
+    border: none;
+    border-radius: v.$rayon;
+    font-weight: 700;
+    cursor: pointer;
+    transition: v.$transition;
+}
+
+.connexion-box input[type="submit"]:hover {
+    background: v.$couleur-or-clair;
+}
+
+.account {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.account a {
+    color: v.$couleur-or;
+    text-decoration: none;
+}
+
+#msg-erreur {
+    display: none;
+    background: rgba(#e74c3c, 0.1);
+    border: 1px solid #e74c3c;
+    border-radius: v.$rayon;
+    padding: 0.75rem;
+    color: #c0392b;
+}
+
+#msg-succes {
+    display: none;
+    background: rgba(#2ecc71, 0.1);
+    border: 1px solid #2ecc71;
+    border-radius: v.$rayon;
+    padding: 0.75rem;
+    color: #27ae60;
+}
+
+@media (max-width: 480px) {
+    .connexion-box {
+        padding: 2rem 1.2rem;
+    }
+
+    .connexion-box h1 {
+        font-size: 1.4rem;
+    }
+}

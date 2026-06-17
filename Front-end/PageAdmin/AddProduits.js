@@ -12,7 +12,7 @@ export default function AddProduits(){
 
 export function initAdd () {
     return `
-       
+    
         <div class="auth-page">
             <div class="auth-container">
                 <h1>Ajout Produits</h1>

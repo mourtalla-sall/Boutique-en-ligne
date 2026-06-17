@@ -1,25 +1,35 @@
 
     const connexion = () => {
-    return `<h1>Connexion</h1>
-    
-       
+    return `
+    <div class="connexion-wrapper">
+        <div class="connexion-box">
 
-        <form id="form-connexion" method="post">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <h1>Connexion</h1>
 
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" required>
+            <form id="form-connexion" method="post">
 
-            <input type="submit" name="submit" value="Se connecter">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
 
-            <p class="account">
-                Pas de compte ? <a href="inscription.php">S'inscrire</a>
-            </p>
-             <p id="msg-erreur" style="color: #ff4d4d; font-weight: bold; display: none; margin-bottom: 15px;"></p>
-                <p id="msg-succes" style="color: #2ecc71; font-weight: bold; display: none; margin-bottom: 15px;"></p>
-        </form>`
-     }
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+
+                <input type="submit" value="Se connecter">
+
+                <p id="msg-erreur"></p>
+                <p id="msg-succes"></p>
+
+                <p class="account">
+                    Pas de compte ?
+                    <a href="#/inscription">S'inscrire</a>
+                </p>
+
+            </form>
+
+        </div>
+    </div>
+    `;
+};
 export function initConnexionForm() {
     const form = document.getElementById('form-connexion')
     if (!form) return

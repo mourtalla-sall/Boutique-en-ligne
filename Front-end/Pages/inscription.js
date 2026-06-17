@@ -1,5 +1,6 @@
  const inscription = () => {
     return `
+    
     <div class="connexion-wrapper">
         <div class="connexion-box">
             <h1>Inscription</h1>
@@ -78,4 +79,4 @@
 
 export default inscription
 
-     
+    
