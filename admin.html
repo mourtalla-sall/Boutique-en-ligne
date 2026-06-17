@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Chez Lamal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/Boutique-en-ligne/Front-end/PageAdmin/AdminCss.css">
+    <script defer type="module" src="/Boutique-en-ligne/Front-end/PageAdmin/router-admin.js"></script>
+</head>
+<body>
+
+    <!-- Structure exacte attendue par le CSS -->
+   <input type="checkbox" id="check">
+<label for="check">
+    <i class="fas fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>
+</label>
+
+<div class="sidebar">
+    <header>Chez Lamal</header>
+    <a href="/Boutique-en-ligne/admin/dashboard" data-link>
+        <i class="fas fa-qrcode"></i><span>Dashboard</span>
+    </a>
+    <a href="/Boutique-en-ligne/admin/produits" data-link>
+        <i class="fas fa-link"></i><span>Produits</span>
+    </a>
+    <a href="/Boutique-en-ligne/admin/add-produit" data-link>
+        <i class="fas fa-plus"></i><span>Ajouter</span>
+    </a>
+    <a href="/Boutique-en-ligne/admin/stock" data-link>
+        <i class="fas fa-boxes"></i><span>Stock</span>
+    </a>
+    <a href="/Boutique-en-ligne/admin/profil" data-link>
+        <i class="fas fa-users"></i><span>Profil</span>
+    </a>
+    <a href="/Boutique-en-ligne/Front-end/Home">
+        <i class="fas fa-arrow-left"></i><span>Retour au site</span>
+    </a>
+</div>
+
+<main id="main-content"></main>
+</body>
+</html>

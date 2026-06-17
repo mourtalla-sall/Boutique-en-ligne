@@ -7,17 +7,31 @@ require_once(__DIR__ . '/../../back-end/vendor/autoload.php');
 
 $newProduit = new Controller();
 
-/* -------------------------
-   GET CATEGORIES
---------------------------*/
+
 if (isset($_GET['action']) && $_GET['action'] === 'getCategories') {
     echo json_encode($newProduit->getCategories());
     exit;
 }
 
-/* -------------------------
-   GET PRODUITS
---------------------------*/
+// DELETE produit
+if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
+    $newProduit->deleteProduit();
+    echo json_encode(['status' => 'success', 'message' => 'Produit supprimé']);
+    exit;
+}
+// GET un produit par id
+if (isset($_GET['id']) && empty($_POST)) {
+    echo $newProduit->getById($_GET['id']);
+    exit;
+}
+// GET produits
+if (empty($_POST)) {
+    // var_dump($newProduit->getProduits());
+    echo ($newProduit->getProduits());
+    exit;
+}
+// validation
+
 if (isset($_GET['id'])) {
     echo $newProduit->getById($_GET['id']);
     exit;
@@ -28,9 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     exit;
 }
 
-/* -------------------------
-   VALIDATION POST
---------------------------*/
+
 if (!isset($_POST['nom'], $_POST['description'], $_POST['prix'], $_POST['categorie'])) {
     echo json_encode(['status' => 'error', 'message' => 'Champs manquants']);
     exit;
@@ -41,15 +53,13 @@ $categorie = htmlspecialchars(trim($_POST['categorie']));
 $prix = htmlspecialchars(trim($_POST['prix']));
 $description = htmlspecialchars(trim($_POST['description']));
 
-/* -------------------------
-   IMAGE
---------------------------*/
 if (!isset($_FILES['image'])) {
     echo json_encode(['status' => 'error', 'message' => 'Image manquante']);
     exit;
 }
 
 $nomFichier = basename($_FILES['image']['name']);
+$destination = __DIR__ . '/../public/images/' . $nomFichier;
 
 $destination = __DIR__ . '/../../../Front-end/public/images/' . $nomFichier;
 
@@ -57,10 +67,30 @@ if (!move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
     echo json_encode(['status' => 'error', 'message' => 'Upload échoué']);
     exit;
 }
+// UPDATE si id en POST
+if (isset($_POST['id']) && !empty($_POST['id'])) {
+    $id = (int) $_POST['id'];
+    $UpdateProduct = $newProduit->updateProduits($id, $nom, $description, $prix, $categorie, $nomFichier);
+    echo $UpdateProduct;
+    exit;
+}
 
-/* -------------------------
-   AJOUT PRODUIT
---------------------------*/
+// ADD sinon
+$AddProduct = $newProduit->addProduit(
+    $nom, $description, $prix, $categorie, $nomFichier
+);
+echo $AddProduct;
+exit;
+
+
+
+// Et pour les erreurs, remplacez tous vos json_encode d'erreur par :
+echo json_encode([
+    'status'  => 'success',
+    'message' => 'Produit ajouté avec succès !',
+    'image'   => $nomFichier
+]);
+
 $newProduit->addProduit(
     $nom,
     $description,
@@ -69,13 +99,6 @@ $newProduit->addProduit(
     $nomFichier
 );
 
-/* -------------------------
-   RESPONSE UNIQUE
---------------------------*/
-echo json_encode([
-    'status' => 'success',
-    'message' => 'Produit ajouté avec succès',
-    'image' => $nomFichier
-]);
+
 var_dump($newProduit->getProduits());
 exit;

@@ -4,10 +4,97 @@ export default function Home() {
 
 export function init() {
     AfficheProduit();
+
 }
 
 function initHome() {
     return `
+        <div id="carrousel"
+            class="carousel slide w-100"
+            data-bs-ride="false">
+
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <h1 class="titre-entete">
+                                    L'Art du <br>
+                                    <span class="texte-or">Raffinement</span> Moderne
+                                </h1>
+                                <p class="paragraphe-entete">
+                                    Découvrez notre nouvelle collection moderne,
+                                    élégante et tendance pour homme et femme.
+                                </p>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <img src="/Boutique-en-ligne/Front-end/public/images/shoping.avif"
+                                    alt="Collection moderne">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <h1 class="titre-entete">
+                                    Style <span class="texte-or">Élégant</span>
+                                </h1>
+                                <p class="paragraphe-entete">
+                                    Une sélection unique pour affirmer votre personnalité.
+                                </p>
+                                <button class="btn bouton-entete">Explorer</button>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <img src="/Boutique-en-ligne/Front-end/public/images/istockphoto-1024106788-170667a.jpg"
+                                    alt="Style élégant">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <h1 class="titre-entete">
+                                    Tendances <span class="texte-or">2026</span>
+                                </h1>
+                                <p class="paragraphe-entete">
+                                    Les dernières nouveautés sont arrivées.
+                                </p>
+                                <button class="btn bouton-entete">Voir la collection</button>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <img src="/Boutique-en-ligne/Front-end/public/images/femme-et-homme-faisant-du-shopping-couple-avec-sac-grande-vente-remise-acheteur-souriant-illustration-vectorielle-dans-le-style-de-161859010.webp"
+                                    alt="Tendances 2026">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Boutons -->
+        <button class="carousel-control-prev" type="button"
+        data-bs-target="#carrousel" data-bs-slide="prev">
+    <i class="bi bi-chevron-left icone-carousel"></i>
+</button>
+
+<button class="carousel-control-next" type="button"
+        data-bs-target="#carrousel" data-bs-slide="next">
+    <i class="bi bi-chevron-right icone-carousel"></i>
+</button>
+
+        </div>
+    
+
         <section class="section-services">
             <div class="container">
                 <div class="row g-4">
@@ -46,11 +133,12 @@ function initHome() {
             <div class="container">
                 <h2 class="titre-section">Nos <span class="texte-or">Collections</span></h2>
                 <div class="filtres-collection">
-                    <button class="bouton-filtre actif">Tous</button>
-                    <button class="bouton-filtre">Homme</button>
-                    <button class="bouton-filtre">Femme</button>
-                </div>
-                <div class="grille-produits" id="grille-produits"></div>
+                <button class="bouton-filtre actif" data-filtre="tous">Tous</button>
+                <button class="bouton-filtre" data-filtre="homme">Homme</button>
+                <button class="bouton-filtre" data-filtre="femme">Femme</button>
+            </div>
+            <div class="grille-produits" id="grille-produits"></div>
+
                 <button class="bouton-voir-plus">Voir tous les produits</button>
             </div>
         </section>
@@ -89,44 +177,3 @@ function initHome() {
         </section>
     `;
 }
-
-    async function AfficheProduit() {
-        try {
-            const response = await fetch("http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php");
-            const produits = await response.json();
-
-            const container = document.getElementById("grille-produits");
-            if (!container) return;
-            container.innerHTML = "";
-
-            produits.forEach((produit) => {
-                container.innerHTML += `
-                    <div class="carte-produit">
-                        <div class="produit-corps">
-                            <img src="/Boutique-en-ligne/Front-end/public/images/${produit.image}" alt="${produit.nom}">
-                        </div>
-                        <div class="produit-pied">
-                            <div class="produit-nom">${produit.nom}</div>
-                            <div class="produit-prix">
-                                <span class="prix-principal">€ ${produit.prix}</span>
-                            </div>
-                            <div class="produit-entete">
-                                <a href="#" 
-                                class="produit-categorie"
-                                onclick="naviguer('/Boutique-en-ligne/Front-end/detailProduit?id=${produit.id_produits}'); return false;">
-                                    Voir le produit
-                                </a>
-                                <a href="#" class="icone-panier" onclick="ajouterAuPanier(${produit.id_produits}); return false;">
-                                    <i class="bi bi-cart3"></i>
-                                    <span class="pastille-panier"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-
-        } catch (error) {
-            console.error(error);
-        }
-    }

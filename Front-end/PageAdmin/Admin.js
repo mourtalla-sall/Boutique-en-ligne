@@ -1,5 +1,26 @@
-console.log('admin');
+// Fonction principale exportée pour le routeur
+export function initAfterRender() {
+    fetchcall();
+}
 
+// Suppression
+async function confirmerSuppression(id) {
+    const ok = confirm("Voulez-vous vraiment supprimer ce produit ?");
+    if (!ok) return;
+
+    const response = await fetch(
+        `http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?action=delete&id=${id}`
+    );
+    const result = await response.json();
+
+    if (result.status === 'success') {
+        alert("Produit supprimé !");
+        fetchcall();
+    }
+}
+window.confirmerSuppression = confirmerSuppression;
+
+// Affichage des produits (page catalogue)
 async function AfficheProduit() {
     const container = document.getElementById("grille-produits");
     if (!container) return;
@@ -23,33 +44,32 @@ async function AfficheProduit() {
             carte.setAttribute("data-categorie", (produit.nom_categorie || "").toLowerCase());
             carte.style.animationDelay = `${index * 0.08}s`;
 
-           carte.innerHTML = `
-    <div class="carte-produit__image">
-        <img 
-            src="/Boutique-en-ligne/Front-end/public/images/${produit.image}" 
-            alt="${produit.nom}"
-            loading="lazy"
-        >
-        
-        <span class="carte-produit__badge">${produit.nom_categorie || ""}</span>
-    </div>
-    <div class="carte-produit__infos">
-        <h3 class="carte-produit__nom">${produit.nom}</h3>
-        <p class="carte-produit__description">${produit.description}</p>
-        <span class="carte-produit__prix">${parseFloat(produit.prix).toFixed(2)} €</span>
-        <div class="carte-produit__footer">
-            <a href="/Boutique-en-ligne/Front-end/detailProduit?id=${produit.id_produits}" class="bouton-voir">
-                Voir le produit
-            </a>
-            <button 
-                class="bouton-panier" 
-                onclick="ajouterAuPanier(${produit.id_produits})"
-            >
-                <i class="bi bi-cart3"></i>
-            </button>
-        </div>
-    </div>
-`;
+            carte.innerHTML = `
+                <div class="carte-produit__image">
+                    <img
+                        src="/Boutique-en-ligne/Front-end/public/images/${produit.image}"
+                        alt="${produit.nom}"
+                        loading="lazy"
+                    >
+                    <span class="carte-produit__badge">${produit.nom_categorie || ""}</span>
+                </div>
+                <div class="carte-produit__infos">
+                    <h3 class="carte-produit__nom">${produit.nom}</h3>
+                    <p class="carte-produit__description">${produit.description}</p>
+                    <span class="carte-produit__prix">${parseFloat(produit.prix).toFixed(2)} €</span>
+                    <div class="carte-produit__footer">
+                        <a href="/Boutique-en-ligne/Front-end/detailProduit?id=${produit.id_produits}" class="bouton-voir">
+                            Voir le produit
+                        </a>
+                        <button
+                            class="bouton-panier"
+                            onclick="ajouterAuPanier(${produit.id_produits})"
+                        >
+                            <i class="bi bi-cart3"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
             container.appendChild(carte);
         });
 
@@ -60,7 +80,6 @@ async function AfficheProduit() {
         container.innerHTML = `<p class="erreur-produit">Impossible de charger les produits.</p>`;
     }
 }
-
 
 function initFiltres() {
     const boutons = document.querySelectorAll(".bouton-filtre");
@@ -85,19 +104,12 @@ function initFiltres() {
     });
 }
 
-// ─────────────────────────────────────────────
-// PANIER (stub — à connecter à ton backend)
-// ─────────────────────────────────────────────
-
 function ajouterAuPanier(idProduit) {
     console.log("Ajout au panier, id :", idProduit);
     // TODO: appel fetch vers ton endpoint panier
 }
 
-// ─────────────────────────────────────────────
-// FORMULAIRES ADMIN
-// ─────────────────────────────────────────────
-
+// Formulaires admin + tableau produits
 function fetchcall() {
 
     /* ---- Ajout produit ---- */
@@ -105,9 +117,9 @@ function fetchcall() {
     if (submitForm) {
         submitForm.addEventListener('click', async (e) => {
             e.preventDefault();
-            const form        = document.getElementById("produitsForm");
-            const fileUpload  = document.getElementById("fileUpload"); // assure-toi que cet id existe
-            const data        = new FormData(form);
+            const form   = document.getElementById("produitsForm");
+            const fileUpload = document.getElementById("fileUpload");
+            const data  = new FormData(form);
             console.log(fileUpload?.files[0]);
 
             try {
@@ -115,7 +127,7 @@ function fetchcall() {
                     "http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php",
                     { method: "POST", body: data }
                 );
-                const result      = await response.json();
+                const result = await response.json();
                 const messageZone = document.getElementById('message-zone');
 
                 if (result.success === true) {
@@ -132,7 +144,7 @@ function fetchcall() {
 
     /* ---- Lecture de l'id en query string ---- */
     const params = new URLSearchParams(window.location.search);
-    const id     = params.get('id');
+    const id = params.get('id');
 
     /* ---- Récupère un produit par id ---- */
     async function getProduit() {
@@ -141,10 +153,10 @@ function fetchcall() {
                 `http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?id=${id}`
             );
             const produit = await response.json();
-            document.querySelector('[name="nom"]').value         = produit.nom;
-            document.querySelector('[name="prix"]').value        = produit.prix;
+            document.querySelector('[name="nom"]').value = produit.nom;
+            document.querySelector('[name="prix"]').value = produit.prix;
             document.querySelector('[name="description"]').value = produit.description;
-            document.querySelector('[name="categorie"]').value   = produit.id_categorie;
+            document.querySelector('[name="categorie"]').value  = produit.id_categorie;
         } catch (error) {
             console.error(error);
         }
@@ -212,7 +224,6 @@ function fetchcall() {
 
             tbody.innerHTML = "";
             produits.forEach((produit) => {
-                
                 tbody.innerHTML += `
                     <tr>
                         <td>${produit.id_produits}</td>
@@ -221,14 +232,15 @@ function fetchcall() {
                         <td>${produit.prix} €</td>
                         <td>${produit.nom_categorie}</td>
                         <td>
-                            <img 
-                                src="/Boutique-en-ligne/Front-end/${produit.image}" 
-                                alt="${produit.nom}" 
+                            <img
+                                src="/Boutique-en-ligne/Front-end/public/images/${produit.image}"
+                                alt="${produit.nom}"
                                 width="50"
                             >
                         </td>
                         <td>
-                            <a href="modifier.html?id=${produit.id_produits}" class="btn-edit">Modifier</a>
+                            <button class="btn-edit" onclick="goToUpdate(${produit.id_produits})">Modifier</button>
+                            <button class="btn-delete" onclick="confirmerSuppression(${produit.id_produits})">Supprimer</button>
                         </td>
                     </tr>
                 `;
@@ -238,7 +250,19 @@ function fetchcall() {
         }
     }
 
-    getProduits();
+    getProduits(); // corrigé : était getProduitsAdmin() — fonction inexistante ici
+
+    window.goToUpdate = (id) => {
+        const path = `/Boutique-en-ligne/Front-end/UpdateProduits?id=${id}`;
+        window.history.pushState({}, "", path);
+
+        const mainContent = document.getElementById("main-content");
+
+        import("./UpdateProduits.js").then(module => {
+            mainContent.innerHTML = module.default();
+            if (module.initAfterRender) module.initAfterRender();
+        });
+    };
 }
 
 export { AfficheProduit, fetchcall };

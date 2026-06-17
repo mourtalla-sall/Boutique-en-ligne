@@ -1,12 +1,16 @@
-console.log('dashboard');
+console.log("Dashboard");
 
+export default function Dashboard() {
+    setTimeout(() => {
+        // hamburger();
+    }, 0);
+    return initDashboard();
+}
 
-// import AddProduits, { fetchCategories } from '../back-end/src/PageAdmin/AddProduits';
-import UpdateProduits from './PageAdmin/UpdateProduits';
-import Produits from './Produits';
-
-// document.getElementById('main-container').innerHTML = AddProduits();
-// document.getElementById('main-container').innerHTML = UpdateProduits();
-document.getElementById('main-container').innerHTML = Produits();
-
-// fetchCategories();
+export function initDashboard() {
+    return `
+      <div class="admin-content">
+            <h2>Bienvenue sur le Dashboard</h2>
+        </div>
+    `;
+}

@@ -52,7 +52,7 @@ const detailProduit = () => {
 // Appelée depuis le router après injection du HTML
 export async function chargerDetailProduit() {
     const params = new URLSearchParams(window.location.search);
-    const id     = params.get('id');
+    const id  = params.get('id');
 
     if (!id) return;
 
@@ -62,10 +62,10 @@ export async function chargerDetailProduit() {
         );
         const produit = await response.json();
 
-        document.getElementById('detail-nom').textContent         = produit.nom;
-        document.getElementById('detail-prix').textContent        = parseFloat(produit.prix).toFixed(2) + ' €';
+        document.getElementById('detail-nom').textContent = produit.nom;
+        document.getElementById('detail-prix').textContent = parseFloat(produit.prix).toFixed(2) + ' €';
         document.getElementById('detail-description').textContent = produit.description;
-        document.getElementById('detail-categorie').textContent   = produit.nom_categorie || '';
+        document.getElementById('detail-categorie').textContent = produit.nom_categorie || '';
         
         const img = document.getElementById('detail-image');
         img.src = `/Boutique-en-ligne/Front-end/public/images/${produit.image}`;

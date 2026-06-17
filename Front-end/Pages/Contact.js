@@ -1,6 +1,8 @@
-const Home = () => {
-    return `
-        <div class="lamal">Lamali la boss</div>
-    `
+const Contact = () => {
+    return ` <h1> Contact Nous</h1>
 
+        
+      `
 }
+
+export default Contact

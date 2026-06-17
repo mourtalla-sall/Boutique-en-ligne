@@ -1,9 +1,15 @@
 @use 'variable' as v;
+@use 'variable';
+@use 'detailproduit';
 @use 'navbar';
 @use 'header';
 @use 'service';
 @use 'produit';
 @use 'section';
+@use 'connexion'; 
+@use 'inscription'; 
+
+
 
 *,
 *::before,
