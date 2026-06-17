@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./style/index.css">
     <link rel="stylesheet" href="./PageAdmin/AdminCss.css">
     <script defer type="module" src="../router.js"></script>
+    
 </head>
 <body>
 
@@ -40,7 +41,14 @@
                         </li>
                         <li class="nav-item">
                             <form class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Rechercher">
+
+                                <div class="position-relative flex-grow-1 me-2">
+                        <input class="form-control me-2" id="site-search" type="search" placeholder="Rechercher">
+                        
+                        <div  id="suggestions" class="list-group position-absolute top-100 start-0 d-none shadow"
+                         style="background-color: #ffffff !important; color: #000000 !important; z-index: 
+                         1000;width: 100%; max-width: 250px;"></div>
+                         </div>
                                 <button class="btn btn-outline-success" type="submit">Rechercher</button>
                             </form>
                         </li>
