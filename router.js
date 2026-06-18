@@ -10,13 +10,14 @@ initAutocomplete();
 const BASE_URL = "/Boutique-en-ligne";
 
 const routes = [
-    { path: BASE_URL + "/Front-end/Home",    file: "./Front-end/Pages/Home.js" },
+    { path: BASE_URL + "/Front-end/",    file: "./Front-end/Pages/Home.js" },
+    { path: BASE_URL + "/Front-end/home",    file: "./Front-end/Pages/Home.js" },
     { path: BASE_URL + "/Front-end/homme",  file: "./Front-end/Pages/homme.js" },
     { path: BASE_URL + "/Front-end/connexion", file: "./Front-end/Pages/connexion.js" },
     { path: BASE_URL + "/Front-end/femmes",  file: "./Front-end/Pages/femmes.js" },
-    { path: BASE_URL + "/Front-end/Contact", file: "./Front-end/Pages/Contact.js" },
-    { path: BASE_URL + "/Front-end/Panier", file: "./Front-end/Pages/Panier.js" },
-    { path: BASE_URL + "/Front-end/Inscription", file: "./Front-end/Pages/inscription.js" },
+    { path: BASE_URL + "/Front-end/contact", file: "./Front-end/Pages/Contact.js" },
+    { path: BASE_URL + "/Front-end/panier", file: "./Front-end/Pages/Panier.js" },
+    { path: BASE_URL + "/Front-end/inscription", file: "./Front-end/Pages/inscription.js" },
     { path: BASE_URL + "/Front-end/detailProduit", file: "./Front-end/Pages/detailProduit.js" },
 ];
 
@@ -35,7 +36,7 @@ const router = async () => {
             const module = await import(match.file);
             appContainer.innerHTML = module.default();
 
-            if (match.path.includes("Home"))         AfficheProduit();
+            if (match.path.includes("home"))         AfficheProduit();
             if (match.path.includes("inscription"))  initInscriptionForm();
             if (match.path.includes("connexion"))    initConnexionForm();
             if (match.path.includes("detailProduit")) chargerDetailProduit();

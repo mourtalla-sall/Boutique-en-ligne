@@ -50,9 +50,7 @@ function listenForm(){
         console.log(submitForm,'yoyo')
         if (submitForm) {
             console.log("envoyez donnez");
-            
             submitForm.addEventListener('click', async (e) => {
-        
         e.preventDefault();
         
         const form = document.getElementById("produitsForm");
@@ -62,7 +60,7 @@ function listenForm(){
         // console.log(fileUpload.files[0]);
         
         try {
-            console.log(data,'hello')
+            // console.log(data,'hello')
             
             const response = await fetch("http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php", {
                 method: "POST",

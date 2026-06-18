@@ -1,0 +1,6 @@
+
+fetchCategories();
+document.addEventListener('DOMContentLoaded', () => {
+  
+
+});

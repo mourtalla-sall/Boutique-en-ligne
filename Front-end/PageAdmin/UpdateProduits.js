@@ -23,7 +23,7 @@ export function initupdate () {
                     <input type="file" id="add-product-file" name="image">
                     <button id="submitUpdate" type="button" class="btn">Valider</button>
                 </form>
-                <a href="/Boutique-en-ligne/Front-end/Produits">
+                <a href="/Produits">
                     <button>Annuler</button>
                 </a>
             </div>
