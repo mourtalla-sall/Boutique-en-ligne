@@ -3,7 +3,7 @@ import { chargerDetailProduit } from "./Front-end/Pages/detailProduit.js";
 import { initInscriptionForm } from "./Front-end/Pages/inscription.js";
 import { initConnexionForm } from "./Front-end/Pages/connexion.js";
 import { AfficheProduit } from "./Front-end/PageAdmin/Admin.js";
-
+import { initPagePanier } from "./Front-end/Pages/Panier.js";
 
 initAutocomplete();
 
@@ -25,7 +25,6 @@ const router = async () => {
     const appContainer = document.getElementById("root");
 
     if (!appContainer) return;
-
     if (currentPath.startsWith(BASE_URL + "/admin")) return;
 
     const match = routes.find(r => currentPath === r.path || currentPath === r.path + "/");
@@ -35,10 +34,11 @@ const router = async () => {
             const module = await import(match.file);
             appContainer.innerHTML = module.default();
 
-            if (match.path.includes("Home"))         AfficheProduit();
-            if (match.path.includes("inscription"))  initInscriptionForm();
-            if (match.path.includes("connexion"))    initConnexionForm();
+            if (match.path.includes("Home"))          AfficheProduit();
+            if (match.path.includes("inscription"))   initInscriptionForm();
+            if (match.path.includes("connexion"))     initConnexionForm();
             if (match.path.includes("detailProduit")) chargerDetailProduit();
+            if (match.path.includes("Panier"))        initPagePanier();
 
         } catch (error) {
             console.error(error);

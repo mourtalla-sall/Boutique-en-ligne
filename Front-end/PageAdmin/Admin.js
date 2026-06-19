@@ -61,12 +61,7 @@ async function AfficheProduit() {
                         <a href="/Boutique-en-ligne/Front-end/detailProduit?id=${produit.id_produits}" class="bouton-voir">
                             Voir le produit
                         </a>
-                        <button
-                            class="bouton-panier"
-                            onclick="ajouterAuPanier(${produit.id_produits})"
-                        >
-                            <i class="bi bi-cart3"></i>
-                        </button>
+        
                     </div>
                 </div>
             `;
