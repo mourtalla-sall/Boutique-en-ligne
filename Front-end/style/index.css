@@ -1198,7 +1198,7 @@ footer .bordure-pied {
   background: #fff;
 }
 
-img {
+.img {
   width: 60px;
   height: 75px;
   object-fit: cover;
