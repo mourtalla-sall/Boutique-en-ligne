@@ -7,6 +7,14 @@
   border-radius: 6px;
   font-size: 5rem;
   color: #7a6e65;
+  overflow: hidden;
+}
+.image-produit img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 .infos-produit h1 {
@@ -21,7 +29,7 @@
 .infos-produit .bloc-prix .prix-actuel {
   font-size: 2rem;
   font-weight: bold;
-  color: #d4af37;
+  color: #111;
 }
 .infos-produit .bloc-prix .prix-ancien {
   font-size: 1.1rem;
@@ -1121,7 +1129,7 @@ footer .bordure-pied {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid #eee;
   background: #fff;
 }
@@ -1152,30 +1160,25 @@ footer .bordure-pied {
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 0.6rem 1rem;
+  border-bottom: none;
   background: #fff;
 }
-.carte-panier img {
-  width: 90px;
-  height: 110px;
-  object-fit: cover;
-  border-radius: 6px;
-  flex-shrink: 0;
-}
-.carte-panier .rond-cocher {
+
+.rond-cocher {
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
-  margin-top: 0;
+  width: 24px;
 }
-.carte-panier .rond-cocher input[type=checkbox] {
+.rond-cocher input[type=checkbox] {
   display: none;
 }
-.carte-panier .rond-cocher .rond {
-  width: 22px;
-  height: 22px;
+.rond-cocher .rond {
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   border: 2px solid #ccc;
   display: flex;
@@ -1183,54 +1186,85 @@ footer .bordure-pied {
   justify-content: center;
   transition: all 0.2s;
 }
-.carte-panier .rond-cocher input:checked + .rond {
+.rond-cocher input:checked + .rond {
   border-color: #111;
   background: #111;
 }
-.carte-panier .rond-cocher input:checked + .rond::after {
+.rond-cocher input:checked + .rond::after {
   content: "";
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #fff;
 }
-.carte-panier .infos-droite {
+
+img {
+  width: 60px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.infos-droite {
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
-  gap: 0.4rem;
+  gap: 0.3rem;
+  min-width: 0;
 }
-.carte-panier .infos-droite .ligne-haut {
+.infos-droite .ligne-haut {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  gap: 3.5rem;
   width: 100%;
 }
-.carte-panier .infos-droite .ligne-haut .nom-produit {
+
+.nom-produit {
   font-size: 0.9rem;
   font-weight: 600;
   color: #111;
   margin: 0;
 }
-.carte-panier .infos-droite .ligne-haut .btn-suppr {
+
+.btn-suppr {
   background: none;
   border: none;
   color: #aaa;
   font-size: 1rem;
   cursor: pointer;
   padding: 0;
+  display: flex;
+  align-items: center;
 }
-.carte-panier .infos-droite .ligne-haut .btn-suppr:hover {
+.btn-suppr:hover {
   color: #111;
 }
-.carte-panier .infos-droite .prix-produit {
+
+&:hover {
+  color: #111;
+}
+
+&:hover {
+  color: #111;
+}
+
+.prix-produit {
   color: #111;
   font-size: 1rem;
   font-weight: bold;
   margin: 0;
 }
-.carte-panier .infos-droite .ligne-quantite .controle-quantite {
+
+.ligne-quantite {
+  display: flex;
+  align-items: center;
+}
+.ligne-quantite .controle-quantite {
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -1238,18 +1272,21 @@ footer .bordure-pied {
   border-radius: 20px;
   padding: 0.2rem 0.5rem;
 }
-.carte-panier .infos-droite .ligne-quantite .controle-quantite button {
+.ligne-quantite .controle-quantite button {
   background: none;
   border: none;
   font-size: 1rem;
   color: #333;
   cursor: pointer;
   padding: 0 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.carte-panier .infos-droite .ligne-quantite .controle-quantite button:hover {
+.ligne-quantite .controle-quantite button:hover {
   color: #000;
 }
-.carte-panier .infos-droite .ligne-quantite .controle-quantite span {
+.ligne-quantite .controle-quantite span {
   font-size: 0.9rem;
   font-weight: bold;
   min-width: 18px;

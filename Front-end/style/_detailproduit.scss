@@ -9,6 +9,15 @@
     border-radius: v.$rayon;
     font-size: 5rem;
     color: v.$couleur-gris;
+    overflow: hidden; // ← empêche l'image de dépasser
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain; // ← garde les proportions sans déformer
+    }
 }
 
 .infos-produit {
@@ -23,7 +32,7 @@
         .prix-actuel {
             font-size: 2rem;
             font-weight: bold;
-            color: v.$couleur-or;
+            color: v.$couleur-sombre; 
         }
 
         .prix-ancien {
