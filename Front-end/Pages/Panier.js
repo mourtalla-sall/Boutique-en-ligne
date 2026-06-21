@@ -1,4 +1,3 @@
-// ───── LOCALSTORAGE ─────
 
 export function getPanier() {
     return JSON.parse(localStorage.getItem('panier')) || [];
@@ -34,7 +33,6 @@ export function mettreAJourBadge() {
     if (badge) badge.textContent = total > 0 ? total : '';
 }
 
-// ───── PAGE PANIER (template HTML) ─────
 
 const pagePanier = () => {
     return `
@@ -106,8 +104,9 @@ export function initPagePanier() {
             </label>
 
             <!-- IMAGE -->
+            <div class="img">
             <img src="/Boutique-en-ligne/Front-end/public/images/${p.image}" alt="${p.nom}">
-
+            </div>
             <!-- INFOS DROITE -->
             <div class="infos-droite">
                 <div class="ligne-haut">
