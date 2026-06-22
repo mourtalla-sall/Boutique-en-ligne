@@ -1,13 +1,10 @@
+Options -MultiViews
 RewriteEngine On
 RewriteBase /Boutique-en-ligne/
 
-# Fichiers physiques → servis directement
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
+# Laisser passer les vrais fichiers/dossiers
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 
-# Routes Admin → admin.html
-RewriteRule ^admin(/.*)?$ admin.html [L]
-
-# Routes boutique → index.html
-RewriteRule ^Front-end/(.*)$ index.html [L]
+# Toutes les routes SPA  index.html
+RewriteRule ^ index.html [L,QSA]

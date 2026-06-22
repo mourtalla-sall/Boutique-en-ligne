@@ -81,7 +81,7 @@ export function initPagePanier() {
             <div class="panier-vide">
                 <i class="bi bi-cart-x"></i>
                 <p>Votre panier est vide.</p>
-                <a href="/Boutique-en-ligne/Front-end/Home" data-link class="btn-continuer">Continuer mes achats</a>
+                <a href="/Boutique-en-ligne/home" data-link class="btn-continuer">Continuer mes achats</a>
             </div>
         `;
         if (totalEl) totalEl.textContent = '0,00 €';

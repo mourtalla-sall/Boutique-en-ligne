@@ -72,7 +72,7 @@ export async function chargerDetailProduit() {
                 const quantite = parseInt(document.querySelector('input[type="number"]').value) || 1;
 
                 ajouterAuPanier({
-                    id: produit.id_produits, //  utilise id_produits
+                    id: produit.id_produits, 
                     nom: produit.nom,
                     prix: produit.prix,
                     image: produit.image,

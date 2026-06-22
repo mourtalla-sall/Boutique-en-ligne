@@ -58,7 +58,7 @@ async function AfficheProduit() {
                     <p class="carte-produit__description">${produit.description}</p>
                     <span class="carte-produit__prix">${parseFloat(produit.prix).toFixed(2)} €</span>
                     <div class="carte-produit__footer">
-                        <a href="/Boutique-en-ligne/Front-end/detailProduit?id=${produit.id_produits}" class="bouton-voir">
+                        <a href="/Boutique-en-ligne/detailProduit?id=${produit.id_produits}" class="bouton-voir">
                             Voir le produit
                         </a>
                         <button
@@ -169,7 +169,7 @@ function fetchcall() {
                 "http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?action=getCategories"
             );
             const categories = await response.json();
-            const select     = document.getElementById("categorie");
+            const select = document.getElementById("categorie");
 
             if (select) {
                 categories.forEach((cat) => {
@@ -198,7 +198,7 @@ function fetchcall() {
                     "http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php",
                     { method: "POST", body: data }
                 );
-                const result      = await response.json();
+                const result = await response.json();
                 const messageZone = document.getElementById('message-zone');
 
                 if (result.success === true) {
@@ -219,7 +219,7 @@ function fetchcall() {
                 "http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php"
             );
             const produits = await response.json();
-            const tbody    = document.getElementById("produitsBody");
+            const tbody = document.getElementById("produitsBody");
             if (!tbody) return;
 
             tbody.innerHTML = "";
@@ -253,7 +253,7 @@ function fetchcall() {
     getProduits(); 
 
     window.goToUpdate = (id) => {
-        const path = `/Boutique-en-ligne/Front-end/UpdateProduits?id=${id}`;
+        const path = `/Boutique-en-ligne/admin/update-produit?id=${id}`;
         window.history.pushState({}, "", path);
 
         const mainContent = document.getElementById("main-content");
