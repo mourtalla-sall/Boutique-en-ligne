@@ -250,7 +250,7 @@ function fetchcall() {
         }
     }
 
-    getProduits(); // corrigé : était getProduitsAdmin() — fonction inexistante ici
+    getProduits(); 
 
     window.goToUpdate = (id) => {
         const path = `/Boutique-en-ligne/Front-end/UpdateProduits?id=${id}`;
