@@ -8,7 +8,7 @@ class Database {
 
     private function __construct() {
     // Chemin absolu vers le .env
-    $env = parse_ini_file(__DIR__ . '/../../Config/.env');
+    $env = parse_ini_file(__DIR__ . '/../../../.env');
     
     try {
         $this->pdo = new PDO(
