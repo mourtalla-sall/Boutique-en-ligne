@@ -3,5 +3,8 @@
         "psr-4": {
             "Boutique\\": "src/"
         }
+    },
+    "require": {
+        "stripe/stripe-php": "^20.2"
     }
 }

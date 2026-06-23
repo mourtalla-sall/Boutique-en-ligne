@@ -56,7 +56,9 @@ const pagePanier = () => {
             <div class="total-bas">
                 <span id="total-panier">0,00 €</span>
             </div>
-            <button class="btn-payer">PAYER</button>
+            <button class="btn-payer">
+             <a href="/Boutique-en-ligne/paiement" data-link class="btn-continuer">PAYER</a>
+            </button>
         </div>
 
     </div>

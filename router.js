@@ -15,27 +15,28 @@ const BASE_URL = "/Boutique-en-ligne";
 // ─────────────────────────────────────────
 
 const routesUser = [
-    { path: BASE_URL + "/",              file: "/Boutique-en-ligne/Front-end/Pages/Home.js" },
-    { path: BASE_URL + "/home",          file: "/Boutique-en-ligne/Front-end/Pages/Home.js" },
-    { path: BASE_URL + "/homme",         file: "/Boutique-en-ligne/Front-end/Pages/homme.js" },
-    { path: BASE_URL + "/femmes",        file: "/Boutique-en-ligne/Front-end/Pages/femmes.js" },
-    { path: BASE_URL + "/contact",       file: "/Boutique-en-ligne/Front-end/Pages/Contact.js" },
-    { path: BASE_URL + "/connexion",     file: "/Boutique-en-ligne/Front-end/Pages/connexion.js" },
-    { path: BASE_URL + "/inscription",   file: "/Boutique-en-ligne/Front-end/Pages/inscription.js" },
-    { path: BASE_URL + "/panier",        file: "/Boutique-en-ligne/Front-end/Pages/Panier.js" },
-    { path: BASE_URL + "/paiement",      file: "/Boutique-en-ligne/Front-end/Pages/paiement.js" },
+    { path: BASE_URL + "/", file: "/Boutique-en-ligne/Front-end/Pages/Home.js" },
+    { path: BASE_URL + "/home", file: "/Boutique-en-ligne/Front-end/Pages/Home.js" },
+    { path: BASE_URL + "/homme",file: "/Boutique-en-ligne/Front-end/Pages/homme.js" },
+    { path: BASE_URL + "/femmes", file: "/Boutique-en-ligne/Front-end/Pages/femmes.js" },
+    { path: BASE_URL + "/contact", file: "/Boutique-en-ligne/Front-end/Pages/Contact.js" },
+    { path: BASE_URL + "/connexion", file: "/Boutique-en-ligne/Front-end/Pages/connexion.js" },
+    { path: BASE_URL + "/inscription",file: "/Boutique-en-ligne/Front-end/Pages/inscription.js" },
+    { path: BASE_URL + "/panier", file: "/Boutique-en-ligne/Front-end/Pages/Panier.js" },
+    { path: BASE_URL + "/paiement", file: "/Boutique-en-ligne/Front-end/Pages/paiement.js" },
+    { path: BASE_URL + "/merci", file: "/Boutique-en-ligne/Front-end/Pages/merci.js" },
     { path: BASE_URL + "/detailproduit", file: "/Boutique-en-ligne/Front-end/Pages/detailProduit.js" },
 ];
 
 const routesAdmin = [
-    { path: BASE_URL + "/admin",                 file: "/Boutique-en-ligne/Front-end/PageAdmin/Dashboard.js" },
-    { path: BASE_URL + "/admin/dashboard",       file: "/Boutique-en-ligne/Front-end/PageAdmin/Dashboard.js" },
-    { path: BASE_URL + "/admin/produits",        file: "/Boutique-en-ligne/Front-end/PageAdmin/Produits.js" },
-    { path: BASE_URL + "/admin/add-produit",     file: "/Boutique-en-ligne/Front-end/PageAdmin/AddProduits.js" },
-    { path: BASE_URL + "/admin/update-produit",  file: "/Boutique-en-ligne/Front-end/PageAdmin/UpdateProduits.js" },
-    { path: BASE_URL + "/admin/delete-produit",  file: "/Boutique-en-ligne/Front-end/PageAdmin/DeleteProduits.js" },
-    { path: BASE_URL + "/admin/stock",           file: "/Boutique-en-ligne/Front-end/PageAdmin/Stock.js" },
-    { path: BASE_URL + "/admin/profil",          file: "/Boutique-en-ligne/Front-end/PageAdmin/Profil.js" },
+    { path: BASE_URL + "/admin", file: "/Boutique-en-ligne/Front-end/PageAdmin/Dashboard.js" },
+    { path: BASE_URL + "/admin/dashboard", file: "/Boutique-en-ligne/Front-end/PageAdmin/Dashboard.js" },
+    { path: BASE_URL + "/admin/produits", file: "/Boutique-en-ligne/Front-end/PageAdmin/Produits.js" },
+    { path: BASE_URL + "/admin/add-produit", file: "/Boutique-en-ligne/Front-end/PageAdmin/AddProduits.js" },
+    { path: BASE_URL + "/admin/update-produit", file: "/Boutique-en-ligne/Front-end/PageAdmin/UpdateProduits.js" },
+    { path: BASE_URL + "/admin/delete-produit", file: "/Boutique-en-ligne/Front-end/PageAdmin/DeleteProduits.js" },
+    { path: BASE_URL + "/admin/stock", file: "/Boutique-en-ligne/Front-end/PageAdmin/Stock.js" },
+    { path: BASE_URL + "/admin/profil", file: "/Boutique-en-ligne/Front-end/PageAdmin/Profil.js" },
 ];
 
 // ─────────────────────────────────────────
@@ -93,6 +94,16 @@ function publicLayout() {
 }
 
 function adminLayout() {
+    const path = location.pathname;
+
+        function lienActif(href) {
+        if (path === href) {
+            return 'active';
+        } else {
+            return '';
+        }
+        }
+
     return `
         <input type="checkbox" id="check">
         <label for="check" class="sidebar-toggle">
@@ -100,13 +111,40 @@ function adminLayout() {
             <i class="bi bi-x-lg" id="cancel"></i>
         </label>
         <aside class="sidebar">
-            <header class="sidebar-header">Chez Lamal</header>
-            <a href="/Boutique-en-ligne/admin/dashboard" data-link><i class="bi bi-speedometer2"></i><span>Dashboard</span></a>
-            <a href="/Boutique-en-ligne/admin/produits" data-link><i class="bi bi-box-seam"></i><span>Produits</span></a>
-            <a href="/Boutique-en-ligne/admin/add-produit" data-link><i class="bi bi-plus-circle"></i><span>Ajouter</span></a>
-            <a href="/Boutique-en-ligne/admin/stock" data-link><i class="bi bi-archive"></i><span>Stock</span></a>
-            <a href="/Boutique-en-ligne/admin/profil" data-link><i class="bi bi-person"></i><span>Profil</span></a>
-            <a href="/Boutique-en-ligne/home" data-link><i class="bi bi-arrow-left"></i><span>Retour au site</span></a>
+            <header class="sidebar-header">
+                Chez <span style="color:#C8A96E">Lamal</span>
+            </header>
+
+            <a href="/Boutique-en-ligne/admin/dashboard" data-link class="${lienActif('/Boutique-en-ligne/admin/dashboard')}">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/Boutique-en-ligne/admin/produits" data-link class="${lienActif('/Boutique-en-ligne/admin/produits')}">
+                <i class="bi bi-box-seam"></i>
+                <span>Produits</span>
+            </a>
+
+            <a href="/Boutique-en-ligne/admin/add-produit" data-link class="${lienActif('/Boutique-en-ligne/admin/add-produit')}">
+                <i class="bi bi-plus-circle"></i>
+                <span>Ajouter</span>
+            </a>
+
+            <a href="/Boutique-en-ligne/admin/stock" data-link class="${lienActif('/Boutique-en-ligne/admin/stock')}">
+                <i class="bi bi-archive"></i>
+                <span>Stock</span>
+            </a>
+
+            <a href="/Boutique-en-ligne/admin/profil" data-link class="${lienActif('/Boutique-en-ligne/admin/profil')}">
+                <i class="bi bi-person"></i>
+                <span>Profil</span>
+            </a>
+
+            <a href="/Boutique-en-ligne/home" data-link class="${lienActif('/Boutique-en-ligne/home')}">
+                <i class="bi bi-arrow-left"></i>
+                <span>Retour au site</span>
+            </a>
+
         </aside>
     `;
 }
@@ -152,9 +190,6 @@ function publicFooter() {
     `;
 }
 
-// ─────────────────────────────────────────
-//  HELPERS
-// ─────────────────────────────────────────
 
 function normalize(path) {
     return path.replace(/\/+$/, "").toLowerCase();
@@ -181,12 +216,18 @@ function updateLayout() {
 }
 
 async function initUserPage(path) {
-    if (path.includes("home"))          AfficheProduit();
-    if (path.includes("inscription"))   initInscriptionForm();
-    if (path.includes("connexion"))     initConnexionForm();
-    if (path.includes("detailproduit")) chargerDetailProduit();
-    if (path.includes("panier"))        initPagePanier();
-    if (path.includes("paiement"))      initPagePaiement();
+    if (path.includes("home"))  
+        AfficheProduit();
+    if (path.includes("inscription"))  
+        initInscriptionForm();
+    if (path.includes("connexion"))     
+        initConnexionForm();
+    if (path.includes("detailproduit"))
+        chargerDetailProduit();
+    if (path.includes("panier"))       
+        initPagePanier();
+    if (path.includes("paiement"))     
+        initPagePaiement();
 }
 
 function render404(appContainer, message = "Page introuvable") {
@@ -229,17 +270,20 @@ const router = async () => {
         try {
             const module = await import(match.file);
             appContainer.innerHTML = module.default();
+            if (module.initAfterRender) await module.initAfterRender();
         } catch (error) {
             console.error(error);
             renderError(appContainer, error);
         }
+
     } else {
         const match = routesUser.find(route => normalize(route.path) === currentPath);
-        if (!match) return render404(appContainer);
+        if (!match) return render404(appContainer, "Page introuvable");
         try {
             const module = await import(match.file);
             appContainer.innerHTML = module.default();
-            await initUserPage(match.path.toLowerCase());
+            await initUserPage(currentPath);
+            if (module.initAfterRender) await module.initAfterRender();
         } catch (error) {
             console.error(error);
             renderError(appContainer, error);

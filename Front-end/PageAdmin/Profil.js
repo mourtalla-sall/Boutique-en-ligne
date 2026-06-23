@@ -8,7 +8,8 @@ export default function Profil() {
 
 export function initProfil() {
     return `
-      <div class="admin-content">
+    
+        <div id="main-content">
             <h2>Bienvenue sur le Profil</h2>
         </div>
     `;

@@ -13,6 +13,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'getCategories') {
     exit;
 }
 
+if (isset($_GET['action']) && $_GET['action'] === 'stats') {
+    echo json_encode($newProduit->getStats());
+    exit;
+}
 // DELETE produit
 if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
     $newProduit->deleteProduit();

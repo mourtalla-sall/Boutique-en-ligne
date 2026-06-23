@@ -7,6 +7,25 @@
   text-decoration: none;
 }
 
+body.is-admin #root {
+    margin-left: 220px;
+    padding: 30px;
+    transition: all 0.5s ease;
+    background: #F5F0E8;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Quand la sidebar est ouverte */
+#check:checked ~ #root {
+    margin-left: 220px;
+}
+
+@media (max-width: 860px) {
+    body.is-admin #root {
+        margin-left: 70px;
+    }
+}
 /* =============== SIDEBAR =============== */
 .sidebar {
   position: fixed;
@@ -46,7 +65,7 @@
 
 .sidebar a.active,
 .sidebar a:hover {
-  border-left: 4px solid #C8A96E; /* beige doré */
+  border-left: 4px solid #C8A96E; 
   color: #C8A96E;
   background: #222222;
 }
@@ -408,4 +427,49 @@ label #cancel {
     border-radius: 6px;
     margin-bottom: 15px;
     font-size: 13px;
+}
+.sidebar a.active {
+    border-left: 4px solid #C8A96E;
+    color: #C8A96E;
+    background: #222222;
+}
+.dashboard-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.card-stat {
+    background: #010101;
+    border-radius: 10px;
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    min-width: 200px;
+    flex: 1;
+}
+
+.card-stat i {
+    font-size: 36px;
+    color: #C8A96E;
+}
+
+.card-stat p {
+    margin: 0;
+    font-size: 13px;
+    color: #C8A96E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-stat h2 {
+    margin: 0;
+    font-size: 32px;
+    font-family: 'Montserrat', sans-serif;
+    color: #C8A96E;
+    border: none;
+    padding: 0;
 }

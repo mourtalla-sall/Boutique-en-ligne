@@ -256,7 +256,7 @@ function fetchcall() {
         const path = `/Boutique-en-ligne/admin/update-produit?id=${id}`;
         window.history.pushState({}, "", path);
 
-        const mainContent = document.getElementById("main-content");
+        const mainContent = document.getElementById("root");
 
         import("./UpdateProduits.js").then(module => {
             mainContent.innerHTML = module.default();

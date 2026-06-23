@@ -50,4 +50,8 @@ class Controller {
     public function deleteProduit() {
         $this->produitModel->delete((int)$_GET['id']);
     }
+    public function getStats()
+    {
+        return $this->produitModel->getStats();
+    }
 }

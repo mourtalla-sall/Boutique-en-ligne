@@ -75,8 +75,22 @@ class Produit {
         return $data->execute();
     }
 
-        public function count() {
-            return $this->pdo->query('SELECT COUNT(*) FROM Produits')->fetchColumn();
-        }
+    public function getStats()
+    {
+        $produits = $this->pdo->prepare('SELECT COUNT(*) FROM Produits');
+        $produits->execute();
+
+        $categories = $this->pdo->prepare('SELECT COUNT(*) FROM Categorie');
+        $categories->execute();
+
+        $users = $this->pdo->prepare('SELECT COUNT(*) FROM User');
+        $users->execute();
+
+        return [
+            'produits'   => $produits->fetchColumn(),
+            'categories' => $categories->fetchColumn(),
+            'users'      => $users->fetchColumn()
+        ];
+    }
     }
 ?>
