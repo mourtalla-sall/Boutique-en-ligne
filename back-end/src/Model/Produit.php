@@ -27,8 +27,11 @@ class Produit {
         $data->bindValue(':quantite', $this->securityInput($quantite), PDO::PARAM_INT);
         $data->bindValue(':id_categorie', $this->securityInput($id_categorie), PDO::PARAM_STR);
         $data->bindValue(':image', $this->securityInput($image), PDO::PARAM_STR);
-
-   
+        return $data->execute();
+    }
+    public function createcategorie($nom) {
+        $data = $this->pdo->prepare('INSERT INTO Produits (nom) VALUES (:nom)');
+        $data->bindValue(':nom', $this->securityInput($nom), PDO::PARAM_STR);
         return $data->execute();
     }
 
@@ -64,6 +67,12 @@ class Produit {
     $data->bindValue(':id', $id, PDO::PARAM_INT);
     return $data->execute();
     }
+    public function updatecategorie($id, $nom) {
+    $data = $this->pdo->prepare('UPDATE Produits SET nom=:nom, WHERE id_categorie=:id');
+    $data->bindValue(':nom', $this->securityInput($nom), PDO::PARAM_STR);
+    $data->bindValue(':id', $id, PDO::PARAM_INT);
+    return $data->execute();
+    }
 
     public function getById($id) {
         $data = $this->pdo->prepare('SELECT * FROM Produits WHERE id_produits = :id');
@@ -71,9 +80,20 @@ class Produit {
         $data->execute();
         return $data->fetch(PDO::FETCH_ASSOC);
     }
+    public function getByIdCategorie($id) {
+        $data = $this->pdo->prepare('SELECT * FROM Categorie WHERE id_categorie = :id');
+        $data->bindValue(':id', $id, PDO::PARAM_INT);
+        $data->execute();
+        return $data->fetch(PDO::FETCH_ASSOC);
+    }
 
     public function delete($id) {
         $data = $this->pdo->prepare('DELETE FROM Produits WHERE id_produits = :id');
+        $data->bindValue(':id', $id, PDO::PARAM_INT);
+        return $data->execute();
+    }
+    public function deleteCategorie($id) {
+        $data = $this->pdo->prepare('SELECT * FROM Categorie WHERE id_categorie = :id');
         $data->bindValue(':id', $id, PDO::PARAM_INT);
         return $data->execute();
     }
