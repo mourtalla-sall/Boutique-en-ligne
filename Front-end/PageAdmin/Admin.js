@@ -9,7 +9,7 @@ async function confirmerSuppression(id) {
     if (!ok) return;
 
     const response = await fetch(
-        `http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?action=delete&id=${id}`
+        `http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=delete&id=${id}`
     );
     const result = await response.json();
 
@@ -27,7 +27,7 @@ async function AfficheProduit() {
 
     try {
         const response = await fetch(
-            "http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php"
+            "http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php"
         );
         const produits = await response.json();
 
@@ -64,6 +64,7 @@ async function AfficheProduit() {
                         <button
                             class="bouton-panier"
                             onclick="ajouterAuPanier(${produit.id_produits})"
+                            aria-label="button "
                         >
                             <i class="bi bi-cart3"></i>
                         </button>
@@ -124,7 +125,7 @@ function fetchcall() {
 
             try {
                 const response = await fetch(
-                    "http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php",
+                    "http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php",
                     { method: "POST", body: data }
                 );
                 const result = await response.json();
@@ -150,7 +151,7 @@ function fetchcall() {
     async function getProduit() {
         try {
             const response = await fetch(
-                `http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?id=${id}`
+                `http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?id=${id}`
             );
             const produit = await response.json();
             document.querySelector('[name="nom"]').value = produit.nom;
@@ -166,7 +167,7 @@ function fetchcall() {
     async function getCategories() {
         try {
             const response   = await fetch(
-                "http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?action=getCategories"
+                "http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=getCategories"
             );
             const categories = await response.json();
             const select = document.getElementById("categorie");
@@ -181,8 +182,46 @@ function fetchcall() {
             console.error(error);
         }
     }
-
     getCategories();
+    async function AffichageCategories() {
+    try {
+        const response = await fetch(
+            "http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=getCategories"
+        );
+
+        const categories = await response.json();
+        const tbody = document.getElementById("categorieBody");
+        if (!tbody) return;
+
+        tbody.innerHTML = "";
+        categories.forEach((categorie) => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${categorie.id_categorie}</td>
+                    <td>${categorie.nom}</td>
+                    <td>
+                        <button class="btn-edit" onclick="goToUpdateCategorie(${categorie.id_categorie})">Modifier</button>
+                        <button class="btn-delete" onclick="confirmerSuppression(${categorie.id_categorie})">Supprimer</button>
+                    </td>
+                </tr>
+            `;
+        });
+    } catch (error) {
+        console.error(error);
+    }
+    }
+    AffichageCategories();
+
+    window.goToUpdateCategorie = (id) => {
+        const path = `/Boutique-en-ligne/admin/update-categorie?id=${id}`;
+        window.history.pushState({}, "", path);
+
+        const mainContent = document.getElementById("root");
+        import("./UpdateCategorie.js").then(module => {
+            mainContent.innerHTML = module.default();
+            if (module.initAfterRender) module.initAfterRender();
+        });
+    };
 
     /* ---- Modification produit ---- */
     const submitUpdate = document.getElementById("submitUpdate");
@@ -195,7 +234,7 @@ function fetchcall() {
 
             try {
                 const response = await fetch(
-                    "http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php",
+                    "http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php",
                     { method: "POST", body: data }
                 );
                 const result = await response.json();
@@ -216,7 +255,7 @@ function fetchcall() {
     async function getProduits() {
         try {
             const response = await fetch(
-                "http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php"
+                "http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php"
             );
             const produits = await response.json();
             const tbody = document.getElementById("produitsBody");
@@ -230,6 +269,7 @@ function fetchcall() {
                         <td>${produit.nom}</td>
                         <td>${produit.description}</td>
                         <td>${produit.prix} €</td>
+                        <td>${produit.quantite} pièce</td>
                         <td>${produit.nom_categorie}</td>
                         <td>
                             <img

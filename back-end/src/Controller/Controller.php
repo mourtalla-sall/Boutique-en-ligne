@@ -25,7 +25,7 @@ class Controller {
     // ajout categorie
     public function addCategorie($nom) {
         if (empty($nom) ) {
-            return json_encode(['status' => 'error', 'message' => 'Tous les champs sont requis']);
+            return json_encode(['status' => 'error', 'message' => 'Le champ est requis']);
         }
 
         if ($this->produitModel->createcategorie($nom)) {
@@ -46,10 +46,10 @@ class Controller {
     public function getById($id) {
         return json_encode($this->produitModel->getById($id));
     }
-    public function getByIdCategorie($id) {
-        return json_encode($this->produitModel->getByIdCategorie($id));
+    public function getCategorieById($id) {
+        return $this->produitModel->getCategorieById($id);
     }
-    // modoifer categorie
+    // modoifer produits
     public function updateProduits($id, $nom, $description, $prix, $quantite, $categorie, $image) {
         if (empty($nom) || empty($description) || empty($prix) || empty($quantite) || empty($categorie) ) {
             return json_encode(['status' => 'error', 'message' => 'Tous les champs sont requis']);

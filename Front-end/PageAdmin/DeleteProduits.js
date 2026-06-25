@@ -35,7 +35,7 @@ function listenDelete(){
             e.preventDefault();
 
             try {
-                const response = await fetch(`http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?action=delete&id=${id}`);
+                const response = await fetch(`http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=delete&id=${id}`);
                 
                 const result = await response.json();
                 console.log(result);

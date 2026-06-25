@@ -1,4 +1,4 @@
-import { initAutocomplete } from "/Boutique-en-ligne/autocompletion.js";
+import { initAutocomplete } from "/Boutique-en-ligne/Front-end/components/autocompletion.js";
 import { chargerDetailProduit } from "/Boutique-en-ligne/Front-end/Pages/detailProduit.js";
 import { initInscriptionForm } from "/Boutique-en-ligne/Front-end/Pages/inscription.js";
 import { initConnexionForm } from "/Boutique-en-ligne/Front-end/Pages/connexion.js";
@@ -35,7 +35,9 @@ const routesAdmin = [
     { path: BASE_URL + "/admin/add-produit", file: "/Boutique-en-ligne/Front-end/PageAdmin/AddProduits.js" },
     { path: BASE_URL + "/admin/update-produit", file: "/Boutique-en-ligne/Front-end/PageAdmin/UpdateProduits.js" },
     { path: BASE_URL + "/admin/delete-produit", file: "/Boutique-en-ligne/Front-end/PageAdmin/DeleteProduits.js" },
-    { path: BASE_URL + "/admin/stock", file: "/Boutique-en-ligne/Front-end/PageAdmin/Stock.js" },
+    { path: BASE_URL + "/admin/categories", file: "/Boutique-en-ligne/Front-end/PageAdmin/Categorie.js" },
+    { path: BASE_URL + "/admin/add-categorie", file: "/Boutique-en-ligne/Front-end/PageAdmin/AddCategorie.js" },
+    { path: BASE_URL + "/admin/update-categorie", file: "/Boutique-en-ligne/Front-end/PageAdmin/UpdateCategorie.js" },
     { path: BASE_URL + "/admin/profil", file: "/Boutique-en-ligne/Front-end/PageAdmin/Profil.js" },
 ];
 
@@ -130,9 +132,9 @@ function adminLayout() {
                 <span>Ajouter</span>
             </a>
 
-            <a href="/Boutique-en-ligne/admin/stock" data-link class="${lienActif('/Boutique-en-ligne/admin/stock')}">
+            <a href="/Boutique-en-ligne/admin/categories" data-link class="${lienActif('/Boutique-en-ligne/admin/categories')}">
                 <i class="bi bi-archive"></i>
-                <span>Stock</span>
+                <span>Categories</span>
             </a>
 
             <a href="/Boutique-en-ligne/admin/profil" data-link class="${lienActif('/Boutique-en-ligne/admin/profil')}">
@@ -185,7 +187,7 @@ function publicFooter() {
                     </ul>
                 </div>
             </div>
-            <div class="bordure-pied text-center">© 2026 Chez Lamal — Tous droits réservés</div>
+            <div class="bordure-pied text-center">© 2026 Chez Lamal  Tous droits réservés</div>
         </div>
     `;
 }

@@ -30,7 +30,7 @@ class Produit {
         return $data->execute();
     }
     public function createcategorie($nom) {
-        $data = $this->pdo->prepare('INSERT INTO Produits (nom) VALUES (:nom)');
+        $data = $this->pdo->prepare('INSERT INTO Categorie (nom) VALUES (:nom)');
         $data->bindValue(':nom', $this->securityInput($nom), PDO::PARAM_STR);
         return $data->execute();
     }
@@ -68,7 +68,7 @@ class Produit {
     return $data->execute();
     }
     public function updatecategorie($id, $nom) {
-    $data = $this->pdo->prepare('UPDATE Produits SET nom=:nom, WHERE id_categorie=:id');
+    $data = $this->pdo->prepare('UPDATE Categorie SET nom=:nom, WHERE id_categorie=:id');
     $data->bindValue(':nom', $this->securityInput($nom), PDO::PARAM_STR);
     $data->bindValue(':id', $id, PDO::PARAM_INT);
     return $data->execute();
@@ -80,7 +80,7 @@ class Produit {
         $data->execute();
         return $data->fetch(PDO::FETCH_ASSOC);
     }
-    public function getByIdCategorie($id) {
+    public function getCategorieById($id) {
         $data = $this->pdo->prepare('SELECT * FROM Categorie WHERE id_categorie = :id');
         $data->bindValue(':id', $id, PDO::PARAM_INT);
         $data->execute();

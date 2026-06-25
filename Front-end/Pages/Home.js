@@ -165,7 +165,7 @@ function initHome() {
                 <div class="row align-items-center g-4">
                     <div class="col-md-6">
                         <h3>La lettre <span>Lamal</span></h3>
-                        <p>Offres exclusives et actualités — deux fois par mois.</p>
+                        <p>Offres exclusives et actualités  deux fois par mois.</p>
                     </div>
                     <div class="col-md-6">
                         <div class="formulaire-lettre">

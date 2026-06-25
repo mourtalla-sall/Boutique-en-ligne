@@ -1,3 +1,4 @@
+export { initAfterRender } from './Admin.js'
 export default function UpdateProduits(){
     setTimeout(() => {
         fetchCategories();
@@ -19,6 +20,7 @@ export function initupdate () {
                         <option value=""> Choisir une catégorie </option>
                     </select>
                     <input type="number" name="prix" placeholder="Prix" required>
+                    <input type="number" name="quantite" placeholder="quantite" required>
                     <textarea name="description" placeholder="Description" required></textarea>
                     <input type="file" id="add-product-file" name="image">
                     <button id="submitUpdate" type="button" class="btn">Valider</button>
@@ -35,7 +37,7 @@ export async function fetchCategories() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
 
-    const response = await fetch('/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?action=getCategories');
+    const response = await fetch('http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=getCategories');
     const categories = await response.json();
 
     const select = document.getElementById('categorie');
@@ -50,11 +52,12 @@ export async function fetchCategories() {
 }
 
 async function getProduit(id) {
-    const response = await fetch(`/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?id=${id}`);
+    const response = await fetch(`http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?id=${id}`);
     const produit = await response.json();
-     console.log(produit);
+    console.log(produit);
     document.querySelector('[name="nom"]').value = produit.nom;
     document.querySelector('[name="prix"]').value = produit.prix;
+    document.querySelector('[name="quantite"]').value = produit.quantite;
     document.querySelector('[name="description"]').value = produit.description;
     document.querySelector('[name="categorie"]').value = produit.id_categorie;
 }
@@ -65,13 +68,13 @@ function listenUpdate() {
 
     const submitUpdate = document.getElementById("submitUpdate");
     if (submitUpdate) {
-        submitUpdate.addEventListener('click', async (e) => {
+        submitUpdate.addEventListener('click', async (e) => {   
             e.preventDefault();
             const form = document.getElementById("updateForm");
             const data = new FormData(form);
             data.append('id', id);
 
-            const response = await fetch("/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php", {
+            const response = await fetch("http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php", {
                 method: "POST",
                 body: data
             });

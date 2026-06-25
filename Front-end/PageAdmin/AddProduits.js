@@ -23,6 +23,7 @@ export function initAdd () {
                         <option value=""> Choisir une catégorie </option>
                     </select>
                     <input type="number" name="prix" placeholder="Le prix du produits" required>
+                    <input type="number" name="quantite" placeholder="La quantite du produits" required>
                     <textarea name="description" placeholder="Description du produit" required></textarea>
                     <input type="file" id="add-product-file" name="image" required>
                    
@@ -34,7 +35,7 @@ export function initAdd () {
     `;
 }
 export async function fetchCategories() {
-    const response = await fetch('http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?action=getCategories');
+    const response = await fetch('http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=getCategories');
     const categories = await response.json();
 
     const select = document.getElementById('categorie');
@@ -62,7 +63,7 @@ function listenForm(){
         try {
             // console.log(data,'hello')
             
-            const response = await fetch("http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php", {
+            const response = await fetch("http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php", {
                 method: "POST",
                 body: data
             });

@@ -50,7 +50,7 @@ export async function chargerDetailProduit() {
 
     try {
         const response = await fetch(
-            `http://localhost/Boutique-en-ligne/Front-end/PageAdmin/Traitement.php?id=${id}`
+            `http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?id=${id}`
         );
         const produit = await response.json();
 

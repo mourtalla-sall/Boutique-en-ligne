@@ -23,6 +23,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])
     echo json_encode(['status' => 'success', 'message' => 'Produit supprimé']);
     exit;
 }
+
 // GET un produit par id
 if (isset($_GET['id']) && empty($_POST)) {
     echo $newProduit->getById($_GET['id']);
@@ -47,6 +48,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     exit;
 }
 
+$nom = htmlspecialchars(trim($_POST['nom']));
+// ADD categorie
+if (isset($_GET['action']) && $_GET['action'] === 'addCategorie') {
+    $AddCategorie = $newProduit->addCategorie($nom);
+    echo $AddCategorie;
+    exit;
+}
+if (isset($_GET['action']) && $_GET['action'] === 'getCategorie' && isset($_GET['id'])) {
+    $id = (int) $_GET['id'];
+    echo json_encode($newProduit->getCategorieById($id));
+    exit;
+}
 
 if (!isset($_POST['nom'], $_POST['description'], $_POST['prix'], $_POST['categorie'])) {
     echo json_encode(['status' => 'error', 'message' => 'Champs manquants']);
@@ -59,16 +72,17 @@ $prix = htmlspecialchars(trim($_POST['prix']));
 $quantite = htmlspecialchars(trim($_POST['quantite']));
 $description = htmlspecialchars(trim($_POST['description']));
 
+
+
 if (!isset($_FILES['image'])) {
     echo json_encode(['status' => 'error', 'message' => 'Image manquante']);
     exit;
-
 }
 
 $nomFichier = basename($_FILES['image']['name']);
-$destination = __DIR__ . '/../public/images/' . $nomFichier;
 
-$destination = __DIR__ . '/../public/images/' . $nomFichier;
+
+ $destination = __DIR__ . '/../../../Front-end/public/images/' . $nomFichier;
 if (!move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
     echo json_encode(['status' => 'error', 'message' => 'Upload échoué']);
     exit;
@@ -80,11 +94,6 @@ if (isset($_POST['id']) && !empty($_POST['id'])) {
     echo $UpdateProduct;
     exit;
 }
-// ADD categorie
-$AddCategorie = $newProduit->addCategorie(
-    $nom, 
-);
-echo $AddCategorie;
 
 
 // ADD sinon

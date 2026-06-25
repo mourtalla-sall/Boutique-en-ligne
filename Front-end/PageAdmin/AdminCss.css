@@ -1,90 +1,93 @@
-/* ===============dashboard============================ */
-@import url('https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans:600&display=swap');
+/* =============== RESET & BASE =============== */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600,700|Open+Sans:400,600&display=swap');
 
 * {
   margin: 0;
   padding: 0;
-  text-decoration: none;
+  box-sizing: border-box;
+}
+
+a, a:hover, a:visited, a:focus {
+  text-decoration: none !important;
+}
+
+/* =============== BODY ADMIN =============== */
+body.is-admin {
+  background: #F5F0E8;
+  min-height: 100vh;
 }
 
 body.is-admin #root {
-    margin-left: 220px;
-    padding: 30px;
-    transition: all 0.5s ease;
-    background: #F5F0E8;
-    min-height: 100vh;
-    box-sizing: border-box;
+  margin-left: 260px;
+  padding: 30px 35px;
+  background: #F5F0E8;
+  min-height: 100vh;
+  transition: margin 0.4s ease;
 }
 
-/* Quand la sidebar est ouverte */
-#check:checked ~ #root {
-    margin-left: 220px;
-}
-
-@media (max-width: 860px) {
-    body.is-admin #root {
-        margin-left: 70px;
-    }
-}
 /* =============== SIDEBAR =============== */
 .sidebar {
   position: fixed;
-  width: 220px;
-  left: -220px;
+  top: 0;
+  left: 0;
+  width: 260px;
   height: 100%;
   background: #1a1a1a;
-  transition: all 0.5s ease;
   z-index: 100;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar header {
-  font-size: 22px;
+  font-size: 20px;
   color: #F5F0E8;
   line-height: 70px;
   text-align: center;
   background: #111111;
-  user-select: none;
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 2px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.sidebar header span {
+  color: #C8A96E;
 }
 
 .sidebar a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   height: 55px;
   width: 100%;
   color: #aaaaaa;
-  line-height: 55px;
-  padding-left: 25px;
-  box-sizing: border-box;
-  border-bottom: 1px solid #2a2a2a;
+  padding: 0 25px;
   border-left: 4px solid transparent;
   font-family: 'Open Sans', sans-serif;
-  font-size: 13px;
-  transition: all 0.3s ease;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  border-bottom: 1px solid #222;
+}
+
+.sidebar a i {
+  font-size: 20px;
+  min-width: 20px;
 }
 
 .sidebar a.active,
 .sidebar a:hover {
-  border-left: 4px solid #C8A96E; 
+  border-left: 4px solid #C8A96E;
   color: #C8A96E;
   background: #222222;
 }
 
-.sidebar a i {
-  font-size: 16px;
-  margin-right: 12px;
-}
-
-.sidebar a span {
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
-/* =============== TOGGLE BUTTON =============== */
+/* =============== TOGGLE (mobile uniquement) =============== */
 #check { display: none; }
 
-label #btn, label #cancel {
+label #btn,
+label #cancel {
   position: fixed;
   top: 15px;
   left: 15px;
@@ -92,79 +95,112 @@ label #btn, label #cancel {
   color: #F5F0E8;
   border-radius: 5px;
   border: 1px solid #333;
-  font-size: 22px;
+  font-size: 20px;
   background: #1a1a1a;
-  height: 40px;
-  width: 40px;
+  height: 38px;
+  width: 38px;
   text-align: center;
-  line-height: 40px;
-  transition: all 0.5s ease;
+  line-height: 38px;
+  transition: all 0.4s ease;
   z-index: 200;
-}
-
-label #cancel {
-  opacity: 0;
-  visibility: hidden;
-}
-
-#check:checked ~ .sidebar { left: 0; }
-
-#check:checked ~ label #btn {
-  left: 235px;
-  opacity: 0;
-  visibility: hidden;
-}
-
-#check:checked ~ label #cancel {
-  left: 235px;
-  opacity: 1;
-  visibility: visible;
+  display: none;
 }
 
 /* =============== MAIN CONTENT =============== */
 #main-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  margin-left: 260px;
   min-height: 100vh;
-  padding: 30px 40px;
-  background: #F5F0E8; /* beige clair */
-  box-sizing: border-box;
-  transition: all 0.5s ease;
+  padding: 30px 35px;
+  background: #F5F0E8;
+  transition: margin-left 0.4s ease;
 }
 
-#check:checked ~ #main-content {
-  left: 220px;
-}
-
-/* =============== TITRE DE PAGE =============== */
+/* =============== TITRE =============== */
 #main-content h1 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 28px;
+  font-size: 36px;
+  font-weight: 700;
   color: #1a1a1a;
-  margin-bottom: 25px;
+  margin-bottom: 24px;
   padding-bottom: 10px;
   border-bottom: 2px solid #C8A96E;
 }
 
+/* =============== DASHBOARD CARDS =============== */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.card-stat {
+  background: #111111;
+  border-radius: 10px;
+  padding: 30px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 130px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.card-stat i {
+  font-size: 38px;
+  color: #C8A96E;
+  min-width: 44px;
+}
+
+.card-stat p {
+  margin: 0 0 4px 0;
+  font-size: 11px;
+  color: #C8A96E;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.card-stat h2 {
+  margin: 0;
+  font-size: 28px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: #C8A96E;
+  border: none;
+  padding: 0;
+  line-height: 1;
+}
+
+.card-stat.card-empty {
+  min-height: 130px;
+  background: #111111;
+}
+
 /* =============== BOUTON ADD =============== */
-#main-content a button,
-#main-content .btn-add {
+.btn-add,
+#main-content > a > button {
   background-color: #C8A96E;
   color: #1a1a1a;
   border: none;
-  padding: 10px 20px;
+  padding: 9px 22px;
   border-radius: 6px;
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: 700;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   letter-spacing: 1px;
-  transition: background 0.3s ease;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  transition: background 0.25s ease;
 }
 
-#main-content a button:hover {
+.btn-add:hover,
+#main-content > a > button:hover {
   background-color: #b8945a;
 }
 
@@ -176,300 +212,223 @@ label #cancel {
   background: #ffffff;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
 }
 
 #main-content table th {
-  background-color: #1a1a1a;
-  color: #C8A96E;
-  padding: 14px 16px;
+  background-color: #C8A96E;
+  color: #1a1a1a;
+  padding: 13px 16px;
   text-align: left;
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
+  font-weight: 700;
 }
 
 #main-content table td {
-  padding: 12px 16px;
+  padding: 11px 16px;
   border-bottom: 1px solid #EDE8DF;
   color: #333333;
   vertical-align: middle;
+  font-family: 'Open Sans', sans-serif;
 }
 
-#main-content table tr:last-child td {
-  border-bottom: none;
-}
+#main-content table tr:last-child td { border-bottom: none; }
+#main-content table tr:hover td { background-color: #F9F5EF; }
 
-#main-content table tr:hover td {
-  background-color: #F9F5EF;
-}
-
-/* Image produit */
 #main-content table img {
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
   object-fit: cover;
   border-radius: 6px;
   border: 1px solid #EDE8DF;
 }
 
-/* Bouton Éditer */
-#main-content table a button {
-  background-color: #1a1a1a;
+/* =============== BOUTONS TABLE =============== */
+.btn-edit {
+  background-color: #1a1a1a;   /* noir */
   color: #C8A96E;
   border: 1px solid #C8A96E;
-  padding: 6px 12px;
+  padding: 5px 11px;
   border-radius: 5px;
   font-size: 11px;
   cursor: pointer;
   margin: 2px;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
-#main-content table a button:hover {
-  background-color: #C8A96E;
+.btn-edit:hover {
+  background-color: #F5F0E8;   /* beige */
   color: #1a1a1a;
+  border-color: #1a1a1a;
 }
 
-/* Bouton Supprimer */
-#main-content table td:last-child button:last-child {
+.btn-delete {
   background-color: transparent;
   color: #e74c3c;
   border: 1px solid #e74c3c;
-  padding: 6px 12px;
+  padding: 5px 11px;
   border-radius: 5px;
   font-size: 11px;
   cursor: pointer;
   margin: 2px;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
+.btn-delete:hover { background-color: #e74c3c; color: white; }
 
-#main-content table td:last-child button:last-child:hover {
-  background-color: #e74c3c;
-  color: white;
-}
-
-/* =============== RESPONSIVE =============== */
-@media (max-width: 860px) {
-  .sidebar {
-    width: 70px;
-    left: 0;
-  }
-  .sidebar header, .sidebar a span {
-    display: none;
-  }
-  .sidebar a {
-    height: 55px;
-    padding-left: 20px;
-  }
-  #main-content {
-    left: 70px;
-  }
-}
 /* =============== FORMULAIRE ADD/UPDATE =============== */
-
 .auth-page {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 30px;
 }
 
 .auth-container {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    width: 100%;
-    max-width: 550px;
+  background: #ffffff;
+  padding: 36px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  width: 100%;
+  max-width: 520px;
 }
 
 .auth-container h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
-    color: #1a1a1a;
-    margin-bottom: 25px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid #C8A96E;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #C8A96E;
 }
 
-/* ── Inputs, select, textarea ── */
 .auth-container input[type="text"],
 .auth-container input[type="number"],
 .auth-container select,
 .auth-container textarea {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 15px;
-    border: 1px solid #DDD8CF;
-    border-radius: 7px;
-    font-size: 14px;
-    background: #FAFAF8;
-    color: #333;
-    box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
-    transition: border 0.3s ease;
+  width: 100%;
+  padding: 11px 14px;
+  margin-bottom: 14px;
+  border: 1px solid #DDD8CF;
+  border-radius: 7px;
+  font-size: 13px;
+  background: #FAFAF8;
+  color: #333;
+  font-family: 'Open Sans', sans-serif;
+  transition: border 0.25s ease;
 }
 
 .auth-container input:focus,
 .auth-container select:focus,
 .auth-container textarea:focus {
-    outline: none;
-    border-color: #C8A96E;
-    background: #ffffff;
+  outline: none;
+  border-color: #C8A96E;
+  background: #ffffff;
 }
 
-.auth-container textarea {
-    height: 120px;
-    resize: vertical;
-}
+.auth-container textarea { height: 110px; resize: vertical; }
 
-/* ── Input file ── */
 .auth-container input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px dashed #C8A96E;
-    border-radius: 7px;
-    background: #FAFAF8;
-    cursor: pointer;
-    box-sizing: border-box;
-    font-size: 13px;
-    color: #666;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 18px;
+  border: 1px dashed #C8A96E;
+  border-radius: 7px;
+  background: #FAFAF8;
+  cursor: pointer;
+  font-size: 12px;
+  color: #666;
 }
 
-/* ── Bouton Validez ── */
 .auth-container .btn {
-    width: 100%;
-    padding: 13px;
-    background: #C8A96E;
-    color: #1a1a1a;
-    border: none;
-    border-radius: 7px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: background 0.3s ease;
-    margin-bottom: 12px;
-    font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  padding: 12px;
+  background: #C8A96E;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background 0.25s ease;
+  margin-bottom: 10px;
+  font-family: 'Montserrat', sans-serif;
 }
+.auth-container .btn:hover { background: #b8945a; }
 
-.auth-container .btn:hover {
-    background: #b8945a;
-}.btn-edit {
-    background-color: #1a1a1a;
-    color: #C8A96E;
-    border: 1px solid #C8A96E;
-    padding: 6px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-edit:hover {
-    background-color: #C8A96E;
-    color: #1a1a1a;
-}
-
-.btn-delete {
-    background-color: transparent;
-    color: #e74c3c;
-    border: 1px solid #e74c3c;
-    padding: 6px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-delete:hover {
-    background-color: #e74c3c;
-    color: white;
-}
-
-
-
-/* ── Bouton Annuler ── */
 #btn-annuler {
-    width: 100%;
-    padding: 11px;
-    background: transparent;
-    color: #888;
-    border: 1px solid #DDD8CF;
-    border-radius: 7px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  color: #888;
+  border: 1px solid #DDD8CF;
+  border-radius: 7px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: 'Open Sans', sans-serif;
 }
+#btn-annuler:hover { border-color: #C8A96E; color: #C8A96E; }
 
-#btn-annuler:hover {
-    border-color: #C8A96E;
-    color: #C8A96E;
-}
-
-/*  Messages succès / erreur */
+/* =============== MESSAGES =============== */
 .success {
-    background: #f0faf0;
-    color: #2e7d32;
-    border: 1px solid #a5d6a7;
-    padding: 10px 15px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    font-size: 13px;
+  background: #f0faf0;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  font-size: 13px;
 }
 
 .error {
-    background: #fff5f5;
-    color: #c62828;
-    border: 1px solid #ef9a9a;
-    padding: 10px 15px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    font-size: 13px;
-}
-.sidebar a.active {
-    border-left: 4px solid #C8A96E;
-    color: #C8A96E;
-    background: #222222;
-}
-.dashboard-cards {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 20px;
+  background: #fff5f5;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  font-size: 13px;
 }
 
-.card-stat {
-    background: #010101;
-    border-radius: 10px;
-    padding: 25px 30px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    min-width: 200px;
-    flex: 1;
+/* =============== RESPONSIVE =============== */
+@media (max-width: 900px) {
+  body.is-admin #root {
+    margin-left: 0;
+    padding: 70px 20px 20px;
+  }
+
+  #main-content {
+    margin-left: 0;
+    padding: 70px 20px 20px;
+  }
+
+  .sidebar {
+    left: -260px;
+    transition: left 0.4s ease;
+  }
+
+  #check:checked ~ .sidebar { left: 0; }
+
+  label #btn,
+  label #cancel { display: block; }
+
+  #check:checked ~ label #btn { opacity: 0; visibility: hidden; }
+
+  #check:checked ~ label #cancel {
+    left: 275px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dashboard-cards { grid-template-columns: repeat(2, 1fr); }
 }
 
-.card-stat i {
-    font-size: 36px;
-    color: #C8A96E;
-}
-
-.card-stat p {
-    margin: 0;
-    font-size: 13px;
-    color: #C8A96E;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.card-stat h2 {
-    margin: 0;
-    font-size: 32px;
-    font-family: 'Montserrat', sans-serif;
-    color: #C8A96E;
-    border: none;
-    padding: 0;
+@media (max-width: 560px) {
+  .dashboard-cards { grid-template-columns: 1fr; }
 }
