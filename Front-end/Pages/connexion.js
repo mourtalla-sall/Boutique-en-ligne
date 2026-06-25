@@ -21,7 +21,7 @@
 
                 <p class="account">
                     Pas de compte ?
-                    <a href="#/inscription">S'inscrire</a>
+                    <a href="./Inscription">S'inscrire</a>
                 </p>
 
             </form>

@@ -25,7 +25,7 @@
                 <input type="submit" name="submit" value="S'inscrire">
 
                 <p class="account">
-                    Déjà un compte ? <a href="connexion.js">Se connecter</a>
+                    Déjà un compte ? <a href="./connexion">Se connecter</a>
                 </p>
                 <p id="msg-erreur" style="color: #ff4d4d; font-weight: bold; display: none; margin-bottom: 15px;"></p>
                 <p id="msg-succes" style="color: #2ecc71; font-weight: bold; display: none; margin-bottom: 15px;"></p>
