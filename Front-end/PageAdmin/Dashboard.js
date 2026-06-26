@@ -29,7 +29,7 @@ const Dashboard = () => {
 
 export async function initAfterRender() {
     try {
-        const response = await fetch('/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=stats');
+        const response = await fetch('/Boutique-en-ligne/back-end/src/Traitement.php?action=stats');
         const data = await response.json();
 
         document.getElementById('count-produits').textContent  = data.produits;

@@ -38,7 +38,7 @@ export function initUpdate () {
 async function fetchCategorie(id) {
     try {
         const response = await fetch(
-            `http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=getCategorie&id=${id}`
+            `http://localhost/Boutique-en-ligne/back-end/src/Traitement.php?action=getCategorie&id=${id}`
         );
         const data = await response.json();
         document.getElementById('nom').value = data.nom;
@@ -59,7 +59,7 @@ function listenForm(id){
             
             try {
                 const response = await fetch(
-                    `http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=updateCategorie&id=${id}`,
+                    `http://localhost/Boutique-en-ligne/back-end/src/Traitement.php?action=updateCategorie&id=${id}`,
                     { method: "POST", body: data }
                 );
                 

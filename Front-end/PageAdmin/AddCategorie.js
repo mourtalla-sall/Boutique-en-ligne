@@ -48,7 +48,7 @@ function listenForm(){
         try {
             // console.log(data,'hello')
             
-            const response = await fetch("http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=addCategorie", {
+            const response = await fetch("http://localhost/Boutique-en-ligne/back-end/src/Traitement.php?action=addCategorie", {
                 method: "POST",
                 body: data
             });

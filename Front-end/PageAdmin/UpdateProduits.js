@@ -37,7 +37,7 @@ export async function fetchCategories() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
 
-    const response = await fetch('http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=getCategories');
+    const response = await fetch('http://localhost/Boutique-en-ligne/back-end/src/Traitement.php?action=getCategories');
     const categories = await response.json();
 
     const select = document.getElementById('categorie');
@@ -52,7 +52,7 @@ export async function fetchCategories() {
 }
 
 async function getProduit(id) {
-    const response = await fetch(`http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?id=${id}`);
+    const response = await fetch(`http://localhost/Boutique-en-ligne/back-end/src/Traitement.php?id=${id}`);
     const produit = await response.json();
     console.log(produit);
     document.querySelector('[name="nom"]').value = produit.nom;
@@ -74,7 +74,7 @@ function listenUpdate() {
             const data = new FormData(form);
             data.append('id', id);
 
-            const response = await fetch("http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php", {
+            const response = await fetch("http://localhost/Boutique-en-ligne/back-end/src/Traitement.php", {
                 method: "POST",
                 body: data
             });

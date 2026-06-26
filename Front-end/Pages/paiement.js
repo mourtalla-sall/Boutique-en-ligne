@@ -1,7 +1,7 @@
 let stripe;
 let elements;
 
-const URL_CREATE_PAYMENT = 'http://localhost/Boutique-en-ligne/back-end/src/Pages/create-payment.php';
+const URL_CREATE_PAYMENT = 'http://localhost/Boutique-en-ligne/back-end/src/Utils/create-payment.php';
 const ROUTE_MERCI = '/Boutique-en-ligne/merci';
 
 const pagePaiement = () => {

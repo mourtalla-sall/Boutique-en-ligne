@@ -35,7 +35,7 @@ export function initAdd () {
     `;
 }
 export async function fetchCategories() {
-    const response = await fetch('http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php?action=getCategories');
+    const response = await fetch('http://localhost/Boutique-en-ligne/back-end/src/Traitement.php?action=getCategories');
     const categories = await response.json();
 
     const select = document.getElementById('categorie');
@@ -58,12 +58,11 @@ function listenForm(){
         
         const data = new FormData(form);
         
-        // console.log(fileUpload.files[0]);
         
         try {
-            // console.log(data,'hello')
+        
             
-            const response = await fetch("http://localhost/Boutique-en-ligne/back-end/src/Pages/Traitement.php", {
+            const response = await fetch("http://localhost/Boutique-en-ligne/back-end/src/Traitement.php", {
                 method: "POST",
                 body: data
             });
